@@ -1,11 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { View } from 'react-native';
 import Signup from './src/screens/SignUpScreen/SignUp';
+import Signin from './src/screens/SignInScreen/Signin';
 
 export default function App() {
   return (
     <View>
-     <Signup />
+     {/* <Signup /> */}
+     <Signin />
     </View>
   );
 }
