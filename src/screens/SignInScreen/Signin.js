@@ -1,13 +1,24 @@
-import React, { useState } from 'react'
-import { Text, TextInput, TouchableOpacity, View, Image, ScrollView, Picker } from 'react-native'
-import { StyleSheet } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, ScrollView, Picker } from 'react-native';
+import { Context } from '../../context/ContextProvider';
 
 export default function Signin() {
+    const { signin, currentUser } = useContext(Context)
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
+    const [loading, setLoading] = useState('')
 
     const onSigninClicked = async () => {
-        console.log("user Logged in")
+        try {
+            setError("")
+            setLoading(true)
+            await signin(email, password)
+        } catch {
+            setError("Failed to Login")
+        }
+        setLoading(false)
     }
 
     return (
@@ -17,11 +28,12 @@ export default function Signin() {
                     style={{ flex: 1, width: '100%' }}>
                     <Image source={require('../../../assets/haulerLogo.png')} style={styles.logo} />
                     <Text style={styles.heading}>Login</Text>
+                    <Text > {error && alert(error)}</Text>
                     <TextInput
                         style={styles.input}
                         placeholder='Email'
                         placeholderTextColor='#C0C0C0'
-                        onChangeText={(email) => { setEmail(email) }}
+                        onChangeText={(email) => { setError(""); setEmail(email) }}
                         value={email}
                     />
                     <TextInput
@@ -29,7 +41,7 @@ export default function Signin() {
                         placeholder='Password'
                         placeholderTextColor='#C0C0C0'
                         secureTextEntry
-                        onChangeText={(password) => { setPassword(password) }}
+                        onChangeText={(password) => { setError(""); setPassword(password) }}
                         value={password}
                     />
                     <TouchableOpacity
@@ -43,7 +55,11 @@ export default function Signin() {
                             Create an account?
                         <Text style={styles.optionLink}
                                 onPress={() => navigation.navigate('Signup')}>
-                                Register</Text>
+                                Register
+                                </Text>
+                        </Text>
+                        <Text style={styles.email}>
+                            Current user : {currentUser && currentUser.email}
                         </Text>
                     </View>
                 </View>

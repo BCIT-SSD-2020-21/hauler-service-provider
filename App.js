@@ -8,11 +8,11 @@ import { AuthProvider } from './src/context/ContextProvider';
 export default function App() {
   return (
     <AuthProvider>
-    <View>
-     {/* <Signup /> */}
-     {/* <Signin /> */}
-     <Profile />
-    </View>
+      <View>
+        {/* <Signup /> */}
+        <Signin />
+        {/* <Profile /> */}
+      </View>
     </AuthProvider>
   );
 }

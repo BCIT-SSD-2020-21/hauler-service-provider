@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import {StyleSheet, Text, TouchableOpacity, View, ScrollView, Modal } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, ScrollView, Modal } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import { FontAwesome } from '@expo/vector-icons';
 import UserInfo from '../../components/userInfo';
@@ -47,7 +47,7 @@ export default function Profile() {
         <ScrollView>
             <View style={styles.container}>
                 <View style={styles.profileContainer}>
-                <Text > {error && alert(error)}</Text>
+                    <Text > {error && alert(error)}</Text>
                     <View style={styles.avatar}>
                         <Avatar
                             title='name'
@@ -85,7 +85,7 @@ export default function Profile() {
                     <View style={styles.infoContainer}>
                         <FontAwesome style={styles.infoIcon} name='envelope' size={24} color='black' />
                         <Text style={styles.userInfo}>
-                        {currentUser && currentUser.email}
+                            {currentUser && currentUser.email}
                         </Text>
                     </View>
                     <View style={styles.infoContainer}>
