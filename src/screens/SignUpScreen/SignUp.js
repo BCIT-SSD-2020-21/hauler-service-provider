@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
-import { Text, TextInput, TouchableOpacity, View, Image, ScrollView, Picker } from 'react-native'
+import React, { useState } from 'react';
+import { Text, TextInput, TouchableOpacity, View, Image, ScrollView, Picker } from 'react-native';
 import { StyleSheet } from 'react-native';
+import UserInfo from '../../components/userInfo';
 
 export default function Signup() {
     const [email, setEmail] = useState('')
@@ -47,52 +48,24 @@ export default function Signup() {
                         onChangeText={(password) => { setConfirmPassword(password) }}
                         value={confirmPassword}
                     />
-                    <TextInput
-                        style={styles.input}
-                        placeholder='First & Last Name'
-                        placeholderTextColor='#C0C0C0'
-                        onChangeText={(flname) => { setFlName(flname) }}
-                        value={flname}
-                    />
-
-                    <TextInput
-                        style={styles.input}
-                        placeholder='Date of Birth'
-                        placeholderTextColor='#C0C0C0'
-                        onChangeText={(date) => { setDob(date) }}
-                        value={dob}
-                    />
-                    <TextInput
-                        style={styles.input}
-                        placeholder='Address'
-                        placeholderTextColor='#C0C0C0'
-                        onChangeText={(address) => { setAddress(address) }}
-                        value={address}
-                    />
-                    <TextInput
-                        style={styles.input}
-                        placeholder='Phone Number'
-                        placeholderTextColor='#C0C0C0'
-                        onChangeText={(number) => { setphoneNumber(number) }}
-                        value={phoneNumber}
+                    <UserInfo
+                        dob={dob}
+                        address={address}
+                        phoneNumber={phoneNumber}
+                        vehileType={vehileType}
+                        flname={flname}
+                        setDob={setDob}
+                        setAddress={setAddress}
+                        setphoneNumber={setphoneNumber}
+                        setVehileType={setVehileType}
+                        setFlName={setFlName}
                     />
                     <Picker
-                    style={styles.input}
-                        selectedValue={vehileType}
-                        
-                        onValueChange={(type) => { setVehileType(type) }}
-                    >
-                        <Picker.Item label='Select Vehicle type' value='' style={{color:'#C0C0C0'}} />
-                        <Picker.Item label='SUV' value='SUV' />
-                        <Picker.Item label='VAN' value='VAN' />
-                        <Picker.Item label='PICKUP' value='PICKUP' />
-                    </Picker>
-                    <Picker
-                    style={styles.input}
+                        style={styles.input}
                         selectedValue={locationOfService}
                         onValueChange={(locationOfService) => { setLocationOfService(locationOfService) }}
                     >
-                        <Picker.Item label='Select Location Of Service' value='' style={{color:'#C0C0C0'}} />
+                        <Picker.Item label='Select Location Of Service' value='' style={{ color: '#C0C0C0' }} />
                         <Picker.Item label='Abbotsford' value='Abbotsford' />
                         <Picker.Item label='Armstrong' value='Armstrong' />
                         <Picker.Item label='Burnaby' value='Burnaby' />
@@ -126,18 +99,18 @@ export default function Signup() {
                         <Picker.Item label='Whistler' value='Whistler' />
                     </Picker>
                     <View style={styles.buttonContainer}>
-                    <TouchableOpacity
-                        style={styles.buttons}>
-                        <Text style={styles.buttonTitle}>Upload Viod Cheque</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.buttons}>
-                        <Text style={styles.buttonTitle}>Upload Driver License</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.buttons}>
-                        <Text style={styles.buttonTitle}>Driver Abstract</Text>
-                    </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.buttons}>
+                            <Text style={styles.buttonTitle}>Upload Viod Cheque</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.buttons}>
+                            <Text style={styles.buttonTitle}>Upload Driver License</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.buttons}>
+                            <Text style={styles.buttonTitle}>Driver Abstract</Text>
+                        </TouchableOpacity>
                     </View>
                     <TextInput
                         style={styles.input}
@@ -177,15 +150,15 @@ const styles = StyleSheet.create({
         height: 100,
         alignSelf: 'center',
     },
-    heading:{
-        textAlign:'center',
+    heading: {
+        textAlign: 'center',
         fontSize: 45,
         marginVertical: '1%',
         color: "#2EBCAC",
         fontWeight: "bold",
     },
     input: {
-        borderColor:'black',
+        borderColor: 'black',
         borderWidth: 1,
         height: 48,
         borderRadius: 5,
@@ -199,7 +172,7 @@ const styles = StyleSheet.create({
         color: '#73AB84',
         textAlign: 'center'
     },
-    buttonContainer:{
+    buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginHorizontal: '2%',
@@ -215,7 +188,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: 'center'
     },
-    buttons:{
+    buttons: {
         backgroundColor: '#5C5C5C',
         width: '30%',
         height: 48,

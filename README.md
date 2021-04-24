@@ -15,14 +15,15 @@
 #### Abhishek Pundir
 ---
 ## Installing Dependencies
-* yarn add firebase
-* npm install @material-ui/core
-* npm install @material-ui/icons
 * npm install axios
 * npm install react-bootstrap bootstrap
 * npm install react-native-dotenv
 * npm install @react-navigation/native @react-navigation/stack
-* expo install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
+* expo install react-native-reanimated react-native-gesture-handler react-native-screens 
+react-native-safe-area-context @react-native-community/masked-view
+* npm install @react-navigation/drawer
+* npm i firebase
+* npm install react-native-elements
 ---
 ### Wireframe for User
 Stored in wireframe folder on the root folder.
