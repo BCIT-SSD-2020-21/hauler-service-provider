@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Text, TextInput, TouchableOpacity, View, Image, ScrollView, Picker } from 'react-native'
 import { StyleSheet } from 'react-native';
 
-export default function Signup() {
+export default function Signin() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
