@@ -5,7 +5,14 @@ import { Avatar } from 'react-native-elements';
 import { FontAwesome } from '@expo/vector-icons';
 
 export default function Signup() {
-
+    const serviceProvider = {
+        email: "John@gmail.com",
+        dob: "1992/01/01",
+        address: "123 abc Street, Surrey, ABC 123",
+        phoneNumber: 1234567,
+        vehileType: "SUV",
+        flname: "John"
+    }
     const onSignOutClicked = async () => {
         console.log("user Logged out")
     }
@@ -31,7 +38,7 @@ export default function Signup() {
                     </View>
 
                     <Text style={styles.user}>
-                        Kulveer
+                        {serviceProvider.flname}
                     </Text>
                     <View style={styles.headerContainer} >
                         <FontAwesome name="star" size={20} color='#2EBCAC' />
@@ -43,38 +50,38 @@ export default function Signup() {
                     <View style={styles.infoContainer}>
                         <FontAwesome style={styles.infoIcon} name="user" size={24} color="black" />
                         <Text style={styles.userInfo}>
-                            Kulveer
-                      </Text>
+                            {serviceProvider.flname}
+                        </Text>
                     </View>
                     <View style={styles.infoContainer}>
                         <FontAwesome style={styles.infoIcon} name="birthday-cake" size={24} color="black" />
                         <Text style={styles.userInfo}>
-                            dob: 01/01/1992
-                </Text>
+                            {serviceProvider.dob}
+                        </Text>
                     </View>
                     <View style={styles.infoContainer}>
                         <FontAwesome style={styles.infoIcon} name="envelope" size={24} color="black" />
                         <Text style={styles.userInfo}>
-                            kulveer@gmail.com
-                </Text>
+                            {serviceProvider.email}
+                        </Text>
                     </View>
                     <View style={styles.infoContainer}>
                         <FontAwesome style={styles.infoIcon} name="phone" size={24} color="black" />
                         <Text style={styles.userInfo}>
-                            64 123456
-                </Text>
+                            {serviceProvider.phoneNumber}
+                        </Text>
                     </View>
                     <View style={styles.infoContainer}>
                         <FontAwesome style={styles.infoIcon} name="address-card" size={24} color="black" />
                         <Text style={styles.userInfo}>
-                            123 abc street
-                </Text>
+                            {serviceProvider.address}
+                        </Text>
                     </View>
                     <View style={styles.infoContainer}>
                         <FontAwesome style={styles.infoIcon} name="truck" size={24} color="black" />
                         <Text style={styles.userInfo}>
-                            PICKUP
-                </Text>
+                            {serviceProvider.vehileType}
+                        </Text>
                     </View>
                 </View>
                 <View style={styles.buttonContainer}>
