@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import {StyleSheet, Text, TouchableOpacity, View, ScrollView, Modal } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View, ScrollView, Modal } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import { FontAwesome } from '@expo/vector-icons';
 import UserInfo from '../../components/userInfo';
+import { Context } from '../../context/ContextProvider';
 
 export default function Profile() {
     const serviceProvider = {
@@ -13,15 +14,26 @@ export default function Profile() {
         vehileType: 'SUV',
         flname: 'John'
     }
-    const [modalVisible, setModalVisible] = useState(false);
+    const { signout, currentUser } = useContext(Context)
+
+    const [modalVisible, setModalVisible] = useState(false)
     const [dob, setDob] = useState(serviceProvider.dob)
     const [address, setAddress] = useState(serviceProvider.address)
     const [phoneNumber, setphoneNumber] = useState(serviceProvider.phoneNumber)
     const [vehileType, setVehileType] = useState(serviceProvider.vehileType)
     const [flname, setFlName] = useState(serviceProvider.flname)
+    const [error, setError] = useState('')
+    const [loading, setLoading] = useState('')
 
     const onSignOutClicked = async () => {
-        console.log('user Logged out')
+        try {
+            setError("")
+            setLoading(true)
+            await signout()
+        } catch {
+            setError("Failed to Log out")
+        }
+        setLoading(false)
     }
 
     const onEditClicked = async () => {
@@ -35,6 +47,7 @@ export default function Profile() {
         <ScrollView>
             <View style={styles.container}>
                 <View style={styles.profileContainer}>
+                    <Text > {error && alert(error)}</Text>
                     <View style={styles.avatar}>
                         <Avatar
                             title='name'
@@ -72,7 +85,7 @@ export default function Profile() {
                     <View style={styles.infoContainer}>
                         <FontAwesome style={styles.infoIcon} name='envelope' size={24} color='black' />
                         <Text style={styles.userInfo}>
-                            {serviceProvider.email}
+                            {currentUser && currentUser.email}
                         </Text>
                     </View>
                     <View style={styles.infoContainer}>
@@ -128,11 +141,13 @@ export default function Profile() {
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
                         style={[styles.buttons, styles.editButton]}
+                        disabled={loading}
                         onPress={() => onEditClicked()}>
                         <Text style={styles.buttonTitle}>Edit</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={[styles.buttons, styles.logOutButton]}
+                        disabled={loading}
                         onPress={() => onSignOutClicked()}>
                         <Text style={styles.buttonTitle}>Log Out</Text>
                     </TouchableOpacity>
