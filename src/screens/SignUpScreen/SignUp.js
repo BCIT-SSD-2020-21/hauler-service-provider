@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { Text, TextInput, TouchableOpacity, View, Image, ScrollView, Picker } from 'react-native';
-import { StyleSheet } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, ScrollView, Picker } from 'react-native';
 import UserInfo from '../../components/userInfo';
+import { Context } from '../../context/ContextProvider';
 
 export default function Signup() {
+    const { signup, currentUser } = useContext(Context)
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
@@ -14,8 +16,22 @@ export default function Signup() {
     const [expiryDate, setExpiryDate] = useState('')
     const [locationOfService, setLocationOfService] = useState('')
     const [flname, setFlName] = useState('')
+    const [error, setError] = useState('')
+    const [loading, setLoading] = useState('')
+
     const onSignUpClicked = async () => {
-        console.log("user registered")
+        if (password !== confirmPassword) {
+            setError("Password does not match")
+            return
+        }
+        try {
+            setError("")
+            setLoading(true)
+            await signup(email, password)
+        } catch {
+            setError("Failed to create an account")
+        }
+        setLoading(false)
     }
 
     return (
@@ -25,11 +41,12 @@ export default function Signup() {
                     style={{ flex: 1, width: '100%' }}>
                     <Image source={require('../../../assets/haulerLogo.png')} style={styles.logo} />
                     <Text style={styles.heading}>Register</Text>
+                    <Text > {error && alert(error)}</Text>
                     <TextInput
                         style={styles.input}
                         placeholder='Email'
                         placeholderTextColor='#C0C0C0'
-                        onChangeText={(email) => { setEmail(email) }}
+                        onChangeText={(email) => { setError(""); setEmail(email) }}
                         value={email}
                     />
                     <TextInput
@@ -37,7 +54,7 @@ export default function Signup() {
                         placeholder='Password'
                         placeholderTextColor='#C0C0C0'
                         secureTextEntry
-                        onChangeText={(password) => { setPassword(password) }}
+                        onChangeText={(password) => { setError(""); setPassword(password) }}
                         value={password}
                     />
                     <TextInput
@@ -45,7 +62,7 @@ export default function Signup() {
                         placeholder='Confirm Password'
                         placeholderTextColor='#C0C0C0'
                         secureTextEntry
-                        onChangeText={(password) => { setConfirmPassword(password) }}
+                        onChangeText={(password) => { setError(""); setConfirmPassword(password) }}
                         value={confirmPassword}
                     />
                     <UserInfo
@@ -59,11 +76,12 @@ export default function Signup() {
                         setphoneNumber={setphoneNumber}
                         setVehileType={setVehileType}
                         setFlName={setFlName}
+                        setError={setError}
                     />
                     <Picker
                         style={styles.input}
                         selectedValue={locationOfService}
-                        onValueChange={(locationOfService) => { setLocationOfService(locationOfService) }}
+                        onValueChange={(locationOfService) => { setError(""); setLocationOfService(locationOfService) }}
                     >
                         <Picker.Item label='Select Location Of Service' value='' style={{ color: '#C0C0C0' }} />
                         <Picker.Item label='Abbotsford' value='Abbotsford' />
@@ -116,11 +134,12 @@ export default function Signup() {
                         style={styles.input}
                         placeholder='Driver Licence Expiry'
                         placeholderTextColor='#C0C0C0'
-                        onChangeText={(date) => { setExpiryDate(date) }}
+                        onChangeText={(date) => { setError(""); setExpiryDate(date) }}
                         value={expiryDate}
                     />
                     <TouchableOpacity
                         style={styles.button}
+                        disabled={loading}
                         onPress={() => onSignUpClicked()}>
                         <Text style={styles.buttonTitle}>Create account</Text>
                     </TouchableOpacity>
@@ -130,7 +149,11 @@ export default function Signup() {
                             Already have an account?
                         <Text style={styles.optionLink}
                                 onPress={() => navigation.navigate('Signin')}>
-                                Log in</Text>
+                                Log in
+                                </Text>
+                        </Text>
+                        <Text style={styles.email}>
+                            Current user : {currentUser && currentUser.email}
                         </Text>
                     </View>
                 </View>
