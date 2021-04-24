@@ -11,9 +11,13 @@ export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState('');
     const [loading, setLoading] = useState(true);
 
-    //===================================Register===========================================//
+    //===================================Register============================================//
     const signup = (email, password) => {
         return auth.createUserWithEmailAndPassword(email, password)
+    }
+    //====================================Log Out============================================//
+    const signout = () => {
+        return auth.signOut()
     }
 
     // ==================================To get current user=================================//
@@ -29,7 +33,8 @@ export const AuthProvider = ({ children }) => {
         <Context.Provider
             value={{
                 currentUser,
-                signup
+                signup,
+                signout
             }}>
             {!loading && children}
         </Context.Provider>

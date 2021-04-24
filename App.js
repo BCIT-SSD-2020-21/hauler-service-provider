@@ -9,9 +9,9 @@ export default function App() {
   return (
     <AuthProvider>
     <View>
-     <Signup />
+     {/* <Signup /> */}
      {/* <Signin /> */}
-     {/* <Profile /> */}
+     <Profile />
     </View>
     </AuthProvider>
   );
