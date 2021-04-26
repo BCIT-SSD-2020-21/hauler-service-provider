@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, ScrollView, Modal } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import { FontAwesome } from '@expo/vector-icons';
-import UserInfo from '../../components/userInfo';
+import UserInfo from '../../components/userInfo/UserInfo';
 import { Context } from '../../context/ContextProvider';
 
 export default function Profile() {

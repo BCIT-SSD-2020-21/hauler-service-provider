@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, ScrollView, Picker } from 'react-native';
-import UserInfo from '../../components/userInfo';
+import UserInfo from '../../components/userInfo/UserInfo';
 import { Context } from '../../context/ContextProvider';
 
 export default function Signup() {
