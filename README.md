@@ -24,6 +24,9 @@ react-native-safe-area-context @react-native-community/masked-view
 * npm install @react-navigation/drawer
 * npm i firebase
 * npm install react-native-elements
+* npm install react-native-picker-select
+* npm install @react-native-picker/picker
+* expo install @react-native-picker/picker
 ---
 ### Wireframe for User
 Stored in wireframe folder on the root folder.
