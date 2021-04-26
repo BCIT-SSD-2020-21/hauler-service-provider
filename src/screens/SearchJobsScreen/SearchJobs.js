@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Image, ScrollView } from 'react-native';
-import RNPickerSelect from 'react-native-picker-select';
-import { Card, Button, Icon } from 'react-native-elements';
-import { FlatList } from 'react-native-gesture-handler';
-import SearchByService from '../../components/SearchByService';
-import SearchByLocation from '../../components/SearchByLocation';
+import { StyleSheet, View } from 'react-native';
+import SearchByService from '../../components/searchByService/SearchByService';
+import SearchByLocation from '../../components/searchByLocation/SearchByLocation';
+import PostsList from '../../components/postList/PostsList';
 
 export default function SearchJobs() {
     const posts = [{
@@ -40,44 +38,17 @@ export default function SearchJobs() {
 
     return (
         <View style={styles.container}>
-            <SearchByLocation 
-            location={location} 
-            setLocation={setLocation}
+            <SearchByLocation
+                location={location}
+                setLocation={setLocation}
             />
-        <SearchByService 
-        service= {service} 
-        setService= {setService}
+            <SearchByService
+                service={service}
+                setService={setService}
             />
-            <FlatList
-                data={posts}
-                keyExtractor={post => post._id}
-                renderItem={(post) => {
-                    return (
-                        post &&
-                        <View style={styles.cardContainer}>
-                            <Card >
-                                <Card.Title style={styles.cardTitle}>
-                                    {post.item.service}</Card.Title>
-                                <Card.Divider />
-                                <Image style={styles.cardImage} source={{ uri: post.item.loadImages[0].imageUrl }} />
-                                <Text style={styles.cardText}>
-                                    {post.item.postHeading}
-                                </Text>
-                                <Text style={styles.cardText}>
-                                    {post.item.pickUpCity}, {post.item.pickUpProvince}
-                                    {post.item.dropOffCity &&
-                                        <Text style={styles.cardText}> to {post.item.dropOffCity}, {post.item.dropOffProvince}
-                                        </Text>
-                                    }
-                                </Text>
-                                <Button
-                                    buttonStyle={{ borderRadius: 5, backgroundColor: '#16B3D5', marginTop: 10 }}
-                                    onPress={onViewDetailsPress}
-                                    title='View Details' />
-                            </Card>
-                        </View>
-                    )
-                }}
+            <PostsList
+                posts={posts}
+                onViewDetailsPress={onViewDetailsPress}
             />
         </View>
     )
