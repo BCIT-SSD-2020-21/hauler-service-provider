@@ -10,6 +10,8 @@ export default function SearchJobs() {
         service: 'Junk Removal',
         postHeading: 'Bed, Sofa and Tv Stand to dispose',
         postDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        pickUpCity: 'Surrey',
+        pickUpProvince: 'BC',
         loadImages: [{
             imageUrl: 'https://samsjunkremoval.ca/wp-content/uploads/2013/04/158-660x371.jpg'
         }],
@@ -19,6 +21,10 @@ export default function SearchJobs() {
         service: 'Moving',
         postHeading: 'Bed, Sofa and Tv Stand to move',
         postDescription: ' MovingLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        pickUpCity: 'Surrey',
+        pickUpProvince: 'BC',
+        dropOffCity: 'Hope',
+        dropOffProvince: 'BC',
         loadImages: [{
             imageUrl: 'https://samsjunkremoval.ca/wp-content/uploads/2013/04/158-660x371.jpg'
         }],
@@ -80,19 +86,28 @@ export default function SearchJobs() {
                 renderItem={(post) => {
                     return (
                         post &&
-                        <Card >
-                            <Card.Title style={styles.cardTitle}>
-                                {post.item.service}</Card.Title>
-                            <Card.Divider />
-                            <Image style={styles.cardImage} source={{ uri: post.item.loadImages[0].imageUrl }} />
-                            <Text style={styles.cardText}>
-                                {post.item.postHeading}
-                            </Text>
-                            <Button
-                                buttonStyle={{ borderRadius: 5, backgroundColor: '#16B3D5', marginTop: 10 }}
-                                onPress={onViewDetailsPress}
-                                title='View Details' />
-                        </Card>
+                        <View style={styles.cardContainer}>
+                            <Card >
+                                <Card.Title style={styles.cardTitle}>
+                                    {post.item.service}</Card.Title>
+                                <Card.Divider />
+                                <Image style={styles.cardImage} source={{ uri: post.item.loadImages[0].imageUrl }} />
+                                <Text style={styles.cardText}>
+                                    {post.item.postHeading}
+                                </Text>
+                                <Text style={styles.cardText}>
+                                    {post.item.pickUpCity}, {post.item.pickUpProvince}
+                                    {post.item.dropOffCity &&
+                                        <Text style={styles.cardText}> to {post.item.dropOffCity}, {post.item.dropOffProvince}
+                                        </Text>
+                                    }
+                                </Text>
+                                <Button
+                                    buttonStyle={{ borderRadius: 5, backgroundColor: '#16B3D5', marginTop: 10 }}
+                                    onPress={onViewDetailsPress}
+                                    title='View Details' />
+                            </Card>
+                        </View>
                     )
                 }}
             />
@@ -116,13 +131,18 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         marginVertical: 5
     },
+    cardContainer: {
+        width: '100%'
+    },
     cardImage: {
         width: 250,
-        height: 150
+        height: 150,
+        alignSelf: 'center'
     },
     cardText: {
         marginTop: 10,
-        width: 250
+        width: 300,
+        textAlign: 'center'
     },
     cardTitle: {
         color: '#2EBCAC'
