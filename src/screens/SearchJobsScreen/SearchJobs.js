@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Image, ScrollView } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import { Card, Button, Icon } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
+import SearchByService from '../../components/SearchByService';
 
 export default function SearchJobs() {
     const posts = [{
@@ -59,27 +60,10 @@ export default function SearchJobs() {
                     ]}
                 />
             </View>
-            <View style={styles.search}>
-                <RNPickerSelect
-                    value={service}
-                    useNativeAndroidPickerStyle={false}
-                    style={{
-                        inputAndroid: {
-                            fontSize: 14,
-                            paddingHorizontal: 10,
-                            paddingVertical: 8,
-                            color: 'black'
-                        },
-                    }}
-                    onValueChange={(value) => setService(value)}
-                    placeholder={{ label: "Search by service", value: null }}
-                    items={[
-                        { label: 'Junk Removal', value: 'Junk Removal' },
-                        { label: 'Moving', value: 'Moving' },
-                        { label: 'Errand', value: 'Errand' },
-                    ]}
-                />
-            </View>
+        <SearchByService 
+        service= {service} 
+        setService= {setService}
+            />
             <FlatList
                 data={posts}
                 keyExtractor={post => post._id}
