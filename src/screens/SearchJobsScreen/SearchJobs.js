@@ -4,6 +4,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import { Card, Button, Icon } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 import SearchByService from '../../components/SearchByService';
+import SearchByLocation from '../../components/SearchByLocation';
 
 export default function SearchJobs() {
     const posts = [{
@@ -39,27 +40,10 @@ export default function SearchJobs() {
 
     return (
         <View style={styles.container}>
-            <View style={styles.search}>
-                <RNPickerSelect
-                    value={location}
-                    useNativeAndroidPickerStyle={false}
-                    style={{
-                        inputAndroid: {
-                            fontSize: 14,
-                            paddingHorizontal: 10,
-                            paddingVertical: 8,
-                            color: 'black'
-                        },
-                    }}
-                    onValueChange={(value) => setLocation(value)}
-                    placeholder={{ label: "Search by location", value: null }}
-                    items={[
-                        { label: 'Surrey', value: 'Surrey' },
-                        { label: 'Langely', value: 'Langely' },
-                        { label: 'Richmond', value: 'Richmond' },
-                    ]}
-                />
-            </View>
+            <SearchByLocation 
+            location={location} 
+            setLocation={setLocation}
+            />
         <SearchByService 
         service= {service} 
         setService= {setService}
