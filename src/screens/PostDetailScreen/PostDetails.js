@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView } from 'react-native';
 
 export default function PostDetails() {
     const posts = {
@@ -11,18 +11,43 @@ export default function PostDetails() {
         loadWeight: "Medium",
         numberOfItems: "4",
         loadImages: [{
+            _id: '1',
             imageUrl: 'https://samsjunkremoval.ca/wp-content/uploads/2013/04/158-660x371.jpg'
         },
         {
+            _id: '2',
             imageUrl: 'https://samsjunkremoval.ca/wp-content/uploads/2013/04/158-660x371.jpg'
         },
         {
+            _id: '3',
             imageUrl: 'https://samsjunkremoval.ca/wp-content/uploads/2013/04/158-660x371.jpg'
         },
         {
+            _id: '4',
             imageUrl: 'https://samsjunkremoval.ca/wp-content/uploads/2013/04/158-660x371.jpg'
         },
         {
+            _id: '5',
+            imageUrl: 'https://samsjunkremoval.ca/wp-content/uploads/2013/04/158-660x371.jpg'
+        },
+        {
+            _id: '6',
+            imageUrl: 'https://samsjunkremoval.ca/wp-content/uploads/2013/04/158-660x371.jpg'
+        },
+        {
+            _id: '7',
+            imageUrl: 'https://samsjunkremoval.ca/wp-content/uploads/2013/04/158-660x371.jpg'
+        },
+        {
+            _id: '8',
+            imageUrl: 'https://samsjunkremoval.ca/wp-content/uploads/2013/04/158-660x371.jpg'
+        },
+        {
+            _id: '9',
+            imageUrl: 'https://samsjunkremoval.ca/wp-content/uploads/2013/04/158-660x371.jpg'
+        },
+        {
+            _id: '10',
             imageUrl: 'https://samsjunkremoval.ca/wp-content/uploads/2013/04/158-660x371.jpg'
         }],
         pickUpProvince: "BC",
@@ -42,39 +67,50 @@ export default function PostDetails() {
         price: 60
     }
 
-    return (
-        <View style={styles.container}>
-            <View>
-             <Text>{posts.postHeading}</Text>
-             <Text>{posts.postDescription}</Text>
-             <Text>{posts.loadWeight}</Text>
-             <Text>{posts.numberOfItems}</Text>
-         </View>
-         <View>
-         <Image style={styles.cardImage} source={{ uri: posts.loadImages[0].imageUrl }} />
-         </View>
-            <Text>Pick Up Address</Text>
-            <View style={styles.addressContainer}>
-         <Text>
-             {posts.pickUpStreetAddress}
-         </Text>
-         <Text>
-             {posts.pickUpCity} {posts.pickUpProvince} {posts.pickUpZipCode}
-         </Text>
-         </View>
-         <View>
+    list = () => {
+        return posts.loadImages.map((e) => {
+            return (
+                e &&
+                <Image key={e._id} style={styles.image} source={{ uri: e.imageUrl }} />
+            )
+        })
+    }
 
-         </View>
-         <Text>Drop Off Address</Text>
-         <View style={styles.addressContainer}>
-         <Text>
-             {posts.dropOffStreetAddress}
-         </Text>
-         <Text>
-             {posts.dropOffCity} {posts.dropOffProvince} {posts.dropOffZipCode}
-         </Text>
-         </View>
-        </View>
+    return (
+        <ScrollView>
+            <View style={styles.container}>
+                <View style={styles.detailsContainer}>
+                    <Text style={styles.heading}>{posts.postHeading}</Text>
+                    <Text>{posts.postDescription}</Text>
+                    <Text>{posts.loadWeight}</Text>
+                    <Text>{posts.numberOfItems}</Text>
+                </View>
+                <View style={styles.imageContainer}>
+                    {list()}
+                </View>
+                <Text>Pick Up Address</Text>
+                <View style={styles.addressContainer}>
+                    <Text>
+                        {posts.pickUpStreetAddress}
+                    </Text>
+                    <Text>
+                        {posts.pickUpCity} {posts.pickUpProvince} {posts.pickUpZipCode}
+                    </Text>
+                </View>
+                <Text>Drop Off Address</Text>
+                <View style={styles.addressContainer}>
+                    <Text>
+                        {posts.dropOffStreetAddress}
+                    </Text>
+                    <Text>
+                        {posts.dropOffCity} {posts.dropOffProvince} {posts.dropOffZipCode}
+                    </Text>
+                </View>
+                <Text>Price</Text>
+                <Text>Price</Text>
+            </View>
+        </ScrollView>
+
     )
 }
 
@@ -87,35 +123,31 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%'
     },
-    addressContainer:{
+    addressContainer: {
         borderWidth: 1,
         borderColor: 'black',
         borderRadius: 8,
         width: '90%'
     },
-    search: {
+    heading: {
+        borderBottomColor: 'black',
+        borderBottomWidth: 2,
+        textAlign: 'center',
+        marginVertical: 10
+    },
+    imageContainer: {
+        flexDirection: 'row',
         width: '90%',
-        borderWidth: 1,
-        borderColor: 'black',
-        borderRadius: 8,
-        marginVertical: 5
+        flexWrap: 'wrap'
     },
-    cardContainer: {
-        width: '100%'
+    detailsContainer: {
+        width: '90%'
     },
-    cardImage: {
-        width: 250,
-        height: 150,
-        alignSelf: 'center'
+    image: {
+        width: 100,
+        height: 100,
+        alignSelf: 'center',
+        margin: 10
     },
-    cardText: {
-        marginTop: 10,
-        width: 300,
-        textAlign: 'center'
-    },
-    cardTitle: {
-        color: '#2EBCAC'
-    }
-
 })
 
