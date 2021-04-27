@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, TextInput } from 'react-native';
-import ImageList from '../../components/imageList/ImageList';
+import PostInfo from '../../components/postInfo/PostInfo';
 
 export default function PostDetails() {
     const posts = {
@@ -81,35 +81,9 @@ export default function PostDetails() {
     return (
         <ScrollView>
             <View style={styles.container}>
-                <View style={styles.detailsContainer}>
-                    <Text style={styles.heading}>{posts.postHeading}</Text>
-                    <Text style={styles.description}>{posts.postDescription}</Text>
-                    <View style={styles.measurementsContainer}>
-                        <Text>Weight: {posts.loadWeight}</Text>
-                        <Text>Number of items: {posts.numberOfItems}</Text>
-                    </View>
-                </View>
-                    <ImageList 
-                    loadImages= {posts.loadImages}
-                    />
-                <Text>Pick Up Address</Text>
-                <View style={styles.addressContainer}>
-                    <Text>
-                        {posts.pickUpStreetAddress}
-                    </Text>
-                    <Text>
-                        {posts.pickUpCity} {posts.pickUpProvince} {posts.pickUpZipCode}
-                    </Text>
-                </View>
-                <Text>Drop Off Address</Text>
-                <View style={styles.addressContainer}>
-                    <Text>
-                        {posts.dropOffStreetAddress}
-                    </Text>
-                    <Text>
-                        {posts.dropOffCity} {posts.dropOffProvince} {posts.dropOffZipCode}
-                    </Text>
-                </View>
+                <PostInfo
+                    posts={posts}
+                />
                 <Text>Price: ${posts.price}</Text>
                 <TouchableOpacity
                     style={styles.button}
@@ -143,44 +117,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%'
     },
-    addressContainer: {
-        padding: 10,
-        borderWidth: 1,
-        borderColor: 'black',
-        borderRadius: 8,
-        width: '90%'
-    },
-    heading: {
-        borderBottomColor: 'black',
-        borderBottomWidth: 2,
-        textAlign: 'center',
-        marginBottom: 10,
-        fontSize: 20,
-        fontWeight: 'bold'
-    },
-    description: {
-        borderBottomColor: 'black',
-        borderBottomWidth: 2,
-        paddingBottom: 10,
-    },
-    measurementsContainer: {
-        alignItems: 'center',
-        marginVertical: 10
-    },
-    imageContainer: {
-        flexDirection: 'row',
-        width: '90%',
-        flexWrap: 'wrap'
-    },
-    detailsContainer: {
-        width: '90%'
-    },
-    image: {
-        width: 100,
-        height: 100,
-        alignSelf: 'center',
-        margin: 10
-    },
+
     button: {
         backgroundColor: 'black',
         marginVertical: 10,
