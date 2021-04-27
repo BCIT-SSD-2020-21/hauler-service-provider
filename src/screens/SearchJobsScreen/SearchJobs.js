@@ -62,30 +62,6 @@ const styles = StyleSheet.create({
         paddingTop: '10%',
         width: '100%',
         height: '100%'
-    },
-    search: {
-        width: '90%',
-        borderWidth: 1,
-        borderColor: 'black',
-        borderRadius: 8,
-        marginVertical: 5
-    },
-    cardContainer: {
-        width: '100%'
-    },
-    cardImage: {
-        width: 250,
-        height: 150,
-        alignSelf: 'center'
-    },
-    cardText: {
-        marginTop: 10,
-        width: 300,
-        textAlign: 'center'
-    },
-    cardTitle: {
-        color: '#2EBCAC'
     }
-
 })
 
