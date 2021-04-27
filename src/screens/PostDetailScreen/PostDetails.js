@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Image, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 
 export default function PostDetails() {
     const posts = {
@@ -67,6 +67,16 @@ export default function PostDetails() {
         price: 60
     }
 
+    const [offer, setOffer] = useState('')
+
+    const onAccept =() =>{
+        console.log("post accepted at original price")
+    }
+
+    const onOffer = () => {
+        console.log('offer sent')
+    }
+
     list = () => {
         return posts.loadImages.map((e) => {
             return (
@@ -81,9 +91,11 @@ export default function PostDetails() {
             <View style={styles.container}>
                 <View style={styles.detailsContainer}>
                     <Text style={styles.heading}>{posts.postHeading}</Text>
-                    <Text>{posts.postDescription}</Text>
-                    <Text>{posts.loadWeight}</Text>
-                    <Text>{posts.numberOfItems}</Text>
+                    <Text style={styles.description}>{posts.postDescription}</Text>
+                    <View style={styles.measurementsContainer}>
+                    <Text>Weight: {posts.loadWeight}</Text>
+                    <Text>Number of items: {posts.numberOfItems}</Text>
+                    </View>
                 </View>
                 <View style={styles.imageContainer}>
                     {list()}
@@ -106,8 +118,24 @@ export default function PostDetails() {
                         {posts.dropOffCity} {posts.dropOffProvince} {posts.dropOffZipCode}
                     </Text>
                 </View>
-                <Text>Price</Text>
-                <Text>Price</Text>
+                <Text>Price: ${posts.price}</Text>
+                <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => onAccept()}>
+                        <Text style={styles.buttonTitle}>ACCEPT</Text>
+                    </TouchableOpacity>
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Enter offer price'
+                        placeholderTextColor='#C0C0C0'
+                        onChangeText={(price) => { setOffer(price) }}
+                        value={offer}
+                    />
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => onOffer()}>
+                        <Text style={styles.buttonTitle}>OFFER</Text>
+                    </TouchableOpacity>
             </View>
         </ScrollView>
 
@@ -119,11 +147,12 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        paddingTop: '10%',
+        paddingVertical: '10%',
         width: '100%',
         height: '100%'
     },
     addressContainer: {
+        padding: 10,
         borderWidth: 1,
         borderColor: 'black',
         borderRadius: 8,
@@ -133,7 +162,18 @@ const styles = StyleSheet.create({
         borderBottomColor: 'black',
         borderBottomWidth: 2,
         textAlign: 'center',
-        marginVertical: 10
+        marginBottom: 10,
+        fontSize: 20,
+        fontWeight:'bold'
+    },
+    description:{
+        borderBottomColor: 'black',
+        borderBottomWidth: 2,
+        paddingBottom: 10,
+    },
+    measurementsContainer:{
+       alignItems:'center',
+       marginVertical: 10
     },
     imageContainer: {
         flexDirection: 'row',
@@ -148,6 +188,31 @@ const styles = StyleSheet.create({
         height: 100,
         alignSelf: 'center',
         margin: 10
+    },
+    button: {
+        backgroundColor: 'black',
+        marginVertical: 10,
+        height: 48,
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 100
+    },
+    buttonTitle: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: "bold"
+    },
+    input: {
+        borderColor: 'black',
+        borderWidth: 1,
+        height: 48,
+        borderRadius: 5,
+        overflow: 'hidden',
+        backgroundColor: 'white',
+        marginVertical: '1%',
+        marginHorizontal: '2%',
+        paddingHorizontal: 10
     },
 })
 
