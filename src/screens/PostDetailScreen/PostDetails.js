@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, TextInput } from 'react-native';
+import ImageList from '../../components/imageList/ImageList';
 
 export default function PostDetails() {
     const posts = {
@@ -69,21 +70,12 @@ export default function PostDetails() {
 
     const [offer, setOffer] = useState('')
 
-    const onAccept =() =>{
+    const onAccept = () => {
         console.log("post accepted at original price")
     }
 
     const onOffer = () => {
         console.log('offer sent')
-    }
-
-    list = () => {
-        return posts.loadImages.map((e) => {
-            return (
-                e &&
-                <Image key={e._id} style={styles.image} source={{ uri: e.imageUrl }} />
-            )
-        })
     }
 
     return (
@@ -93,13 +85,13 @@ export default function PostDetails() {
                     <Text style={styles.heading}>{posts.postHeading}</Text>
                     <Text style={styles.description}>{posts.postDescription}</Text>
                     <View style={styles.measurementsContainer}>
-                    <Text>Weight: {posts.loadWeight}</Text>
-                    <Text>Number of items: {posts.numberOfItems}</Text>
+                        <Text>Weight: {posts.loadWeight}</Text>
+                        <Text>Number of items: {posts.numberOfItems}</Text>
                     </View>
                 </View>
-                <View style={styles.imageContainer}>
-                    {list()}
-                </View>
+                    <ImageList 
+                    loadImages= {posts.loadImages}
+                    />
                 <Text>Pick Up Address</Text>
                 <View style={styles.addressContainer}>
                     <Text>
@@ -120,22 +112,22 @@ export default function PostDetails() {
                 </View>
                 <Text>Price: ${posts.price}</Text>
                 <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => onAccept()}>
-                        <Text style={styles.buttonTitle}>ACCEPT</Text>
-                    </TouchableOpacity>
-                    <TextInput
-                        style={styles.input}
-                        placeholder='Enter offer price'
-                        placeholderTextColor='#C0C0C0'
-                        onChangeText={(price) => { setOffer(price) }}
-                        value={offer}
-                    />
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => onOffer()}>
-                        <Text style={styles.buttonTitle}>OFFER</Text>
-                    </TouchableOpacity>
+                    style={styles.button}
+                    onPress={() => onAccept()}>
+                    <Text style={styles.buttonTitle}>ACCEPT</Text>
+                </TouchableOpacity>
+                <TextInput
+                    style={styles.input}
+                    placeholder='Enter offer price'
+                    placeholderTextColor='#C0C0C0'
+                    onChangeText={(price) => { setOffer(price) }}
+                    value={offer}
+                />
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => onOffer()}>
+                    <Text style={styles.buttonTitle}>OFFER</Text>
+                </TouchableOpacity>
             </View>
         </ScrollView>
 
@@ -164,16 +156,16 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 10,
         fontSize: 20,
-        fontWeight:'bold'
+        fontWeight: 'bold'
     },
-    description:{
+    description: {
         borderBottomColor: 'black',
         borderBottomWidth: 2,
         paddingBottom: 10,
     },
-    measurementsContainer:{
-       alignItems:'center',
-       marginVertical: 10
+    measurementsContainer: {
+        alignItems: 'center',
+        marginVertical: 10
     },
     imageContainer: {
         flexDirection: 'row',
