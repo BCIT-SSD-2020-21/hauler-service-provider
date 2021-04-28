@@ -68,14 +68,8 @@ export default function JobConfirmation() {
         price: 60
     }
 
-    const [offer, setOffer] = useState('')
-
-    const onAccept = () => {
-        console.log("post accepted at original price")
-    }
-
-    const onOffer = () => {
-        console.log('offer sent')
+    const onJobListPressed = () => {
+        console.log('go to my job list screen')
     }
 
     return (
@@ -96,23 +90,11 @@ export default function JobConfirmation() {
                 <PostInfo
                     posts={posts}
                 />
-                <Text>Price: ${posts.price}</Text>
+                <Text>Total Earning: ${posts.price}</Text>
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => onAccept()}>
-                    <Text style={styles.buttonTitle}>ACCEPT</Text>
-                </TouchableOpacity>
-                <TextInput
-                    style={styles.input}
-                    placeholder='Enter offer price'
-                    placeholderTextColor='#C0C0C0'
-                    onChangeText={(price) => { setOffer(price) }}
-                    value={offer}
-                />
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => onOffer()}>
-                    <Text style={styles.buttonTitle}>OFFER</Text>
+                    onPress={() => onJobListPressed()}>
+                    <Text style={styles.buttonTitle}>My Job List</Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
