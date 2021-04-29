@@ -30,11 +30,11 @@ export default function MyJobList() {
         }],
     }]
 
-    const ServiceProviderAction =  [{
+    const ServiceProviderAction = [{
         _id: 'abc',
         postId: '1234',
-        status: 'negotiating',
-        notification: true,
+        status: 'Negotiating',
+        notification: 'flex',
         serviceProviderResponse: [{
             serviceProviderResponse: 'Offer',
             serviceProviderActionPrice: '70',
@@ -44,7 +44,7 @@ export default function MyJobList() {
         _id: 'bcd',
         postId: '12345',
         status: 'Accepted',
-        notification: true,
+        notification: 'none',
         serviceProviderResponse: [{
             serviceProviderResponse: 'Accept',
             serviceProviderActionPrice: '50',
