@@ -1,47 +1,66 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
-import { Card, Button } from 'react-native-elements';
+import { Card, Badge, Button } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 
-export default function PostsList({posts, onViewDetailsPress}) {
+export default function PostsList({ posts, onViewDetailsPress, ServiceProviderAction, onStatusDeailsPress }) {
+    const [display, setDisplay] = useState('none')
+
+
     return (
-            <FlatList
-                data={posts}
-                keyExtractor={post => post._id}
-                renderItem={(post) => {
-                    return (
-                        post &&
-                        <View style={styles.cardContainer}>
-                            <Card >
-                                <Card.Title style={styles.cardTitle}>
-                                    {post.item.service}</Card.Title>
-                                <Card.Divider />
-                                <Image style={styles.cardImage} source={{ uri: post.item.loadImages[0].imageUrl }} />
-                                <Text style={styles.cardText}>
-                                    {post.item.postHeading}
-                                </Text>
-                                <Text style={styles.cardText}>
-                                    {post.item.pickUpCity}, {post.item.pickUpProvince}
-                                    {post.item.dropOffCity &&
-                                        <Text style={styles.cardText}> to {post.item.dropOffCity}, {post.item.dropOffProvince}
-                                        </Text>
-                                    }
-                                </Text>
+        <FlatList
+            data={posts}
+            keyExtractor={post => post._id}
+            renderItem={({ item, index }) => {
+                return (
+                    item &&
+                    <View style={styles.cardContainer}>
+                        <Card style={styles.cardSubContainer}>
+                            <Card.Title style={styles.cardTitle}>
+                                {item.service}</Card.Title>
+                            {ServiceProviderAction ?
+                                <Badge
+                                    badgeStyle={{ display: ServiceProviderAction[index].notification }}
+                                    status="success"
+                                    value="notification"
+                                    containerStyle={{ position: 'absolute', top: -20, left: -30 }}
+                                /> :
+                                <Text>"</Text>}
+                            <Card.Divider />
+                            <Image style={styles.cardImage} source={{ uri: item.loadImages[0].imageUrl }} />
+                            <Text style={styles.cardText}>
+                                {item.postHeading}
+                            </Text>
+                            <Text style={styles.cardText}>
+                                {item.pickUpCity}, {item.pickUpProvince}
+                                {item.dropOffCity &&
+                                    <Text style={styles.cardText}> to {item.dropOffCity}, {item.dropOffProvince}
+                                    </Text>}
+                            </Text>
+                            {ServiceProviderAction ?
                                 <Button
                                     buttonStyle={{ borderRadius: 5, backgroundColor: '#16B3D5', marginTop: 10 }}
-                                    onPress={()=>onViewDetailsPress()}
-                                    title='View Details' />
-                            </Card>
-                        </View>
-                    )
-                }}
-            />
+                                    onPress={() => onStatusDeailsPress()}
+                                    title={ServiceProviderAction[index].status}
+                                /> :
+                                <Text>"</Text>}
+                            <Button
+                                buttonStyle={{ borderRadius: 5, backgroundColor: '#16B3D5', marginTop: 10 }}
+                                onPress={() => onViewDetailsPress()}
+                                title='View Details'
+                            />
+                        </Card>
+                    </View>
+                )
+            }}
+        />
     )
 }
 
 const styles = StyleSheet.create({
     cardContainer: {
-        width: '100%'
+        width: '100%',
+        position: 'relative',
     },
     cardImage: {
         width: 250,

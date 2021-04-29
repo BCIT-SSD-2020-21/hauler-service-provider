@@ -4,7 +4,7 @@ import SearchByService from '../../components/searchByService/SearchByService';
 import SearchByLocation from '../../components/searchByLocation/SearchByLocation';
 import PostsList from '../../components/postList/PostsList';
 
-export default function SearchJobs() {
+export default function MyJobList() {
     const posts = [{
         _id: '1234',
         service: 'Junk Removal',
@@ -29,11 +29,36 @@ export default function SearchJobs() {
             imageUrl: 'https://samsjunkremoval.ca/wp-content/uploads/2013/04/158-660x371.jpg'
         }],
     }]
+
+    const ServiceProviderAction = [{
+        _id: 'abc',
+        postId: '1234',
+        status: 'Negotiating',
+        notification: 'flex',
+        serviceProviderResponse: [{
+            serviceProviderResponse: 'Offer',
+            serviceProviderActionPrice: '70',
+        }]
+    },
+    {
+        _id: 'bcd',
+        postId: '12345',
+        status: 'Accepted',
+        notification: 'none',
+        serviceProviderResponse: [{
+            serviceProviderResponse: 'Accept',
+            serviceProviderActionPrice: '50',
+        }]
+    }];
+
     const [location, setLocation] = useState('')
     const [service, setService] = useState('')
 
     const onViewDetailsPress = () => {
         console.log("Details pressed")
+    }
+    const onStatusDeailsPress = () => {
+        console.log("Status Details pressed")
     }
 
     return (
@@ -49,8 +74,8 @@ export default function SearchJobs() {
             <PostsList
                 posts={posts}
                 onViewDetailsPress={onViewDetailsPress}
-                ServiceProviderAction=""
-                onStatusDeailsPress=""
+                ServiceProviderAction={ServiceProviderAction}
+                onStatusDeailsPress={onStatusDeailsPress}
             />
         </View>
     )
