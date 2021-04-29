@@ -3,6 +3,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import MenuIcon from '../MenuIcon/MenuIcon';
 import HomeNavigator from '../HomeNavigator/HomeNavigator';
 import Profile from '../../../screens/ProfileScreen/Profile';
+import SearchJobsNavigator from'../SearchJobsNavigator/SearchJobsNavigator';
 
 const Drawer = createDrawerNavigator();
 
@@ -12,6 +13,11 @@ export default function DrawerNavigation() {
       <Drawer.Screen
         name="Home"
         component={HomeNavigator}
+        options={{ headerTitle: 'Home', headerRight: () => <MenuIcon /> }}
+      />
+      <Drawer.Screen
+        name="SearchJobs"
+        component={SearchJobsNavigator}
         options={{ headerTitle: 'Home', headerRight: () => <MenuIcon /> }}
       />
       <Drawer.Screen
