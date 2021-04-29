@@ -30,7 +30,7 @@ const HomeNavigator = () => {
                             headerRight: () => <MenuIcon />,
                         }
                         : {
-                            headerTitle: 'User Dashboard',
+                            headerTitle: 'Home',
                         }
                 }
             />

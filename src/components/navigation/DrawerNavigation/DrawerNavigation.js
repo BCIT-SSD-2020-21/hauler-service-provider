@@ -4,6 +4,7 @@ import MenuIcon from '../MenuIcon/MenuIcon';
 import HomeNavigator from '../HomeNavigator/HomeNavigator';
 import Profile from '../../../screens/ProfileScreen/Profile';
 import SearchJobsNavigator from'../SearchJobsNavigator/SearchJobsNavigator';
+import MyJobListNavigator from '../MyJobListNavigator/MyJobListNavigator';
 
 const Drawer = createDrawerNavigator();
 
@@ -21,9 +22,14 @@ export default function DrawerNavigation() {
         options={{ headerTitle: 'Home', headerRight: () => <MenuIcon /> }}
       />
       <Drawer.Screen
+        name="MyJobListNavigator"
+        component={MyJobListNavigator}
+        options={{ headerTitle: 'My Job List', headerRight: () => <MenuIcon /> }}
+      />
+      <Drawer.Screen
         name="Profile"
         component={Profile}
-        options={{ headerTitle: 'Watchlist', headerRight: () => <MenuIcon /> }}
+        options={{ headerTitle: 'Profile', headerRight: () => <MenuIcon /> }}
       />
     </Drawer.Navigator>
   );

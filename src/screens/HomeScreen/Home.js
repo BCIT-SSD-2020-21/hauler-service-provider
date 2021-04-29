@@ -7,7 +7,7 @@ export default function Home({navigation}) {
         navigation.navigate('SearchJobsNavigator')
     }
     const onMyJobListPressed = async () => {
-        console.log("My Job List Pressed")
+        navigation.navigate('MyJobListNavigator')
     }
 
     return (
