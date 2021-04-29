@@ -1,5 +1,5 @@
 import React from 'react';
-import MenuIcon from './MenuIcon';
+import MenuIcon from '../MenuIcon/MenuIcon'
 import { createStackNavigator } from '@react-navigation/stack';
 import { Platform } from 'react-native';
 import Signin from '../../../screens/SignInScreen/Signin';
