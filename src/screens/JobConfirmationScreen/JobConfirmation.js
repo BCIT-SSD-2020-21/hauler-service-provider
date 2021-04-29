@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import PostInfo from '../../components/postInfo/PostInfo';
 
-export default function JobConfirmation() {
+export default function JobConfirmation({navigation}) {
     const posts = {
         userId: "hbsdhfvajfhasmdf",
         _id: '1234',
@@ -69,7 +69,7 @@ export default function JobConfirmation() {
     }
 
     const onJobListPressed = () => {
-        console.log('go to my job list screen')
+        navigation.navigate('MyJobListNavigator')
     }
 
     return (

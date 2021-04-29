@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, ScrollView, Picker } from 'react-native';
 import { Context } from '../../context/ContextProvider';
 
-export default function Signin() {
+export default function Signin({ navigation }) {
     const { signin, currentUser } = useContext(Context)
 
     const [email, setEmail] = useState('')
@@ -15,6 +15,7 @@ export default function Signin() {
             setError("")
             setLoading(true)
             await signin(email, password)
+            navigation.navigate('Home')
         } catch {
             setError("Failed to Login")
         }
@@ -45,6 +46,7 @@ export default function Signin() {
                         value={password}
                     />
                     <TouchableOpacity
+                        disabled={loading}
                         style={styles.button}
                         onPress={() => onSigninClicked()}>
                         <Text style={styles.buttonTitle}>Login</Text>
@@ -54,7 +56,7 @@ export default function Signin() {
                         <Text style={styles.optionText}>
                             Create an account?
                         <Text style={styles.optionLink}
-                                onPress={() => navigation.navigate('Signup')}>
+                                onPress={() => navigation.navigate('SignUp')}>
                                 Register
                                 </Text>
                         </Text>

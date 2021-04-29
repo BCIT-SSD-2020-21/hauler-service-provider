@@ -1,31 +1,29 @@
 import React from 'react';
-import { View } from 'react-native';
-// import Signup from './src/screens/SignUpScreen/SignUp';
-// import Signin from './src/screens/SignInScreen/Signin';
-// import Profile from './src/screens/ProfileScreen/Profile';
+import { Platform } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { createStackNavigator } from '@react-navigation/stack';
+import BottomTabNavigation from './src/components/navigation/BottomTabNavigation/BottomTabNavigation';
+import DrawerNavigation from './src/components/navigation/DrawerNavigation/DrawerNavigation';
 import { AuthProvider } from './src/context/ContextProvider';
-import MyJobList from './src/screens/MyJobListScreen/MyJobList';
-// import JobConfirmation from './src/screens/JobConfirmationScreen/JobConfirmation';
-// import Home from './src/screens/HomeScreen/Home';
-// import SearchJobs from './src/screens/SearchJobsScreen/SearchJobs';
-// import PostDetails from './src/screens/PostDetailScreen/PostDetails';
-// import OfferConfirmation from './src/screens/OfferConfirmationScreen/OfferConfirmation';
+
+const Stack = createStackNavigator();
+
+const PlatformSpecificNavigator = Platform.select({
+  ios: () => BottomTabNavigation,
+  android: () => DrawerNavigation,
+})();
 
 export default function App() {
   return (
     <AuthProvider>
-      <View>
-        {/* <Signup /> */}
-        {/* <Signin /> */}
-        {/* <Profile /> */}
-        {/* <Home /> */}
-        {/* <SearchJobs /> */}
-        {/* <PostDetails /> */}
-        {/* <JobConfirmation /> */}
-        {/* <OfferConfirmation /> */}
-        <MyJobList />
-      </View>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name='Root' component={PlatformSpecificNavigator} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaProvider>
     </AuthProvider>
   );
 }
-

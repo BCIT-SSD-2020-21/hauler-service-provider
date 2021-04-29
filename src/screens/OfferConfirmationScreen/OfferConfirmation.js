@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-export default function OfferConfirmation() {
+export default function OfferConfirmation({navigation}) {
 
-    const onSearchJobsPressed = async () => {
-        console.log("Search Job Pressed")
+    const onReturnToHomePressed = async () => {
+        navigation.navigate('Home')
     }
 
     return (

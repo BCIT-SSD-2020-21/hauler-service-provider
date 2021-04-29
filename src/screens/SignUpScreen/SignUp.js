@@ -3,7 +3,7 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, ScrollView,
 import UserInfo from '../../components/userInfo/UserInfo';
 import { Context } from '../../context/ContextProvider';
 
-export default function Signup() {
+export default function Signup({navigation}) {
     const { signup, currentUser } = useContext(Context)
 
     const [email, setEmail] = useState('')
@@ -28,6 +28,7 @@ export default function Signup() {
             setError("")
             setLoading(true)
             await signup(email, password)
+            navigation.navigate('Home')
         } catch {
             setError("Failed to create an account")
         }

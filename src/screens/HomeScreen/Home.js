@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-export default function Home() {
+export default function Home({navigation}) {
 
     const onSearchJobsPressed = async () => {
-        console.log("Search Job Pressed")
+        navigation.navigate('SearchJobsNavigator')
     }
     const onMyJobListPressed = async () => {
-        console.log("My Job List Pressed")
+        navigation.navigate('MyJobListNavigator')
     }
 
     return (
