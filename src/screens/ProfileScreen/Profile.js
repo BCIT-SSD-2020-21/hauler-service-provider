@@ -5,7 +5,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import UserInfo from '../../components/userInfo/UserInfo';
 import { Context } from '../../context/ContextProvider';
 
-export default function Profile() {
+export default function Profile({navigation}) {
     const serviceProvider = {
         email: 'John@gmail.com',
         dob: '1992/01/01',
@@ -30,6 +30,7 @@ export default function Profile() {
             setError("")
             setLoading(true)
             await signout()
+            navigation.navigate('Home')
         } catch {
             setError("Failed to Log out")
         }

@@ -3,8 +3,8 @@ import { Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createStackNavigator } from '@react-navigation/stack';
-import BottomTabNavigation from './src/components/navigation/BottomTabNavigation';
-import DrawerNavigation from './src/components/navigation/DrawerNavigation';
+// import BottomTabNavigation from './src/components/navigation/BottomTabNavigation/BottomTabNavigation';
+import DrawerNavigation from './src/components/navigation/DrawerNavigation/DrawerNavigation';
 import { AuthProvider } from './src/context/ContextProvider';
 
 const Stack = createStackNavigator();
