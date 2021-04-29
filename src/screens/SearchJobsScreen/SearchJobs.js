@@ -49,6 +49,8 @@ export default function SearchJobs() {
             <PostsList
                 posts={posts}
                 onViewDetailsPress={onViewDetailsPress}
+                ServiceProviderAction=""
+                onStatusDeailsPress=""
             />
         </View>
     )

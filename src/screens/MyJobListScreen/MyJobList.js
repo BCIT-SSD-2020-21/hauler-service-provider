@@ -57,6 +57,9 @@ export default function MyJobList() {
     const onViewDetailsPress = () => {
         console.log("Details pressed")
     }
+    const onStatusDeailsPress = () => {
+        console.log("Status Details pressed")
+    }
 
     return (
         <View style={styles.container}>
@@ -72,6 +75,7 @@ export default function MyJobList() {
                 posts={posts}
                 onViewDetailsPress={onViewDetailsPress}
                 ServiceProviderAction={ServiceProviderAction}
+                onStatusDeailsPress={onStatusDeailsPress}
             />
         </View>
     )

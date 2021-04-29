@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
 import { Card, Badge, Button } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 
-export default function PostsList({ posts, onViewDetailsPress, ServiceProviderAction }) {
+export default function PostsList({ posts, onViewDetailsPress, ServiceProviderAction, onStatusDeailsPress }) {
     const [display, setDisplay] = useState('none')
 
 
@@ -18,13 +18,14 @@ export default function PostsList({ posts, onViewDetailsPress, ServiceProviderAc
                         <Card style={styles.cardSubContainer}>
                             <Card.Title style={styles.cardTitle}>
                                 {item.service}</Card.Title>
-                                
-                            <Badge
-                            badgeStyle= {{display: ServiceProviderAction[index].notification}}
-                                status="success"
-                                value="notification"
-                                containerStyle={{ position: 'absolute', top: -20, left: -30 }}
-                            />
+                            {ServiceProviderAction ?
+                                <Badge
+                                    badgeStyle={{ display: ServiceProviderAction[index].notification }}
+                                    status="success"
+                                    value="notification"
+                                    containerStyle={{ position: 'absolute', top: -20, left: -30 }}
+                                /> :
+                                <Text>"</Text>}
                             <Card.Divider />
                             <Image style={styles.cardImage} source={{ uri: item.loadImages[0].imageUrl }} />
                             <Text style={styles.cardText}>
@@ -34,20 +35,21 @@ export default function PostsList({ posts, onViewDetailsPress, ServiceProviderAc
                                 {item.pickUpCity}, {item.pickUpProvince}
                                 {item.dropOffCity &&
                                     <Text style={styles.cardText}> to {item.dropOffCity}, {item.dropOffProvince}
-                                    </Text>
-                                }
+                                    </Text>}
                             </Text>
-                            <Button
-                                buttonStyle={{ borderRadius: 5, backgroundColor: '#16B3D5', marginTop: 10 }}
-                                title={ServiceProviderAction[index].status} />
-
+                            {ServiceProviderAction ?
+                                <Button
+                                    buttonStyle={{ borderRadius: 5, backgroundColor: '#16B3D5', marginTop: 10 }}
+                                    onPress={() => onStatusDeailsPress()}
+                                    title={ServiceProviderAction[index].status}
+                                /> :
+                                <Text>"</Text>}
                             <Button
                                 buttonStyle={{ borderRadius: 5, backgroundColor: '#16B3D5', marginTop: 10 }}
                                 onPress={() => onViewDetailsPress()}
-                                title='View Details' />
+                                title='View Details'
+                            />
                         </Card>
-
-
                     </View>
                 )
             }}
