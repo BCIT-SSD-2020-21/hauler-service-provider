@@ -5,6 +5,7 @@ import { Platform } from 'react-native';
 import SearchJobs from '../../../screens/SearchJobsScreen/SearchJobs';
 import PostDetails from '../../../screens/PostDetailScreen/PostDetails';
 import JobConfirmation from '../../../screens/JobConfirmationScreen/JobConfirmation';
+import OfferConfirmation from '../../../screens/OfferConfirmationScreen/OfferConfirmation';
 
 const SearchStack = createStackNavigator();
 
@@ -45,7 +46,28 @@ const SearchJobsNavigator = () => {
             <SearchStack.Screen
                 name='JobConfirmation'
                 component={JobConfirmation}
-                options={{ headerShown: false }}
+                options={
+                    Platform.OS === 'android'
+                        ? {
+                            headerRight: () => <MenuIcon />,
+                        }
+                        : {
+                            headerTitle: '',
+                        }
+                }
+            />
+            <SearchStack.Screen
+                name='OfferConfirmation'
+                component={OfferConfirmation}
+                options={
+                    Platform.OS === 'android'
+                        ? {
+                            headerRight: () => <MenuIcon />,
+                        }
+                        : {
+                            headerTitle: '',
+                        }
+                }
             />
         </SearchStack.Navigator>
     );

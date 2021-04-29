@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import PostInfo from '../../components/postInfo/PostInfo';
 
-export default function PostDetails() {
+export default function PostDetails({navigation}) {
     const posts = {
         userId: "hbsdhfvajfhasmdf",
         _id: '1234',
@@ -71,11 +71,11 @@ export default function PostDetails() {
     const [offer, setOffer] = useState('')
 
     const onAccept = () => {
-        console.log("post accepted at original price")
+        navigation.navigate('JobConfirmation')
     }
 
     const onOffer = () => {
-        console.log('offer sent')
+        navigation.navigate('OfferConfirmation')
     }
 
     return (
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        paddingVertical: '10%',
+        paddingVertical: '2%',
         width: '100%',
         height: '100%'
     },

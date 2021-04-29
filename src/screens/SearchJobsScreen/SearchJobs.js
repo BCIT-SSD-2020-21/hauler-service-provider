@@ -4,7 +4,7 @@ import SearchByService from '../../components/searchByService/SearchByService';
 import SearchByLocation from '../../components/searchByLocation/SearchByLocation';
 import PostsList from '../../components/postList/PostsList';
 
-export default function SearchJobs() {
+export default function SearchJobs({navigation}) {
     const posts = [{
         _id: '1234',
         service: 'Junk Removal',
@@ -33,7 +33,7 @@ export default function SearchJobs() {
     const [service, setService] = useState('')
 
     const onViewDetailsPress = () => {
-        console.log("Details pressed")
+        navigation.navigate('PostDetails')
     }
 
     return (
@@ -61,7 +61,6 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        paddingTop: '10%',
         width: '100%',
         height: '100%'
     }

@@ -16,7 +16,7 @@ export default function DrawerNavigation() {
         options={{ headerTitle: 'Home', headerRight: () => <MenuIcon /> }}
       />
       <Drawer.Screen
-        name="SearchJobs"
+        name="SearchJobsNavigator"
         component={SearchJobsNavigator}
         options={{ headerTitle: 'Home', headerRight: () => <MenuIcon /> }}
       />
