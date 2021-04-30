@@ -4,9 +4,7 @@ import { Card, Badge, Button } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 
 export default function PostsList({ posts, onViewDetailsPress, ServiceProviderAction, onStatusDeailsPress }) {
-    const [display, setDisplay] = useState('none')
-
-
+    
     return (
         <FlatList
             data={posts}
@@ -25,7 +23,7 @@ export default function PostsList({ posts, onViewDetailsPress, ServiceProviderAc
                                     value="notification"
                                     containerStyle={{ position: 'absolute', top: -20, left: -30 }}
                                 /> :
-                                <Text>"</Text>}
+                                <View></View>}
                             <Card.Divider />
                             <Image style={styles.cardImage} source={{ uri: item.loadImages[0].imageUrl }} />
                             <Text style={styles.cardText}>
@@ -43,7 +41,7 @@ export default function PostsList({ posts, onViewDetailsPress, ServiceProviderAc
                                     onPress={() => onStatusDeailsPress()}
                                     title={ServiceProviderAction[index].status}
                                 /> :
-                                <Text>"</Text>}
+                                <View></View>}
                             <Button
                                 buttonStyle={{ borderRadius: 5, backgroundColor: '#16B3D5', marginTop: 10 }}
                                 onPress={() => onViewDetailsPress()}

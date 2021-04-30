@@ -68,14 +68,13 @@ export default function PostDetails({navigation}) {
         price: 60
     }
 
-    const [offer, setOffer] = useState('')
 
     const onAccept = () => {
         navigation.navigate('JobConfirmation')
     }
 
     const onOffer = () => {
-        navigation.navigate('OfferConfirmation')
+        navigation.navigate('OfferDetails')
     }
 
     return (
@@ -90,13 +89,7 @@ export default function PostDetails({navigation}) {
                     onPress={() => onAccept()}>
                     <Text style={styles.buttonTitle}>ACCEPT</Text>
                 </TouchableOpacity>
-                <TextInput
-                    style={styles.input}
-                    placeholder='Enter offer price'
-                    placeholderTextColor='#C0C0C0'
-                    onChangeText={(price) => { setOffer(price) }}
-                    value={offer}
-                />
+                
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => onOffer()}>
