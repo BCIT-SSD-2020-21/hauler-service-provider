@@ -6,6 +6,7 @@ import SearchJobs from '../../../screens/SearchJobsScreen/SearchJobs';
 import PostDetails from '../../../screens/PostDetailScreen/PostDetails';
 import JobConfirmation from '../../../screens/JobConfirmationScreen/JobConfirmation';
 import OfferConfirmation from '../../../screens/OfferConfirmationScreen/OfferConfirmation';
+import OfferDetails from '../../../screens/OfferDetailsScreen/OfferDetails';
 
 const SearchStack = createStackNavigator();
 
@@ -46,6 +47,19 @@ const SearchJobsNavigator = () => {
             <SearchStack.Screen
                 name='JobConfirmation'
                 component={JobConfirmation}
+                options={
+                    Platform.OS === 'android'
+                        ? {
+                            headerRight: () => <MenuIcon />,
+                        }
+                        : {
+                            headerTitle: '',
+                        }
+                }
+            />
+            <SearchStack.Screen
+                name='OfferDetails'
+                component={OfferDetails}
                 options={
                     Platform.OS === 'android'
                         ? {
