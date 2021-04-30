@@ -80,7 +80,7 @@ export default function MyJobList({navigation}) {
     const [service, setService] = useState('')
 
     const onViewDetailsPress = () => {
-        console.log("Details pressed")
+        navigation.navigate('PostDetails')
     }
     const onStatusDeailsPress = () => {
         navigation.navigate('StatusDetails')

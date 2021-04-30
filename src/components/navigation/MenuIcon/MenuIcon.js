@@ -16,7 +16,7 @@ export default function MenuIcon() {
       <EvilIcons
         name='navicon'
         size={30}
-        color='#40DF9F'
+        color='black'
         style={{ marginRight: 15 }}
       />
     </TouchableOpacity>
