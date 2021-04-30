@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, TextInput } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, TextInput, ScrollView } from 'react-native';
 
-export default function OfferInfo({ navigation, ServiceProviderAction, setOffer, onSendOffer, offer }) {
+export default function OfferInfo({ navigation, ServiceProviderAction, setOffer, onSendOffer, offer, onAccept, onDecline }) {
 
     list = () => {
         return ServiceProviderAction.serviceProviderResponse.map((e, i) => {
@@ -17,6 +17,7 @@ export default function OfferInfo({ navigation, ServiceProviderAction, setOffer,
     }
 
     return (
+        <ScrollView>
         <View style={styles.container}>
             <Text>Original Price: {ServiceProviderAction.originalPrice}</Text>
             {list()}
@@ -32,7 +33,23 @@ export default function OfferInfo({ navigation, ServiceProviderAction, setOffer,
                 onPress={() => onSendOffer()}>
                 <Text style={styles.buttonTitle}>SEND OFFER</Text>
             </TouchableOpacity>
+            {onAccept?
+            <>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => onAccept()}>
+                <Text style={styles.buttonTitle}>ACCEPT</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => onDecline()}>
+                <Text style={styles.buttonTitle}>DECLINE</Text>
+            </TouchableOpacity>
+            </>
+            :
+            <View></View>}
         </View>
+        </ScrollView>
     )
 }
 

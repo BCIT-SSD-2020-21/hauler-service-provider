@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import OfferInfo from '../../components/offerInfo/OfferInfo';
 
-export default function OfferDetails({ navigation }) {
+export default function StatusDetails({ navigation }) {
     const ServiceProviderAction = {
         _id: 'abc',
         postId: '1234',
@@ -32,6 +32,12 @@ export default function OfferDetails({ navigation }) {
     const onSendOffer = () => {
         navigation.navigate('OfferConfirmation')
     }
+    const onDecline = () => {
+        console.log("offer declined")
+    }
+    const onAccept = () =>{
+        console.log("offerAccepted")
+    }
 
     return (
         <OfferInfo
@@ -39,11 +45,8 @@ export default function OfferDetails({ navigation }) {
             setOffer={setOffer}
             onSendOffer={onSendOffer}
             offer={offer}
-            onDecline= ""
-            onAccept=""
+            onDecline= {onDecline}
+            onAccept={onAccept}
         />
     )
 }
-
-
-
