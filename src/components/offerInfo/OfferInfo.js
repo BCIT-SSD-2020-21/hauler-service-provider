@@ -29,6 +29,7 @@ export default function OfferInfo({ navigation, ServiceProviderAction, setOffer,
                 value={offer}
             />
             <TouchableOpacity
+            disabled={ServiceProviderAction.serviceProviderActionButtons}
                 style={styles.button}
                 onPress={() => onSendOffer()}>
                 <Text style={styles.buttonTitle}>SEND OFFER</Text>
@@ -36,11 +37,13 @@ export default function OfferInfo({ navigation, ServiceProviderAction, setOffer,
             {onAccept?
             <>
             <TouchableOpacity
+            disabled={ServiceProviderAction.serviceProviderActionButtons}
                 style={styles.button}
                 onPress={() => onAccept()}>
                 <Text style={styles.buttonTitle}>ACCEPT</Text>
             </TouchableOpacity>
             <TouchableOpacity
+            disabled={ServiceProviderAction.serviceProviderActionButtons}
                 style={styles.button}
                 onPress={() => onDecline()}>
                 <Text style={styles.buttonTitle}>DECLINE</Text>

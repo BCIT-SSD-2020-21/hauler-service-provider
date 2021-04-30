@@ -10,12 +10,13 @@ export default function StatusDetails({ navigation }) {
         originalPrice: '50',
         status: 'Negotiating',
         notification: 'flex',
+        serviceProviderActionButtons: false,
         serviceProviderResponse: [{
             _id: 'abc123',
             serviceProviderResponse: 'Offer',
             serviceProviderActionPrice: '70',
         },
-        {   
+        {
             _id: 'abc1235',
             serviceProviderResponse: 'Offer',
             serviceProviderActionPrice: '65',
@@ -35,8 +36,8 @@ export default function StatusDetails({ navigation }) {
     const onDecline = () => {
         console.log("offer declined")
     }
-    const onAccept = () =>{
-        console.log("offerAccepted")
+    const onAccept = () => {
+        navigation.navigate('JobConfirmation')
     }
 
     return (
@@ -45,7 +46,7 @@ export default function StatusDetails({ navigation }) {
             setOffer={setOffer}
             onSendOffer={onSendOffer}
             offer={offer}
-            onDecline= {onDecline}
+            onDecline={onDecline}
             onAccept={onAccept}
         />
     )

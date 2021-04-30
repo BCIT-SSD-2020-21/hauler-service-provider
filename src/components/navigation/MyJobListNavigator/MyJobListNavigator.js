@@ -5,6 +5,7 @@ import { Platform } from 'react-native';
 import MyJobList from '../../../screens/MyJobListScreen/MyJobList';
 import StatusDetails from '../../../screens/StatusDetailsScreen/StatusDetails';
 import OfferConfirmation from '../../../screens/OfferConfirmationScreen/OfferConfirmation';
+import JobConfirmation from '../../../screens/JobConfirmationScreen/JobConfirmation';
 
 const MyJobListStack = createStackNavigator();
 
@@ -45,6 +46,19 @@ const MyJobListNavigator = () => {
             <MyJobListStack.Screen
                 name='OfferConfirmation'
                 component={OfferConfirmation}
+                options={
+                    Platform.OS === 'android'
+                        ? {
+                            headerRight: () => <MenuIcon />,
+                        }
+                        : {
+                            headerTitle: '',
+                        }
+                }
+            />
+            <MyJobListStack.Screen
+                name='JobConfirmation'
+                component={JobConfirmation}
                 options={
                     Platform.OS === 'android'
                         ? {

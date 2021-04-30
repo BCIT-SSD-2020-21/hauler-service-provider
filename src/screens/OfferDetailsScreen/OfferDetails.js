@@ -10,6 +10,7 @@ export default function OfferDetails({ navigation }) {
         originalPrice: '50',
         status: 'Negotiating',
         notification: 'flex',
+        serviceProviderActionButtons: false,
         serviceProviderResponse: [{
             _id: 'abc123',
             serviceProviderResponse: 'Offer',

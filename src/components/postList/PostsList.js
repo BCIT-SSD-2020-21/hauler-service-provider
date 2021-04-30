@@ -20,7 +20,7 @@ export default function PostsList({ posts, onViewDetailsPress, ServiceProviderAc
                                 <Badge
                                     badgeStyle={{ display: ServiceProviderAction[index].notification }}
                                     status="success"
-                                    value="notification"
+                                    value={ServiceProviderAction[index].serviceProviderResponse[0].serviceProviderResponse}
                                     containerStyle={{ position: 'absolute', top: -20, left: -30 }}
                                 /> :
                                 <View></View>}
