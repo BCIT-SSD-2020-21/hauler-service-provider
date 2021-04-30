@@ -15,7 +15,7 @@ export default function StatusDetails({ navigation }) {
             serviceProviderResponse: 'Offer',
             serviceProviderActionPrice: '70',
         },
-        {
+        {   
             _id: 'abc1235',
             serviceProviderResponse: 'Offer',
             serviceProviderActionPrice: '65',

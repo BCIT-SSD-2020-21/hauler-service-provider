@@ -4,7 +4,7 @@ import SearchByService from '../../components/searchByService/SearchByService';
 import SearchByLocation from '../../components/searchByLocation/SearchByLocation';
 import PostsList from '../../components/postList/PostsList';
 
-export default function MyJobList() {
+export default function MyJobList({navigation}) {
     const posts = [{
         _id: '1234',
         service: 'Junk Removal',
@@ -58,7 +58,7 @@ export default function MyJobList() {
         console.log("Details pressed")
     }
     const onStatusDeailsPress = () => {
-        console.log("Status Details pressed")
+        navigation.navigate('StatusDetails')
     }
 
     return (
