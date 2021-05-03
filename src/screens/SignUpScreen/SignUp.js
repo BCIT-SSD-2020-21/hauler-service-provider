@@ -2,20 +2,27 @@ import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, ScrollView, Picker } from 'react-native';
 import UserInfo from '../../components/userInfo/UserInfo';
 import { Context } from '../../context/ContextProvider';
+import { signUp } from '../../../network';
 
-export default function Signup({navigation}) {
+export default function Signup({ navigation }) {
     const { signup, currentUser } = useContext(Context)
 
+    const [uid, setUid] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
-    const [dob, setDob] = useState('')
-    const [address, setAddress] = useState('')
-    const [phoneNumber, setphoneNumber] = useState('')
-    const [vehileType, setVehileType] = useState('')
-    const [expiryDate, setExpiryDate] = useState('')
-    const [locationOfService, setLocationOfService] = useState('')
-    const [flname, setFlName] = useState('')
+    const [profilePicUrl, setProfilePicUrl] = useState('')
+    const [dateOfBirth, setDob] = useState('')
+    const [province, setProvince] = useState('')
+    const [city, setCity] = useState('')
+    const [streetAddress, setStreetAddress] = useState('')
+    const [unitNumber, setUnitNumber] = useState('')
+    const [contactNumber, setContactNumber] = useState('')
+    const [vehicleType, setVehicleType] = useState('')
+    const [driverLicenseExpiry, setExpiryDate] = useState('')
+    const [serviceLocation, setLocationOfService] = useState('')
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
     const [error, setError] = useState('')
     const [loading, setLoading] = useState('')
 
@@ -27,10 +34,27 @@ export default function Signup({navigation}) {
         try {
             setError("")
             setLoading(true)
-            await signup(email, password)
+            const response = await signup(email, password)
+            const currentUid = response.user.uid
+            setUid(currentUid)
+            await signUp(currentUid,
+                firstName,
+                lastName,
+                profilePicUrl,
+                // dateOfBirth,
+                province,
+                city,
+                streetAddress,
+                unitNumber,
+                email,
+                contactNumber,
+                vehicleType,
+                // driverLicenseExpiry,
+                serviceLocation,
+            )
             navigation.navigate('Home')
-        } catch {
-            setError("Failed to create an account")
+        } catch (err) {
+            setError(err.message)
         }
         setLoading(false)
     }
@@ -67,21 +91,31 @@ export default function Signup({navigation}) {
                         value={confirmPassword}
                     />
                     <UserInfo
-                        dob={dob}
-                        address={address}
-                        phoneNumber={phoneNumber}
-                        vehileType={vehileType}
-                        flname={flname}
+                        dateOfBirth={dateOfBirth}
+                        province={province}
+                        city={city}
+                        streetAddress={streetAddress}
+                        unitNumber={unitNumber}
+                        contactNumber={contactNumber}
+                        vehicleType={vehicleType}
+                        firstName={firstName}
+                        lastName={lastName}
+                        profilePicUrl={profilePicUrl}
+                        setProvince={setProvince}
+                        setCity={setCity}
+                        setStreetAddress={setStreetAddress}
+                        setUnitNumber={setUnitNumber}
+                        setProfilePicUrl={setProfilePicUrl}
+                        setLastName={setLastName}
                         setDob={setDob}
-                        setAddress={setAddress}
-                        setphoneNumber={setphoneNumber}
-                        setVehileType={setVehileType}
-                        setFlName={setFlName}
+                        setContactNumber={setContactNumber}
+                        setVehicleType={setVehicleType}
+                        setFirstName={setFirstName}
                         setError={setError}
                     />
                     <Picker
                         style={styles.input}
-                        selectedValue={locationOfService}
+                        selectedValue={serviceLocation}
                         onValueChange={(locationOfService) => { setError(""); setLocationOfService(locationOfService) }}
                     >
                         <Picker.Item label='Select Location Of Service' value='' style={{ color: '#C0C0C0' }} />
@@ -136,7 +170,7 @@ export default function Signup({navigation}) {
                         placeholder='Driver Licence Expiry'
                         placeholderTextColor='#C0C0C0'
                         onChangeText={(date) => { setError(""); setExpiryDate(date) }}
-                        value={expiryDate}
+                        value={driverLicenseExpiry}
                     />
                     <TouchableOpacity
                         style={styles.button}
