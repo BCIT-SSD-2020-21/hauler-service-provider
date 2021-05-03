@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import SearchByService from '../../components/searchByService/SearchByService';
 import SearchByLocation from '../../components/searchByLocation/SearchByLocation';
 import PostsList from '../../components/postList/PostsList';
+import { getAllPosts } from '../../../network';
 
 export default function SearchJobs({navigation}) {
     const posts = [{
@@ -35,6 +36,12 @@ export default function SearchJobs({navigation}) {
     const onViewDetailsPress = () => {
         navigation.navigate('PostDetails')
     }
+
+    useEffect(() => {
+        (async() =>{
+           const newPosts = await getAllPosts()
+        })()
+    }, [])
 
     return (
         <View style={styles.container}>

@@ -16,8 +16,8 @@ export default function Signin({ navigation }) {
             setLoading(true)
             await signin(email, password)
             navigation.navigate('Home')
-        } catch {
-            setError("Failed to Login")
+        } catch(err) {
+            setError(err.message)
         }
         setLoading(false)
     }

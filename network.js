@@ -3,6 +3,7 @@ import { NETWORK_URL } from '@env';
 
 const url = NETWORK_URL;
 
+//==============================To register Service Provider========================================//
 export async function signUp(
     uid,
     firstName,
@@ -44,3 +45,13 @@ export async function signUp(
         console.log('user created');
         return res
 }
+
+//================================== To get All active posts =========================================//
+export async function getAllPosts() {
+    try {
+      const res = await axios.get(`${url}/api/posts/all`);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
