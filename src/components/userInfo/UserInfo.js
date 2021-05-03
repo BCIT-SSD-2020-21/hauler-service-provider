@@ -2,42 +2,78 @@ import React from 'react';
 import { TextInput, View, Picker } from 'react-native';
 import { StyleSheet } from 'react-native';
 
-export default function UserInfo({ flname, dob, address, setDob, phoneNumber, vehileType, setAddress, setphoneNumber, setVehileType, setFlName, setError}) {
+export default function UserInfo({ firstName, lastName, province, city, streetAddress,
+    unitNumber, setCity, setStreetAddress, setUnitNumber, profilePicUrl, dateOfBirth, setDob, contactNumber, vehicleType, setContactNumber, setProvince, setVehicleType, setFirstName, setLastName, setProfilePicUrl, setError }) {
     return (
         <View>
             <TextInput
                 style={styles.input}
-                placeholder='First & Last Name'
+                placeholder='profilePicUrl'
                 placeholderTextColor='#C0C0C0'
-                onChangeText={(flname) => {setError(""); setFlName(flname) }}
-                value={flname}
+                onChangeText={(profilePic) => { setError(""); setProfilePicUrl(profilePic) }}
+                value={profilePicUrl}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder='First Name'
+                placeholderTextColor='#C0C0C0'
+                onChangeText={(fname) => { setError(""); setFirstName(fname) }}
+                value={firstName}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder='Last Name'
+                placeholderTextColor='#C0C0C0'
+                onChangeText={(lname) => { setError(""); setLastName(lname) }}
+                value={lastName}
             />
             <TextInput
                 style={styles.input}
                 placeholder='Date of Birth'
                 placeholderTextColor='#C0C0C0'
-                onChangeText={(date) => {setError(""); setDob(date) }}
-                value={dob}
+                onChangeText={(date) => { setError(""); setDob(date) }}
+                value={dateOfBirth}
             />
             <TextInput
                 style={styles.input}
-                placeholder='Address'
+                placeholder='Province'
                 placeholderTextColor='#C0C0C0'
-                onChangeText={(address) => {setError(""); setAddress(address) }}
-                value={address}
+                onChangeText={(province) => { setError(""); setProvince(province) }}
+                value={province}
             />
             <TextInput
                 style={styles.input}
-                placeholder='Phone Number'
+                placeholder='City'
                 placeholderTextColor='#C0C0C0'
-                onChangeText={(number) => {setError(""); setphoneNumber(number) }}
-                value={phoneNumber}
+                onChangeText={(city) => { setError(""); setCity(city) }}
+                value={city}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder='StreetAddress'
+                placeholderTextColor='#C0C0C0'
+                onChangeText={(streetAddress) => { setError(""); setStreetAddress(streetAddress) }}
+                value={streetAddress}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder='Unit Number'
+                placeholderTextColor='#C0C0C0'
+                onChangeText={(unitNumber) => { setError(""); setUnitNumber(unitNumber) }}
+                value={unitNumber}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder='Contact Number'
+                placeholderTextColor='#C0C0C0'
+                onChangeText={(number) => { setError(""); setContactNumber(number) }}
+                value={contactNumber}
             />
             <Picker
                 style={styles.input}
-                selectedValue={vehileType}
+                selectedValue={vehicleType}
 
-                onValueChange={(type) => {setError(""); setVehileType(type) }}
+                onValueChange={(type) => { setError(""); setVehicleType(type) }}
             >
                 <Picker.Item label='Select Vehicle type' value='' style={{ color: '#C0C0C0' }} />
                 <Picker.Item label='SUV' value='SUV' />
