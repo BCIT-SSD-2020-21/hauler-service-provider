@@ -56,7 +56,7 @@ export async function getAllPosts() {
   }
 }
 
-//=================================== get posts by service ===========================================//
+//================================= To get posts by service ===========================================//
 export async function getPostsByService(service) {
   try {
     const res = await axios.get(`${url}/api/posts/service/${service}`);
@@ -66,7 +66,7 @@ export async function getPostsByService(service) {
   }
 }
 
-//=================================== get posts by location ===========================================//
+//================================ To get posts by location ===========================================//
   export async function getPostsByLocation(location) {
     try {
       console.log(location)
@@ -78,3 +78,13 @@ export async function getPostsByService(service) {
     }
   }
 
+  //================================ To get single Post ===============================================//
+  export async function getOnePost(postId) {
+    try {
+      console.log(postId)
+      const res = await axios.get(`${url}/api/posts/one/${postId}`);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
