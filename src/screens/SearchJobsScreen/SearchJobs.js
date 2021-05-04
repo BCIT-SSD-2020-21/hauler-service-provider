@@ -10,8 +10,8 @@ export default function SearchJobs({ navigation }) {
     const [service, setService] = useState('')
     const [posts, setPosts] = useState('')
 
-    const onViewDetailsPress = () => {
-        navigation.navigate('PostDetails')
+    const onViewDetailsPress = (value) => {
+        navigation.navigate('PostDetails', {postId:value.postId})
     }
 
     const searchService = async (value) => {

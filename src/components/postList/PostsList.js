@@ -44,7 +44,7 @@ export default function PostsList({ posts, onViewDetailsPress, ServiceProviderAc
                                 <View></View>}
                             <Button
                                 buttonStyle={{ borderRadius: 5, backgroundColor: '#16B3D5', marginTop: 10 }}
-                                onPress={() => onViewDetailsPress()}
+                                onPress={() => onViewDetailsPress({postId: item._id})}
                                 title='View Details'
                             />
                         </Card>
