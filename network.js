@@ -105,3 +105,13 @@ export async function getPostsByPostIdAndLocation(postId, location) {
     console.log(err);
   }
 }
+
+//================================= To get Service Provider Profile ==================================//
+export async function getOneServiceProvider(uid) {
+  try {
+    const res = await axios.get(`${url}/api/service-providers/${uid}`);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
