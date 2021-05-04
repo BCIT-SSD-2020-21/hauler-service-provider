@@ -3,9 +3,9 @@ import { StyleSheet, View } from 'react-native';
 import SearchByService from '../../components/searchByService/SearchByService';
 import SearchByLocation from '../../components/searchByLocation/SearchByLocation';
 import PostsList from '../../components/postList/PostsList';
-import { getAllPosts } from '../../../network';
+import { getAllPosts, getPostsByService } from '../../../network';
 
-export default function SearchJobs({navigation}) {
+export default function SearchJobs({ navigation }) {
     const [location, setLocation] = useState('')
     const [service, setService] = useState('')
     const [posts, setPosts] = useState('')
@@ -14,10 +14,15 @@ export default function SearchJobs({navigation}) {
         navigation.navigate('PostDetails')
     }
 
+    const searchService = async (value) => {
+        const newPosts = await getPostsByService(value.service)
+        setPosts(newPosts)
+    }
+
     useEffect(() => {
-        (async() =>{
-           const newPosts = await getAllPosts()
-           setPosts(newPosts)
+        (async () => {
+            const newPosts = await getAllPosts()
+            setPosts(newPosts)
         })()
     }, [])
 
@@ -30,6 +35,7 @@ export default function SearchJobs({navigation}) {
             <SearchByService
                 service={service}
                 setService={setService}
+                searchService={searchService}
             />
             <PostsList
                 posts={posts}
