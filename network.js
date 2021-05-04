@@ -66,25 +66,34 @@ export async function getPostsByService(service) {
   }
 }
 
-//================================ To get posts by location ===========================================//
+//================================== To get posts by location =========================================//
   export async function getPostsByLocation(location) {
     try {
-      console.log(location)
       const res = await axios.get(`${url}/api/posts/location/${location}`);
-      console.log(res.data)
       return res.data;
     } catch (err) {
       console.log(err);
     }
   }
 
-  //================================ To get single Post ===============================================//
+  //==================================== To get single Post ===========================================//
   export async function getOnePost(postId) {
     try {
-      console.log(postId)
       const res = await axios.get(`${url}/api/posts/one/${postId}`);
       return res.data;
     } catch (err) {
       console.log(err);
     }
   }
+
+  //================================ To get post by postId and service ================================//
+  export async function getPostsByPostIdAndService(postId, service) {
+    try {
+      const res = await axios.get(`${url}/api/posts/serviceprovider/service/${postId}/${service}`);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  
