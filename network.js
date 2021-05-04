@@ -66,3 +66,15 @@ export async function getPostsByService(service) {
   }
 }
 
+//=================================== get posts by location ===========================================//
+  export async function getPostsByLocation(location) {
+    try {
+      console.log(location)
+      const res = await axios.get(`${url}/api/posts/location/${location}`);
+      console.log(res.data)
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
