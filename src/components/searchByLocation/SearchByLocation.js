@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 
-export default function SearchByLocation({ location, setLocation }) {
+export default function SearchByLocation({ location, setLocation, searchLocation }) {
 
     return (
         <View style={styles.search}>
@@ -17,12 +17,13 @@ export default function SearchByLocation({ location, setLocation }) {
                         color: 'black'
                     },
                 }}
-                onValueChange={(value) => setLocation(value)}
+                onValueChange={(value) => { setLocation(value); searchLocation({ location: value }) }}
                 placeholder={{ label: "Search by location", value: null }}
                 items={[
                     { label: 'Surrey', value: 'Surrey' },
                     { label: 'Langely', value: 'Langely' },
                     { label: 'Richmond', value: 'Richmond' },
+                    { label: 'Burnaby', value: 'Burnaby' }
                 ]}
             />
         </View>

@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import SearchByService from '../../components/searchByService/SearchByService';
 import SearchByLocation from '../../components/searchByLocation/SearchByLocation';
 import PostsList from '../../components/postList/PostsList';
-import { getAllPosts, getPostsByService } from '../../../network';
+import { getAllPosts, getPostsByLocation, getPostsByService } from '../../../network';
 
 export default function SearchJobs({ navigation }) {
     const [location, setLocation] = useState('')
@@ -19,6 +19,11 @@ export default function SearchJobs({ navigation }) {
         setPosts(newPosts)
     }
 
+    const searchLocation = async (value) => {
+        const newPosts = await getPostsByLocation(value.location)
+        setPosts(newPosts)
+    }
+
     useEffect(() => {
         (async () => {
             const newPosts = await getAllPosts()
@@ -31,6 +36,7 @@ export default function SearchJobs({ navigation }) {
             <SearchByLocation
                 location={location}
                 setLocation={setLocation}
+                searchLocation={searchLocation}
             />
             <SearchByService
                 service={service}
