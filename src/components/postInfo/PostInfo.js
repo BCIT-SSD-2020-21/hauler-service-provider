@@ -13,9 +13,13 @@ export default function PostInfo({ posts }) {
                     <Text>Number of items: {posts.numberOfItems}</Text>
                 </View>
             </View>
-            <ImageList
-                loadImages={posts.loadImages}
-            />
+            <Text>
+            {posts &&
+                <ImageList
+                    loadImages={posts.loadImages}
+                />
+            }
+            </Text>
             <View style={styles.addressContainer}>
                 <Text>Pick Up Address</Text>
                 <View style={styles.addressSubContainer}>

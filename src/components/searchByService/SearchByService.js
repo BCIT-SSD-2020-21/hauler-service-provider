@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 
-export default function SearchByService({ service, setService }) {
+export default function SearchByService({ service, setService, searchService }) {
 
     return (
         <View style={styles.search}>
@@ -17,10 +17,10 @@ export default function SearchByService({ service, setService }) {
                         color: 'black'
                     },
                 }}
-                onValueChange={(value) => setService(value)}
+                onValueChange={(value) => {setService(value); searchService({service: value})}}
                 placeholder={{ label: "Search by service", value: null }}
                 items={[
-                    { label: 'Junk Removal', value: 'Junk Removal' },
+                    { label: 'Junk Removal', value: 'Junk' },
                     { label: 'Moving', value: 'Moving' },
                     { label: 'Errand', value: 'Errand' },
                 ]}

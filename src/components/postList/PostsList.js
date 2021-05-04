@@ -4,11 +4,11 @@ import { Card, Badge, Button } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 
 export default function PostsList({ posts, onViewDetailsPress, ServiceProviderAction, onStatusDeailsPress }) {
-    
+
     return (
         <FlatList
             data={posts}
-            keyExtractor={post => post._id}
+            keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => {
                 return (
                     item &&
@@ -44,7 +44,7 @@ export default function PostsList({ posts, onViewDetailsPress, ServiceProviderAc
                                 <View></View>}
                             <Button
                                 buttonStyle={{ borderRadius: 5, backgroundColor: '#16B3D5', marginTop: 10 }}
-                                onPress={() => onViewDetailsPress()}
+                                onPress={() => onViewDetailsPress({ postId: item._id })}
                                 title='View Details'
                             />
                         </Card>
