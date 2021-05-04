@@ -3,12 +3,12 @@ import { StyleSheet, View } from 'react-native';
 import SearchByService from '../../components/searchByService/SearchByService';
 import SearchByLocation from '../../components/searchByLocation/SearchByLocation';
 import PostsList from '../../components/postList/PostsList';
-import { getOnePost } from '../../../network';
+import { getOnePost, getPostsByPostIdAndService } from '../../../network';
 
-export default function MyJobList({navigation}) {
+export default function MyJobList({ navigation }) {
 
-const postIds= ["608fba4ddc55d161f4e89889","608fc06d2113ac6cc0ef7ba4"]
-const [posts, setPosts] = useState('')
+    const postIds = ["608fba4ddc55d161f4e89889", "608fc06d2113ac6cc0ef7ba4"]
+    const [posts, setPosts] = useState('')
 
     // const posts = [{
     //     _id: '1234',
@@ -48,60 +48,67 @@ const [posts, setPosts] = useState('')
     //     }],
     // }]
 
-    const ServiceProviderAction = [{
-        _id: 'abc',
-        postId: '1234',
-        status: 'Negotiating',
-        notification: 'flex',
-        serviceProviderResponse: [{
-            serviceProviderResponse: 'Offer',
-            serviceProviderActionPrice: '70',
-        }]
-    },
-    {
-        _id: 'bcd',
-        postId: '12345',
-        status: 'Accepted',
-        notification: 'none',
-        serviceProviderResponse: [{
-            serviceProviderResponse: 'Accept',
-            serviceProviderActionPrice: '50',
-        },
-    ]
-    },
-    {
-        _id: 'bcde',
-        postId: '123456',
-        status: 'Accepted',
-        notification: 'flex',
-        serviceProviderResponse: [{
-            serviceProviderResponse: 'Accept',
-            serviceProviderActionPrice: '50',
-        },
-    ]
-    }];
+    // const ServiceProviderAction = [{
+    //     _id: 'abc',
+    //     postId: '1234',
+    //     status: 'Negotiating',
+    //     notification: 'flex',
+    //     serviceProviderResponse: [{
+    //         serviceProviderResponse: 'Offer',
+    //         serviceProviderActionPrice: '70',
+    //     }]
+    // },
+    // {
+    //     _id: 'bcd',
+    //     postId: '12345',
+    //     status: 'Accepted',
+    //     notification: 'none',
+    //     serviceProviderResponse: [{
+    //         serviceProviderResponse: 'Accept',
+    //         serviceProviderActionPrice: '50',
+    //     },
+    //     ]
+    // },
+    // {
+    //     _id: 'bcde',
+    //     postId: '123456',
+    //     status: 'Accepted',
+    //     notification: 'flex',
+    //     serviceProviderResponse: [{
+    //         serviceProviderResponse: 'Accept',
+    //         serviceProviderActionPrice: '50',
+    //     },
+    //     ]
+    // }];
 
     const [location, setLocation] = useState('')
     const [service, setService] = useState('')
 
     const onViewDetailsPress = (value) => {
-        navigation.navigate('PostDetails', {postId:value.postId})
+        navigation.navigate('PostDetails', { postId: value.postId })
     }
     const onStatusDeailsPress = () => {
         navigation.navigate('StatusDetails')
     }
+    const searchService = async (value) => {
+
+        const posts = await Promise.all(postIds.map(async (a) => {
+            if (!!a) {
+                return await getPostsByPostIdAndService(a, value.service);
+            } else { return null }
+        }))
+        console.log(posts)
+        setPosts(posts)
+    }
 
     useEffect(() => {
         (async () => {
-           const posts = await Promise.all(postIds.map(async (a) => {
-            if (!!a) {
-              return await getOnePost(a);
-            } else { return null }
-          }))
-          setPosts(posts)
-
-            // const newPosts = await getAllPosts()
-            // setPosts(newPosts)
+            const posts = await Promise.all(postIds.map(async (a) => {
+                if (!!a) {
+                    return await getOnePost(a);
+                } else { return null }
+            }))
+            setPosts(posts)
         })()
     }, [])
 
@@ -114,11 +121,12 @@ const [posts, setPosts] = useState('')
             <SearchByService
                 service={service}
                 setService={setService}
+                searchService={searchService}
             />
             <PostsList
                 posts={posts}
                 onViewDetailsPress={onViewDetailsPress}
-                ServiceProviderAction={ServiceProviderAction}
+                ServiceProviderAction=''
                 onStatusDeailsPress={onStatusDeailsPress}
             />
         </View>
