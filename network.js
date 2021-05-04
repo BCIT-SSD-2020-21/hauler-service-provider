@@ -55,3 +55,13 @@ export async function getAllPosts() {
       console.log(err);
     }
   }
+
+//=================================== get posts by service ===========================================//
+export async function getPostsByService(service) {
+  try {
+    const res = await axios.get(`${url}/api/posts/service/:${service}`);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
