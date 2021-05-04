@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import SearchByService from '../../components/searchByService/SearchByService';
 import SearchByLocation from '../../components/searchByLocation/SearchByLocation';
 import PostsList from '../../components/postList/PostsList';
-import { getOnePost, getPostsByPostIdAndService } from '../../../network';
+import { getOnePost, getPostsByPostIdAndLocation, getPostsByPostIdAndService } from '../../../network';
 
 export default function MyJobList({ navigation }) {
 
@@ -91,10 +91,19 @@ export default function MyJobList({ navigation }) {
         navigation.navigate('StatusDetails')
     }
     const searchService = async (value) => {
-
         const posts = await Promise.all(postIds.map(async (a) => {
             if (!!a) {
                 return await getPostsByPostIdAndService(a, value.service);
+            } else { return null }
+        }))
+        console.log(posts)
+        setPosts(posts)
+    }
+
+    const searchLocation = async (value) => {
+        const posts = await Promise.all(postIds.map(async (a) => {
+            if (!!a) {
+                return await getPostsByPostIdAndLocation(a, value.location);
             } else { return null }
         }))
         console.log(posts)
@@ -117,6 +126,7 @@ export default function MyJobList({ navigation }) {
             <SearchByLocation
                 location={location}
                 setLocation={setLocation}
+                searchLocation={searchLocation}
             />
             <SearchByService
                 service={service}

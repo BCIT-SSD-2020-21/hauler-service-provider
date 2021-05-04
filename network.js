@@ -99,7 +99,7 @@ export async function getPostsByPostIdAndService(postId, service) {
 //================================ To get post by postId and location ================================//
 export async function getPostsByPostIdAndLocation(postId, location) {
   try {
-    const res = await axios.get(`${url}/api/posts/serviceprovider/service/${postId}/${location}`);
+    const res = await axios.get(`${url}/api/posts/serviceprovider/location/${postId}/${location}`);
     return res.data;
   } catch (err) {
     console.log(err);
