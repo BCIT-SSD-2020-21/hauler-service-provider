@@ -40,7 +40,7 @@ export default function Signup({ navigation }) {
             await signUp(currentUid,
                 firstName,
                 lastName,
-                profilePicUrl,
+                // profilePicUrl,
                 // dateOfBirth,
                 province,
                 city,
@@ -97,7 +97,6 @@ export default function Signup({ navigation }) {
                         streetAddress={streetAddress}
                         unitNumber={unitNumber}
                         contactNumber={contactNumber}
-                        vehicleType={vehicleType}
                         firstName={firstName}
                         lastName={lastName}
                         profilePicUrl={profilePicUrl}
@@ -109,10 +108,20 @@ export default function Signup({ navigation }) {
                         setLastName={setLastName}
                         setDob={setDob}
                         setContactNumber={setContactNumber}
-                        setVehicleType={setVehicleType}
                         setFirstName={setFirstName}
                         setError={setError}
                     />
+                    <Picker
+                        style={styles.input}
+                        selectedValue={vehicleType}
+
+                        onValueChange={(type) => { setError(""); setVehicleType(type) }}
+                    >
+                        <Picker.Item label='Select Vehicle type' value='' style={{ color: '#C0C0C0' }} />
+                        <Picker.Item label='SUV' value='SUV' />
+                        <Picker.Item label='VAN' value='VAN' />
+                        <Picker.Item label='PICKUP' value='PICKUP' />
+                    </Picker>
                     <Picker
                         style={styles.input}
                         selectedValue={serviceLocation}

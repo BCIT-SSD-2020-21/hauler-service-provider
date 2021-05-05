@@ -8,7 +8,7 @@ export async function signUp(
   uid,
   firstName,
   lastName,
-  profilePicUrl,
+  // profilePicUrl,
   // dateOfBirth,
   province,
   city,
@@ -18,13 +18,14 @@ export async function signUp(
   contactNumber,
   vehicleType,
   // driverLicenseExpiry,
-  serviceLocation) {
+  serviceLocation
+) {
   const res = await axios.post(`${url}/api/service-providers`, {
     uid: uid,
     firstName: firstName,
     lastName: lastName,
-    profilePicUrl: profilePicUrl,
-    // dateOfBirth:"01/01/2000",
+    profilePicUrl: "https://techcommunity.microsoft.com/t5/image/serverpage/image-id/217078i525F6A9EF292601F/image-size/large?v=v2&px=999",
+    dateOfBirth: "01/01/2000",
     province: province,
     city: city,
     streetAddress: streetAddress,
@@ -32,8 +33,8 @@ export async function signUp(
     email: email,
     contactNumber: contactNumber,
     chequeDepositFormUrl: "https://i.pinimg.com/474x/40/f3/1d/40f31dd88a4ec213f8b21d1444242969.jpg",
-    vehicleType: vehicleType,
-    // driverLicenseExpiry:"01/01/2023",
+    vehicle: vehicleType,
+    driverLicenseExpiry: "01/01/2023",
     serviceLocation: serviceLocation,
     driverLicenseUrl: "https://i.pinimg.com/474x/40/f3/1d/40f31dd88a4ec213f8b21d1444242969.jpg",
     driverAbstractUrl: "https://i.pinimg.com/474x/40/f3/1d/40f31dd88a4ec213f8b21d1444242969.jpg",
@@ -100,6 +101,47 @@ export async function getPostsByPostIdAndService(postId, service) {
 export async function getPostsByPostIdAndLocation(postId, location) {
   try {
     const res = await axios.get(`${url}/api/posts/serviceprovider/location/${postId}/${location}`);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+//================================= To get Service Provider Profile ==================================//
+export async function getOneServiceProvider(uid) {
+  try {
+    const res = await axios.get(`${url}/api/service-providers/${uid}`);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+//================================= To edit Profile info =============================================//
+export async function updateOneServiceProvider(
+  uid, 
+  firstName,
+  lastName,
+  profilePicUrl,
+  dateOfBirth,
+  province,
+  city,
+  streetAddress,
+  unitNumber,
+  contactNumber
+) {
+  try {
+    const res = await axios.post(`${url}/api/service-providers/${uid}`, {
+      firstName: firstName,
+      lastName: lastName,
+      profilePicUrl: "https://techcommunity.microsoft.com/t5/image/serverpage/image-id/217078i525F6A9EF292601F/image-size/large?v=v2&px=999",
+      dateOfBirth: dateOfBirth,
+      province: province,
+      city: city,
+      streetAddress: streetAddress,
+      unitNumber: unitNumber,
+      contactNumber: contactNumber,
+    });
     return res.data;
   } catch (err) {
     console.log(err);

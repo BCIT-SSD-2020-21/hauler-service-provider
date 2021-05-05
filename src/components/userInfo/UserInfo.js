@@ -3,7 +3,7 @@ import { TextInput, View, Picker } from 'react-native';
 import { StyleSheet } from 'react-native';
 
 export default function UserInfo({ firstName, lastName, province, city, streetAddress,
-    unitNumber, setCity, setStreetAddress, setUnitNumber, profilePicUrl, dateOfBirth, setDob, contactNumber, vehicleType, setContactNumber, setProvince, setVehicleType, setFirstName, setLastName, setProfilePicUrl, setError }) {
+    unitNumber, setCity, setStreetAddress, setUnitNumber, profilePicUrl, dateOfBirth, setDob, contactNumber, setContactNumber, setProvince, setFirstName, setLastName, setProfilePicUrl, setError }) {
     return (
         <View>
             <TextInput
@@ -69,17 +69,6 @@ export default function UserInfo({ firstName, lastName, province, city, streetAd
                 onChangeText={(number) => { setError(""); setContactNumber(number) }}
                 value={contactNumber}
             />
-            <Picker
-                style={styles.input}
-                selectedValue={vehicleType}
-
-                onValueChange={(type) => { setError(""); setVehicleType(type) }}
-            >
-                <Picker.Item label='Select Vehicle type' value='' style={{ color: '#C0C0C0' }} />
-                <Picker.Item label='SUV' value='SUV' />
-                <Picker.Item label='VAN' value='VAN' />
-                <Picker.Item label='PICKUP' value='PICKUP' />
-            </Picker>
         </View>
     )
 }
