@@ -19,13 +19,13 @@ export async function signUp(
   vehicleType,
   // driverLicenseExpiry,
   serviceLocation
-  ) {
+) {
   const res = await axios.post(`${url}/api/service-providers`, {
     uid: uid,
     firstName: firstName,
     lastName: lastName,
     profilePicUrl: "https://techcommunity.microsoft.com/t5/image/serverpage/image-id/217078i525F6A9EF292601F/image-size/large?v=v2&px=999",
-    dateOfBirth:"01/01/2000",
+    dateOfBirth: "01/01/2000",
     province: province,
     city: city,
     streetAddress: streetAddress,
@@ -34,7 +34,7 @@ export async function signUp(
     contactNumber: contactNumber,
     chequeDepositFormUrl: "https://i.pinimg.com/474x/40/f3/1d/40f31dd88a4ec213f8b21d1444242969.jpg",
     vehicle: vehicleType,
-    driverLicenseExpiry:"01/01/2023",
+    driverLicenseExpiry: "01/01/2023",
     serviceLocation: serviceLocation,
     driverLicenseUrl: "https://i.pinimg.com/474x/40/f3/1d/40f31dd88a4ec213f8b21d1444242969.jpg",
     driverAbstractUrl: "https://i.pinimg.com/474x/40/f3/1d/40f31dd88a4ec213f8b21d1444242969.jpg",
@@ -118,9 +118,31 @@ export async function getOneServiceProvider(uid) {
 }
 
 //================================= To edit Profile info =============================================//
-export async function updateOneServiceProvider(uid) {
+export async function updateOneServiceProvider(
+  uid, 
+  firstName,
+  lastName,
+  profilePicUrl,
+  dateOfBirth,
+  province,
+  city,
+  streetAddress,
+  unitNumber,
+  contactNumber
+) {
   try {
-    const res = await axios.post(`${url}/api/service-providers/${uid}`);
+    const res = await axios.post(`${url}/api/service-providers/${uid}`, {
+      uid: uid,
+      firstName: firstName,
+      lastName: lastName,
+      profilePicUrl: "https://techcommunity.microsoft.com/t5/image/serverpage/image-id/217078i525F6A9EF292601F/image-size/large?v=v2&px=999",
+      dateOfBirth: dateOfBirth,
+      province: province,
+      city: city,
+      streetAddress: streetAddress,
+      unitNumber: unitNumber,
+      contactNumber: contactNumber,
+    });
     return res.data;
   } catch (err) {
     console.log(err);

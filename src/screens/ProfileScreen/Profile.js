@@ -4,7 +4,7 @@ import { Avatar } from 'react-native-elements';
 import { FontAwesome } from '@expo/vector-icons';
 import UserInfo from '../../components/userInfo/UserInfo';
 import { Context } from '../../context/ContextProvider';
-import { getOneServiceProvider } from '../../../network';
+import { getOneServiceProvider, updateOneServiceProvider } from '../../../network';
 
 export default function Profile({ navigation }) {
     const { signout, currentUser } = useContext(Context)
@@ -12,7 +12,7 @@ export default function Profile({ navigation }) {
     const [serviceProvider, setServiceProvider] = useState('')
     const [modalVisible, setModalVisible] = useState(false)
     const [profilePicUrl, setProfilePicUrl] = useState('')
-    const [dateOfBirth, setDob] = useState('')
+    const [dateOfBirth, setDob] = useState()
     const [province, setProvince] = useState('')
     const [city, setCity] = useState('')
     const [streetAddress, setStreetAddress] = useState('')
@@ -30,8 +30,8 @@ export default function Profile({ navigation }) {
             setLoading(true)
             await signout()
             navigation.navigate('Home')
-        } catch {
-            setError("Failed to Log out")
+        } catch (err) {
+            setError(err.message)
         }
         setLoading(false)
     }
@@ -40,7 +40,7 @@ export default function Profile({ navigation }) {
         setModalVisible(true)
     }
     const onEditSubmitted = async () => {
-        setModalVisible(!modalVisible)
+        await updateOneServiceProvider(currentUser.uid)
     }
 
     useEffect(() => {
@@ -48,6 +48,15 @@ export default function Profile({ navigation }) {
             (async () => {
                 const profile = await getOneServiceProvider(currentUser.uid)
                 setServiceProvider(profile)
+                setCity(profile.city)
+                setStreetAddress(profile.streetAddress)
+                setUnitNumber(profile.unitNumber)
+                setDob(profile.dateOfBirth)
+                setContactNumber(profile.contactNumber)
+                setProvince(profile.province)
+                setFirstName(profile.firstName)
+                setLastName(profile.lastName)
+                setProfilePicUrl(profile.profilePicUrl)
             })()
     }, [])
 
@@ -165,14 +174,12 @@ export default function Profile({ navigation }) {
                                     profilePicUrl={profilePicUrl}
                                     dateOfBirth={dateOfBirth}
                                     contactNumber={contactNumber}
-                                    vehicleType={vehicleType}
                                     setCity={setCity}
                                     setStreetAddress={setStreetAddress}
                                     setUnitNumber={setUnitNumber}
                                     setDob={setDob}
                                     setContactNumber={setContactNumber}
                                     setProvince={setProvince}
-                                    setVehicleType={setVehicleType}
                                     setFirstName={setFirstName}
                                     setLastName={setLastName}
                                     setProfilePicUrl={setProfilePicUrl}
