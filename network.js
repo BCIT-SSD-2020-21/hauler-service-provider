@@ -116,3 +116,13 @@ export async function getOneServiceProvider(uid) {
     console.log(err);
   }
 }
+
+//================================= To edit Profile info =============================================//
+export async function updateOneServiceProvider(uid) {
+  try {
+    const res = await axios.post(`${url}/api/service-providers/${uid}`);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
