@@ -1,36 +1,26 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, ScrollView, Modal } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, ScrollView, Modal, FlatList } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import { FontAwesome } from '@expo/vector-icons';
 import UserInfo from '../../components/userInfo/UserInfo';
 import { Context } from '../../context/ContextProvider';
+import { getOneServiceProvider } from '../../../network';
 
 export default function Profile({ navigation }) {
-    const serviceProvider = {
-        firstName: 'John',
-        lastName: 'Smith',
-        province: 'BC',
-        city: 'Surrey',
-        streetAddress: '12',
-        unitNumber: '1',
-        profilePicUrl: 'https://techcommunity.microsoft.com/t5/image/serverpage/image-id/217078i525F6A9EF292601F/image-size/large?v=v2&px=999',
-        dateOfBirth: '01-02-1995',
-        contactNumber: '122334444',
-        vehicleType: 'SUV'
-    }
     const { signout, currentUser } = useContext(Context)
 
+    const [serviceProvider, setServiceProvider] = useState('')
     const [modalVisible, setModalVisible] = useState(false)
-    const [profilePicUrl, setProfilePicUrl] = useState(serviceProvider.profilePicUrl)
-    const [dateOfBirth, setDob] = useState(serviceProvider.dateOfBirth)
-    const [province, setProvince] = useState(serviceProvider.province)
-    const [city, setCity] = useState(serviceProvider.city)
-    const [streetAddress, setStreetAddress] = useState(serviceProvider.streetAddress)
-    const [unitNumber, setUnitNumber] = useState(serviceProvider.unitNumber)
-    const [contactNumber, setContactNumber] = useState(serviceProvider.contactNumber)
-    const [vehicleType, setVehicleType] = useState(serviceProvider.vehicleType)
-    const [firstName, setFirstName] = useState(serviceProvider.firstName)
-    const [lastName, setLastName] = useState(serviceProvider.lastName)
+    const [profilePicUrl, setProfilePicUrl] = useState('')
+    const [dateOfBirth, setDob] = useState('')
+    const [province, setProvince] = useState('')
+    const [city, setCity] = useState('')
+    const [streetAddress, setStreetAddress] = useState('')
+    const [unitNumber, setUnitNumber] = useState('')
+    const [contactNumber, setContactNumber] = useState('')
+    const [vehicleType, setVehicleType] = useState('')
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
     const [error, setError] = useState('')
     const [loading, setLoading] = useState('')
 
@@ -53,86 +43,106 @@ export default function Profile({ navigation }) {
         setModalVisible(!modalVisible)
     }
 
+    useEffect(() => {
+        currentUser &&
+            (async () => {
+                const profile = await getOneServiceProvider(currentUser.uid)
+                setServiceProvider(profile)
+            })()
+    }, [])
+
     return (
         <ScrollView>
-            <View style={styles.container}>
-                <View style={styles.profileContainer}>
-                    <Text > {error && alert(error)}</Text>
-                    <View style={styles.avatar}>
-                        <Avatar
-                            title='name'
-                            size='xlarge'
-                            source={{
-                                uri:
-                                     serviceProvider.profilePicUrl ,
-                            }}
-                            containerStyle={{borderRadius:30, overflow: 'hidden'}}
-                        />
-                    </View>
+            {serviceProvider ?
+                <View style={styles.container}>
+                    <View style={styles.profileContainer}>
+                        <Text > {error && alert(error)}</Text>
+                        <View style={styles.avatar}>
+                            <Avatar
+                                title='name'
+                                size='xlarge'
+                                source={{
+                                    uri:
+                                        serviceProvider.profilePicUrl,
+                                }}
+                                containerStyle={{ borderRadius: 30, overflow: 'hidden' }}
+                            />
+                        </View>
 
-                    <Text style={styles.user}>
-                        {serviceProvider.firstName}
-                    </Text>
-                    <View style={styles.headerContainer} >
-                        <FontAwesome name='star' size={20} color='#2EBCAC' />
-                        <FontAwesome name='star' size={20} color='#2EBCAC' />
-                        <FontAwesome name='star' size={20} color='#2EBCAC' />
-                        <FontAwesome name='star' size={20} color='#2EBCAC' />
-                        <FontAwesome name='star' size={20} color='#2EBCAC' />
-                    </View>
-                    <View style={styles.infoContainer}>
-                        <FontAwesome style={styles.infoIcon} name='user' size={24} color='black' />
-                        <Text style={styles.userInfo}>
+                        <Text style={styles.user}>
                             {serviceProvider.firstName}
                         </Text>
-                    </View>
-                    <View style={styles.infoContainer}>
-                        <FontAwesome style={styles.infoIcon} name='birthday-cake' size={24} color='black' />
-                        <Text style={styles.userInfo}>
-                            {serviceProvider.dateOfBirth}
-                        </Text>
-                    </View>
-                    <View style={styles.infoContainer}>
-                        <FontAwesome style={styles.infoIcon} name='envelope' size={24} color='black' />
-                        <Text style={styles.userInfo}>
-                            {currentUser && currentUser.email}
-                        </Text>
-                    </View>
-                    <View style={styles.infoContainer}>
-                        <FontAwesome style={styles.infoIcon} name='phone' size={24} color='black' />
-                        <Text style={styles.userInfo}>
-                            {serviceProvider.contactNumber}
-                        </Text>
-                    </View>
-                    <View style={styles.infoContainer}>
-                        <FontAwesome style={styles.infoIcon} name='address-card' size={24} color='black' />
-                        <Text style={styles.userInfo}>
-                            {serviceProvider.unitNumber}
-                        </Text>
-                    </View>
-                    <View style={styles.infoContainer}>
-                        <FontAwesome style={styles.infoIcon} name='address-card' size={24} color='black' />
-                        <Text style={styles.userInfo}>
-                            {serviceProvider.streetAddress}
-                        </Text>
-                    </View>
-                    <View style={styles.infoContainer}>
-                        <FontAwesome style={styles.infoIcon} name='address-card' size={24} color='black' />
-                        <Text style={styles.userInfo}>
-                            {serviceProvider.city}
-                        </Text>
-                    </View>
-                    <View style={styles.infoContainer}>
-                        <FontAwesome style={styles.infoIcon} name='address-card' size={24} color='black' />
-                        <Text style={styles.userInfo}>
-                            {serviceProvider.province}
-                        </Text>
-                    </View>
-                    <View style={styles.infoContainer}>
-                        <FontAwesome style={styles.infoIcon} name='truck' size={24} color='black' />
-                        <Text style={styles.userInfo}>
-                            {serviceProvider.vehicleType}
-                        </Text>
+                        <View style={styles.headerContainer} >
+                            <FontAwesome name='star' size={20} color='#2EBCAC' />
+                            <FontAwesome name='star' size={20} color='#2EBCAC' />
+                            <FontAwesome name='star' size={20} color='#2EBCAC' />
+                            <FontAwesome name='star' size={20} color='#2EBCAC' />
+                            <FontAwesome name='star' size={20} color='#2EBCAC' />
+                        </View>
+                        <View style={styles.infoContainer}>
+                            <FontAwesome style={styles.infoIcon} name='user' size={24} color='black' />
+                            <Text style={styles.userInfo}>
+                                {serviceProvider.firstName}
+                            </Text>
+                        </View>
+                        <View style={styles.infoContainer}>
+                            <FontAwesome style={styles.infoIcon} name='birthday-cake' size={24} color='black' />
+                            <Text style={styles.userInfo}>
+                                {serviceProvider.dateOfBirth}
+                            </Text>
+                        </View>
+                        <View style={styles.infoContainer}>
+                            <FontAwesome style={styles.infoIcon} name='envelope' size={24} color='black' />
+                            <Text style={styles.userInfo}>
+                                {currentUser && currentUser.email}
+                            </Text>
+                        </View>
+                        <View style={styles.infoContainer}>
+                            <FontAwesome style={styles.infoIcon} name='phone' size={24} color='black' />
+                            <Text style={styles.userInfo}>
+                                {serviceProvider.contactNumber}
+                            </Text>
+                        </View>
+                        <View style={styles.infoContainer}>
+                            <FontAwesome style={styles.infoIcon} name='address-card' size={24} color='black' />
+                            <Text style={styles.userInfo}>
+                                {serviceProvider.unitNumber}
+                            </Text>
+                        </View>
+                        <View style={styles.infoContainer}>
+                            <FontAwesome style={styles.infoIcon} name='address-card' size={24} color='black' />
+                            <Text style={styles.userInfo}>
+                                {serviceProvider.streetAddress}
+                            </Text>
+                        </View>
+                        <View style={styles.infoContainer}>
+                            <FontAwesome style={styles.infoIcon} name='address-card' size={24} color='black' />
+                            <Text style={styles.userInfo}>
+                                {serviceProvider.city}
+                            </Text>
+                        </View>
+                        <View style={styles.infoContainer}>
+                            <FontAwesome style={styles.infoIcon} name='address-card' size={24} color='black' />
+                            <Text style={styles.userInfo}>
+                                {serviceProvider.province}
+                            </Text>
+                        </View>
+                        <View style={styles.infoContainer}>
+                            <FontAwesome style={styles.infoIcon} name='truck' size={24} color='black' />
+                            <FlatList
+                                data={serviceProvider.vehicleType}
+                                keyExtractor={(result) => result._id}
+                                renderItem={({ item }) => {
+                                    return (
+                                        <Text style={styles.userInfo}>
+                                            {item.vehicle}
+                                        </Text>
+                                    )
+                                }}
+                                horizontal={true}
+                                showsHorizontalScrollIndicator={false}
+                            />
+                        </View>
 
                         <Modal
                             animationType='slide'
@@ -169,37 +179,37 @@ export default function Profile({ navigation }) {
                                     setError={setError}
                                 />
                                 <View style={styles.buttonContainer}>
-                                <TouchableOpacity
-                                    style={[styles.buttons, styles.logOutButton]}
-                                    onPress={() => onEditSubmitted()}>
-                                    <Text style={styles.buttonTitle}>Submit</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    style={[styles.buttons, styles.logOutButton]}
-                                    onPress={() => setModalVisible(!modalVisible)}>
-                                    <Text style={styles.buttonTitle}>Close</Text>
-                                </TouchableOpacity>
+                                    <TouchableOpacity
+                                        style={[styles.buttons, styles.logOutButton]}
+                                        onPress={() => onEditSubmitted()}>
+                                        <Text style={styles.buttonTitle}>Submit</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity
+                                        style={[styles.buttons, styles.logOutButton]}
+                                        onPress={() => setModalVisible(!modalVisible)}>
+                                        <Text style={styles.buttonTitle}>Close</Text>
+                                    </TouchableOpacity>
                                 </View>
                             </View>
                         </Modal>
                     </View>
-                </View>
-                <View style={styles.buttonContainer}>
-                    <TouchableOpacity
-                        style={[styles.buttons, styles.editButton]}
-                        disabled={loading}
-                        onPress={() => onEditClicked()}>
-                        <Text style={styles.buttonTitle}>Edit</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={[styles.buttons, styles.logOutButton]}
-                        disabled={loading}
-                        onPress={() => onSignOutClicked()}>
-                        <Text style={styles.buttonTitle}>Log Out</Text>
-                    </TouchableOpacity>
-                </View>
+                    <View style={styles.buttonContainer}>
+                        <TouchableOpacity
+                            style={[styles.buttons, styles.editButton]}
+                            disabled={loading}
+                            onPress={() => onEditClicked()}>
+                            <Text style={styles.buttonTitle}>Edit</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[styles.buttons, styles.logOutButton]}
+                            disabled={loading}
+                            onPress={() => onSignOutClicked()}>
+                            <Text style={styles.buttonTitle}>Log Out</Text>
+                        </TouchableOpacity>
+                    </View>
 
-            </View>
+                </View>
+                : <View></View>}
         </ScrollView>
     )
 }

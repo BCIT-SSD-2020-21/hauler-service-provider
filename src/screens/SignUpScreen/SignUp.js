@@ -40,7 +40,7 @@ export default function Signup({ navigation }) {
             await signUp(currentUid,
                 firstName,
                 lastName,
-                profilePicUrl,
+                // profilePicUrl,
                 // dateOfBirth,
                 province,
                 city,
