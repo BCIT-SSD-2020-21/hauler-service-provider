@@ -18,11 +18,11 @@ export default function Profile({ navigation }) {
     const [streetAddress, setStreetAddress] = useState('')
     const [unitNumber, setUnitNumber] = useState('')
     const [contactNumber, setContactNumber] = useState('')
-    const [vehicleType, setVehicleType] = useState('')
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [error, setError] = useState('')
     const [loading, setLoading] = useState('')
+    const [reload, setReload] = useState(true)
 
     const onSignOutClicked = async () => {
         try {
@@ -40,7 +40,20 @@ export default function Profile({ navigation }) {
         setModalVisible(true)
     }
     const onEditSubmitted = async () => {
-        await updateOneServiceProvider(currentUser.uid)
+        await updateOneServiceProvider(
+            currentUser.uid,
+            firstName,
+            lastName,
+            profilePicUrl,
+            dateOfBirth,
+            province,
+            city,
+            streetAddress,
+            unitNumber,
+            contactNumber
+        )
+        setReload(!reload)
+        setModalVisible(!modalVisible)
     }
 
     useEffect(() => {
@@ -58,7 +71,7 @@ export default function Profile({ navigation }) {
                 setLastName(profile.lastName)
                 setProfilePicUrl(profile.profilePicUrl)
             })()
-    }, [])
+    }, [reload])
 
     return (
         <ScrollView>
@@ -163,7 +176,7 @@ export default function Profile({ navigation }) {
                                 setModalVisible(!modalVisible);
                             }}
                         >
-                            <View style={styles.modalContainer}>
+                            <ScrollView style={styles.modalContainer}>
                                 <UserInfo
                                     firstName={firstName}
                                     lastName={lastName}
@@ -197,7 +210,7 @@ export default function Profile({ navigation }) {
                                         <Text style={styles.buttonTitle}>Close</Text>
                                     </TouchableOpacity>
                                 </View>
-                            </View>
+                            </ScrollView>
                         </Modal>
                     </View>
                     <View style={styles.buttonContainer}>

@@ -132,7 +132,6 @@ export async function updateOneServiceProvider(
 ) {
   try {
     const res = await axios.post(`${url}/api/service-providers/${uid}`, {
-      uid: uid,
       firstName: firstName,
       lastName: lastName,
       profilePicUrl: "https://techcommunity.microsoft.com/t5/image/serverpage/image-id/217078i525F6A9EF292601F/image-size/large?v=v2&px=999",
