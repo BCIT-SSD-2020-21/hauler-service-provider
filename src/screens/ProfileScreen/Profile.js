@@ -104,7 +104,7 @@ export default function Profile({ navigation }) {
                         <View style={styles.infoContainer}>
                             <FontAwesome style={styles.infoIcon} name='user' size={24} color='black' />
                             <Text style={styles.userInfo}>
-                                {serviceProvider.firstName}
+                                {serviceProvider.firstName} {serviceProvider.lastName}
                             </Text>
                         </View>
                         <View style={styles.infoContainer}>
@@ -128,25 +128,7 @@ export default function Profile({ navigation }) {
                         <View style={styles.infoContainer}>
                             <FontAwesome style={styles.infoIcon} name='address-card' size={24} color='black' />
                             <Text style={styles.userInfo}>
-                                {serviceProvider.unitNumber}
-                            </Text>
-                        </View>
-                        <View style={styles.infoContainer}>
-                            <FontAwesome style={styles.infoIcon} name='address-card' size={24} color='black' />
-                            <Text style={styles.userInfo}>
-                                {serviceProvider.streetAddress}
-                            </Text>
-                        </View>
-                        <View style={styles.infoContainer}>
-                            <FontAwesome style={styles.infoIcon} name='address-card' size={24} color='black' />
-                            <Text style={styles.userInfo}>
-                                {serviceProvider.city}
-                            </Text>
-                        </View>
-                        <View style={styles.infoContainer}>
-                            <FontAwesome style={styles.infoIcon} name='address-card' size={24} color='black' />
-                            <Text style={styles.userInfo}>
-                                {serviceProvider.province}
+                                {serviceProvider.unitNumber}, {serviceProvider.streetAddress}, {serviceProvider.city}, {serviceProvider.province}
                             </Text>
                         </View>
                         <View style={styles.infoContainer}>
