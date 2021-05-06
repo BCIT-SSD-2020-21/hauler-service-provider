@@ -177,3 +177,13 @@ export async function getPostsByServiceProviderIdAndLocation(uid, location) {
     console.log(err);
   }
 }
+
+//========================== get response by getResponseByServiseProviderId ==========================//
+export async function getResponseByServiseProviderId(uid, postId) {
+  try {
+    const res = await axios.get(`${url}/api/posts/response/service-provider/${uid}/${postId}`);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
