@@ -1,16 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, TextInput, ScrollView } from 'react-native';
 
-export default function OfferInfo({ navigation, ServiceProviderAction, setOffer, onSendOffer, offer, onAccept, onDecline }) {
+export default function OfferInfo({response, setOffer, onSendOffer, offer, onAccept, onDecline }) {
 
-    list = () => {
-        return ServiceProviderAction.serviceProviderResponse.map((e, i) => {
+   const list = () => {
+        return response.serviceProviderResponseSchema.map((e, i) => {
             return (
                 e &&
                 <View key={e._id}>
                     <Text> {e.serviceProviderResponse}: {e.serviceProviderActionPrice}</Text>
-                    {ServiceProviderAction.userResponse[i] ?
-                        <Text>Response: {ServiceProviderAction.userResponse[i].userResponse}: {ServiceProviderAction.userResponse[i].userResponsePrice}</Text> : <Text>Waiting</Text>}
+                    {response.userResponseSchema[i] ?
+                        <Text>Response: {response.userResponseSchema[i].userResponse}: {response.userResponseSchema[i].userResponsePrice}</Text> : <Text>Waiting</Text>}
                 </View>
             )
         })
@@ -18,8 +18,9 @@ export default function OfferInfo({ navigation, ServiceProviderAction, setOffer,
 
     return (
         <ScrollView>
+            {response ?
         <View style={styles.container}>
-            <Text>Original Price: {ServiceProviderAction.originalPrice}</Text>
+            <Text>Original Price: {response.originalPrice}</Text>
             {list()}
             <TextInput
                 style={styles.input}
@@ -29,7 +30,7 @@ export default function OfferInfo({ navigation, ServiceProviderAction, setOffer,
                 value={offer}
             />
             <TouchableOpacity
-            disabled={ServiceProviderAction.serviceProviderActionButtons}
+            disabled={response.serviceProviderActionButtons}
                 style={styles.button}
                 onPress={() => onSendOffer()}>
                 <Text style={styles.buttonTitle}>SEND OFFER</Text>
@@ -37,13 +38,13 @@ export default function OfferInfo({ navigation, ServiceProviderAction, setOffer,
             {onAccept?
             <>
             <TouchableOpacity
-            disabled={ServiceProviderAction.serviceProviderActionButtons}
+            disabled={response.serviceProviderActionButtons}
                 style={styles.button}
                 onPress={() => onAccept()}>
                 <Text style={styles.buttonTitle}>ACCEPT</Text>
             </TouchableOpacity>
             <TouchableOpacity
-            disabled={ServiceProviderAction.serviceProviderActionButtons}
+            disabled={response.serviceProviderActionButtons}
                 style={styles.button}
                 onPress={() => onDecline()}>
                 <Text style={styles.buttonTitle}>DECLINE</Text>
@@ -51,7 +52,7 @@ export default function OfferInfo({ navigation, ServiceProviderAction, setOffer,
             </>
             :
             <View></View>}
-        </View>
+        </View>:<View></View>}
         </ScrollView>
     )
 }
@@ -91,5 +92,3 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10
     },
 })
-
-

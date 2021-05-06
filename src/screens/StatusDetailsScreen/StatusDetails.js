@@ -1,33 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Modal, View, Text, TouchableOpacity } from 'react-native';
+import { getResponseByServiseProviderId } from '../../../network';
 import OfferInfo from '../../components/offerInfo/OfferInfo';
 
-export default function StatusDetails({ navigation }) {
-    const ServiceProviderAction = {
-        _id: 'abc',
-        postId: '1234',
-        serviceProviderId: 'a123',
-        originalPrice: '50',
-        status: 'Negotiating',
-        notification: 'flex',
-        serviceProviderActionButtons: false,
-        serviceProviderResponse: [{
-            _id: 'abc123',
-            serviceProviderResponse: 'Offer',
-            serviceProviderActionPrice: '70',
-        },
-        {
-            _id: 'abc1235',
-            serviceProviderResponse: 'Offer',
-            serviceProviderActionPrice: '65',
-        }],
-        userResponse: [{
-            _id: 'abc1234',
-            userResponse: 'Offer',
-            userResponsePrice: '60'
-        }]
-    }
+export default function StatusDetails({ navigation, route }) {
+    const { uid, postId } = route.params;
 
+    const [response, setResponse] = useState('')
     const [offer, setOffer] = useState('')
     const [modalVisible, setModalVisible] = useState(false)
 
@@ -45,6 +24,13 @@ export default function StatusDetails({ navigation }) {
     const onAccept = () => {
         navigation.navigate('JobConfirmation')
     }
+
+    useEffect(() => {
+        (async () => {
+            const newResponse = await getResponseByServiseProviderId(uid, postId)
+            setResponse(newResponse[0])
+        })()
+    }, [])
 
     return (
         <>
@@ -75,7 +61,7 @@ export default function StatusDetails({ navigation }) {
                 </View>
             </Modal>
             <OfferInfo
-                ServiceProviderAction={ServiceProviderAction}
+                response={response}
                 setOffer={setOffer}
                 onSendOffer={onSendOffer}
                 offer={offer}

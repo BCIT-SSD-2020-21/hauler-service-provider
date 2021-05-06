@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
 import { Card, Badge, Button } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
@@ -37,9 +37,8 @@ export default function PostsList({ posts, onViewDetailsPress, response, onStatu
                             </Text>
                             {(response.length > 0) ?
                                 <Button
-                                
                                     buttonStyle={{ borderRadius: 5, backgroundColor: '#16B3D5', marginTop: 10 }}
-                                    onPress={() => onStatusDeailsPress()}
+                                    onPress={() => onStatusDeailsPress({ postId: item._id })}
                                     title={response[index][0].responseStatus}
                                 /> :
                                 <View></View>}
@@ -74,6 +73,5 @@ const styles = StyleSheet.create({
     cardTitle: {
         color: '#2EBCAC'
     }
-
 })
 

@@ -4,7 +4,7 @@ import SearchByService from '../../components/searchByService/SearchByService';
 import SearchByLocation from '../../components/searchByLocation/SearchByLocation';
 import PostsList from '../../components/postList/PostsList';
 import { Context } from '../../context/ContextProvider';
-import { getOnePost, getPostsByPostIdAndLocation, getPostsByPostIdAndService, getPostsByServiceProviderId, getPostsByServiceProviderAndService, getPostsByServiceProviderIdAndLocation, getResponseByServiseProviderId } from '../../../network';
+import { getPostsByServiceProviderId, getPostsByServiceProviderAndService, getPostsByServiceProviderIdAndLocation, getResponseByServiseProviderId } from '../../../network';
 
 export default function MyJobList({ navigation }) {
     const { currentUser } = useContext(Context)
@@ -17,8 +17,8 @@ export default function MyJobList({ navigation }) {
     const onViewDetailsPress = (value) => {
         navigation.navigate('PostDetails', { postId: value.postId })
     }
-    const onStatusDeailsPress = () => {
-        navigation.navigate('StatusDetails')
+    const onStatusDeailsPress = (value) => {
+        navigation.navigate('StatusDetails', { uid: currentUser.uid, postId: value.postId })
     }
     const searchService = async (value) => {
         const posts = await getPostsByServiceProviderAndService(currentUser && currentUser.uid, value.service)
