@@ -147,3 +147,13 @@ export async function updateOneServiceProvider(
     console.log(err);
   }
 }
+
+//=================================== To get posts by serviceProviderId ===============================//
+export async function getPostsByServiceProviderId(uid) {
+  try {
+    const res = await axios.get(`${url}/api/posts/serviceprovider/${uid}`);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}

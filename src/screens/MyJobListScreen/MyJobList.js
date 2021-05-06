@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import SearchByService from '../../components/searchByService/SearchByService';
 import SearchByLocation from '../../components/searchByLocation/SearchByLocation';
 import PostsList from '../../components/postList/PostsList';
-import { getOnePost, getPostsByPostIdAndLocation, getPostsByPostIdAndService } from '../../../network';
+import { Context } from '../../context/ContextProvider';
+import { getOnePost, getPostsByPostIdAndLocation, getPostsByPostIdAndService, getPostsByServiceProviderId } from '../../../network';
 
 export default function MyJobList({ navigation }) {
-
+    const { currentUser } = useContext(Context)
     const postIds = ["608fba4ddc55d161f4e89889", "608fc06d2113ac6cc0ef7ba4"]
     const [posts, setPosts] = useState('')
 
@@ -112,11 +113,7 @@ export default function MyJobList({ navigation }) {
 
     useEffect(() => {
         (async () => {
-            const posts = await Promise.all(postIds.map(async (a) => {
-                if (!!a) {
-                    return await getOnePost(a);
-                } else { return null }
-            }))
+            const posts = await getPostsByServiceProviderId(currentUser.uid)
             setPosts(posts)
         })()
     }, [])
