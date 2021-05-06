@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Image } from 'react-native';
 import { Card, Badge, Button } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 
-export default function PostsList({ posts, onViewDetailsPress, ServiceProviderAction, onStatusDeailsPress }) {
+export default function PostsList({ posts, onViewDetailsPress, response, onStatusDeailsPress }) {
 
     return (
         <FlatList
@@ -16,11 +16,11 @@ export default function PostsList({ posts, onViewDetailsPress, ServiceProviderAc
                         <Card style={styles.cardSubContainer}>
                             <Card.Title style={styles.cardTitle}>
                                 {item.service}</Card.Title>
-                            {ServiceProviderAction ?
+                            {(response.length > 0) ?
                                 <Badge
-                                    badgeStyle={{ display: ServiceProviderAction[index].notification }}
+                                    badgeStyle={{ display: response[index][0].notificationOnServiceProvider }}
                                     status="success"
-                                    value={ServiceProviderAction[index].serviceProviderResponse[0].serviceProviderResponse}
+                                    value={response[index][0].serviceProviderResponseSchema[response[index][0].serviceProviderResponseSchema.length - 1].serviceProviderResponse}
                                     containerStyle={{ position: 'absolute', top: -20, left: -30 }}
                                 /> :
                                 <View></View>}
@@ -35,11 +35,12 @@ export default function PostsList({ posts, onViewDetailsPress, ServiceProviderAc
                                     <Text style={styles.cardText}> to {item.dropOffCity}, {item.dropOffProvince}
                                     </Text>}
                             </Text>
-                            {ServiceProviderAction ?
+                            {(response.length > 0) ?
                                 <Button
+                                
                                     buttonStyle={{ borderRadius: 5, backgroundColor: '#16B3D5', marginTop: 10 }}
                                     onPress={() => onStatusDeailsPress()}
-                                    title={ServiceProviderAction[index].status}
+                                    title={response[index][0].responseStatus}
                                 /> :
                                 <View></View>}
                             <Button
