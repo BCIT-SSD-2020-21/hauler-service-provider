@@ -4,7 +4,7 @@ import SearchByService from '../../components/searchByService/SearchByService';
 import SearchByLocation from '../../components/searchByLocation/SearchByLocation';
 import PostsList from '../../components/postList/PostsList';
 import { Context } from '../../context/ContextProvider';
-import { getOnePost, getPostsByPostIdAndLocation, getPostsByPostIdAndService, getPostsByServiceProviderId } from '../../../network';
+import { getOnePost, getPostsByPostIdAndLocation, getPostsByPostIdAndService, getPostsByServiceProviderId, getPostsByServiceProviderAndService } from '../../../network';
 
 export default function MyJobList({ navigation }) {
     const { currentUser } = useContext(Context)
@@ -92,12 +92,7 @@ export default function MyJobList({ navigation }) {
         navigation.navigate('StatusDetails')
     }
     const searchService = async (value) => {
-        const posts = await Promise.all(postIds.map(async (a) => {
-            if (!!a) {
-                return await getPostsByPostIdAndService(a, value.service);
-            } else { return null }
-        }))
-        console.log(posts)
+        const posts = await getPostsByServiceProviderAndService(currentUser && currentUser.uid, value.service)
         setPosts(posts)
     }
 
