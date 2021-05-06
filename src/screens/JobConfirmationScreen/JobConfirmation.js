@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, ScrollView, TouchableOpacity, TextInput } from 
 import PostInfo from '../../components/postInfo/PostInfo';
 
 export default function JobConfirmation({navigation, route}) {
-    const { posts } = route.params;
+    const { posts, actionPrice } = route.params;
     const onJobListPressed = () => {
         navigation.navigate('MyJobListNavigator')
     }
@@ -26,7 +26,7 @@ export default function JobConfirmation({navigation, route}) {
                 <PostInfo
                     posts={posts}
                 />
-                <Text>Total Earning: ${posts.price}</Text>
+                <Text>Total Earning: ${actionPrice ? actionPrice : posts.price}</Text>
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => onJobListPressed()}>

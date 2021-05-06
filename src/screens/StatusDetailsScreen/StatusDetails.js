@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Modal, View, Text, TouchableOpacity } from 'react-native';
-import { addServiceProviserResponse, getResponseByServiseProviderId } from '../../../network';
+import { addServiceProviserResponse, getOnePost, getResponseByServiseProviderId } from '../../../network';
 import OfferInfo from '../../components/offerInfo/OfferInfo';
 
 export default function StatusDetails({ navigation, route }) {
@@ -10,6 +10,8 @@ export default function StatusDetails({ navigation, route }) {
     const [offer, setOffer] = useState('')
     const [modalVisible, setModalVisible] = useState(false)
     const [reset, setReset] = useState(true)
+    const [post, setPost] = useState('')
+    const [actionPrice, setActionPrice] = useState('')
 
     const onSendOffer = async () => {
         await addServiceProviserResponse(postId,
@@ -31,13 +33,16 @@ export default function StatusDetails({ navigation, route }) {
         console.log("offerdeclined")
     }
     const onAccept = () => {
-        navigation.navigate('JobConfirmation')
+        navigation.navigate('JobConfirmation', {posts:post, actionPrice:actionPrice })
     }
 
     useEffect(() => {
         (async () => {
             const newResponse = await getResponseByServiseProviderId(uid, postId)
-            setResponse(newResponse[0])
+            setResponse(newResponse[0]);
+            setActionPrice(newResponse[0].userResponseSchema[newResponse[0].userResponseSchema.length - 1].userResponsePrice)
+            const newPost = await getOnePost(postId)
+            setPost(newPost)
         })()
     }, [reset])
 
@@ -76,6 +81,7 @@ export default function StatusDetails({ navigation, route }) {
                 offer={offer}
                 onDecline={onDecline}
                 onAccept={onAccept}
+                setActionPrice={setActionPrice}
             />
         </>
     )
