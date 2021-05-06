@@ -167,3 +167,27 @@ export async function getResponseByServiseProviderId(uid, postId) {
     console.log(err);
   }
 }
+
+//================================ post service provider response ====================================//
+export async function addServiceProviserResponse(
+  postId,
+  serviceProviderId,
+  responseStatus,
+  serviceProviderActionButtons,
+  serviceProviderResponse,
+  serviceProviderActionPrice,
+  userActionButtons
+) {
+  const res = await axios.post(`${url}/api/posts/response/service-provider`, {
+    postId:postId,
+    serviceProviderId: serviceProviderId,
+    originalPrice: 60,
+    responseStatus: responseStatus,
+    serviceProviderActionButtons: serviceProviderActionButtons,
+    serviceProviderResponse: serviceProviderResponse,
+    serviceProviderActionPrice : serviceProviderActionPrice,
+    userActionButtons : userActionButtons
+  });
+  console.log('response sent');
+  return res
+}

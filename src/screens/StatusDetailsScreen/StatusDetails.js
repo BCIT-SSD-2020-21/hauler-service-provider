@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Modal, View, Text, TouchableOpacity } from 'react-native';
-import { getResponseByServiseProviderId } from '../../../network';
+import { addServiceProviserResponse, getResponseByServiseProviderId } from '../../../network';
 import OfferInfo from '../../components/offerInfo/OfferInfo';
 
 export default function StatusDetails({ navigation, route }) {
@@ -9,8 +9,17 @@ export default function StatusDetails({ navigation, route }) {
     const [response, setResponse] = useState('')
     const [offer, setOffer] = useState('')
     const [modalVisible, setModalVisible] = useState(false)
+    const [reset, setReset] = useState(true)
 
-    const onSendOffer = () => {
+    const onSendOffer = async () => {
+        await addServiceProviserResponse(postId,
+            uid,
+            'Negotiating',
+            true,
+            'Offer',
+            offer,
+            'false')
+        setReset(!reset);
         navigation.navigate('OfferConfirmation')
     }
     const onDecline = () => {
@@ -30,7 +39,7 @@ export default function StatusDetails({ navigation, route }) {
             const newResponse = await getResponseByServiseProviderId(uid, postId)
             setResponse(newResponse[0])
         })()
-    }, [])
+    }, [reset])
 
     return (
         <>
