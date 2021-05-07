@@ -48,7 +48,7 @@ export default function PostsList({ posts, onViewDetailsPress, response, onStatu
                                             {(response.length > 0) ?
                                                 <View style={styles.statusButton}>
                                                     <Button
-                                                        buttonStyle={{ borderRadius: 5, backgroundColor: response[index][0].responseStatus === 'Accepted' ? '#0077FC' : '#DE0303', width: 100 }}
+                                                        buttonStyle={{ borderRadius: 5, backgroundColor: response[index][0].responseStatus === 'Accepted' ? '#0077FC' : (response[index][0].responseStatus === 'Negotiating' ? '#03DE0B' : '#DE0303'), width: 100 }}
                                                         onPress={() => onStatusDeailsPress({ postId: item._id })}
                                                         title={`$ ${response[index][0].userResponseSchema.length > 0 ? response[index][0].userResponseSchema[response[index][0].userResponseSchema.length - 1].userResponsePrice : item.price}`}
                                                     />
@@ -58,8 +58,7 @@ export default function PostsList({ posts, onViewDetailsPress, response, onStatu
                                                 <Button
                                                     buttonStyle={{ borderRadius: 5, backgroundColor: '#0077FC', width: 100 }}
                                                     onPress={() => onViewDetailsPress({ postId: item._id })}
-                                                    title='$ 1000'
-                                                // title={item.price}
+                                                    title={item.price}
                                                 />}</Text>
                                     </View>
                                 </View>
