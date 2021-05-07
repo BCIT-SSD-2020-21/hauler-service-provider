@@ -41,7 +41,7 @@ export default function SearchByLocation({ location, setLocation, searchLocation
 
 const styles = StyleSheet.create({
     search: {
-        width: '95%',
+        width: '90%',
         borderRadius: 10,
         backgroundColor: '#F5F5F5',
         marginVertical: 5
