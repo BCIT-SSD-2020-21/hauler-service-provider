@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Modal, View, Text, TouchableOpacity } from 'react-native';
 import { addServiceProviserResponse, getOnePost, getResponseByServiseProviderId, updatePostVisibility } from '../../../network';
 import OfferInfo from '../../components/offerInfo/OfferInfo';
+import { useIsFocused } from "@react-navigation/native";
 
 export default function StatusDetails({ navigation, route }) {
+    const isFocused = useIsFocused();
     const { uid, postId } = route.params;
 
     const [response, setResponse] = useState('')
@@ -65,7 +67,7 @@ export default function StatusDetails({ navigation, route }) {
             const newPost = await getOnePost(postId)
             setPost(newPost)
         })()
-    }, [reset])
+    }, [reset, isFocused])
 
     return (
         <>

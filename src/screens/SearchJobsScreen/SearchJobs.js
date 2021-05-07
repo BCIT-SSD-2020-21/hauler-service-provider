@@ -4,8 +4,11 @@ import SearchByService from '../../components/searchByService/SearchByService';
 import SearchByLocation from '../../components/searchByLocation/SearchByLocation';
 import PostsList from '../../components/postList/PostsList';
 import { getAllPosts, getPostsByLocation, getPostsByService } from '../../../network';
+import { useIsFocused } from "@react-navigation/native";
 
 export default function SearchJobs({ navigation }) {
+    const isFocused = useIsFocused();
+
     const [location, setLocation] = useState('')
     const [service, setService] = useState('')
     const [posts, setPosts] = useState('')
@@ -29,7 +32,7 @@ export default function SearchJobs({ navigation }) {
             const newPosts = await getAllPosts()
             setPosts(newPosts)
         })()
-    }, [])
+    }, [isFocused])
 
     return (
         <View style={styles.container}>
