@@ -87,26 +87,6 @@ export async function getOnePost(postId) {
   }
 }
 
-//================================ To get post by postId and service ================================//
-export async function getPostsByPostIdAndService(postId, service) {
-  try {
-    const res = await axios.get(`${url}/api/posts/serviceprovider/service/${postId}/${service}`);
-    return res.data;
-  } catch (err) {
-    console.log(err);
-  }
-}
-
-//================================ To get post by postId and location ================================//
-export async function getPostsByPostIdAndLocation(postId, location) {
-  try {
-    const res = await axios.get(`${url}/api/posts/serviceprovider/location/${postId}/${location}`);
-    return res.data;
-  } catch (err) {
-    console.log(err);
-  }
-}
-
 //================================= To get Service Provider Profile ==================================//
 export async function getOneServiceProvider(uid) {
   try {
@@ -119,7 +99,7 @@ export async function getOneServiceProvider(uid) {
 
 //================================= To edit Profile info =============================================//
 export async function updateOneServiceProvider(
-  uid, 
+  uid,
   firstName,
   lastName,
   profilePicUrl,
@@ -183,6 +163,42 @@ export async function getResponseByServiseProviderId(uid, postId) {
   try {
     const res = await axios.get(`${url}/api/posts/response/service-provider/${uid}/${postId}`);
     return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+//================================ post service provider response ====================================//
+export async function addServiceProviserResponse(
+  postId,
+  serviceProviderId,
+  responseStatus,
+  serviceProviderActionButtons,
+  serviceProviderResponse,
+  serviceProviderActionPrice,
+  userActionButtons
+) {
+  const res = await axios.post(`${url}/api/posts/response/service-provider`, {
+    postId: postId,
+    serviceProviderId: serviceProviderId,
+    responseStatus: responseStatus,
+    serviceProviderActionButtons: serviceProviderActionButtons,
+    serviceProviderResponse: serviceProviderResponse,
+    serviceProviderActionPrice: serviceProviderActionPrice,
+    userActionButtons: userActionButtons
+  });
+  console.log('response sent');
+  return res
+}
+
+//=============================== To change post visibility =====================================================//
+export async function updatePostVisibility(postId, actionPrice) {
+  try {
+    const res = await axios.post(`${url}/api/posts/one/${postId}`,{
+      price: actionPrice
+    });
+    console.log('Hide post');
+    return res
   } catch (err) {
     console.log(err);
   }

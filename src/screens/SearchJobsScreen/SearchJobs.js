@@ -46,7 +46,7 @@ export default function SearchJobs({ navigation }) {
             <PostsList
                 posts={posts}
                 onViewDetailsPress={onViewDetailsPress}
-                ServiceProviderAction=""
+                response=""
                 onStatusDeailsPress=""
             />
         </View>

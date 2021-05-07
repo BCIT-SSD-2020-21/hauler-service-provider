@@ -1,50 +1,68 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Modal, View, Text, TouchableOpacity } from 'react-native';
+import { addServiceProviserResponse, getOnePost, getResponseByServiseProviderId, updatePostVisibility } from '../../../network';
 import OfferInfo from '../../components/offerInfo/OfferInfo';
 
-export default function StatusDetails({ navigation }) {
-    const ServiceProviderAction = {
-        _id: 'abc',
-        postId: '1234',
-        serviceProviderId: 'a123',
-        originalPrice: '50',
-        status: 'Negotiating',
-        notification: 'flex',
-        serviceProviderActionButtons: false,
-        serviceProviderResponse: [{
-            _id: 'abc123',
-            serviceProviderResponse: 'Offer',
-            serviceProviderActionPrice: '70',
-        },
-        {
-            _id: 'abc1235',
-            serviceProviderResponse: 'Offer',
-            serviceProviderActionPrice: '65',
-        }],
-        userResponse: [{
-            _id: 'abc1234',
-            userResponse: 'Offer',
-            userResponsePrice: '60'
-        }]
-    }
+export default function StatusDetails({ navigation, route }) {
+    const { uid, postId } = route.params;
 
+    const [response, setResponse] = useState('')
     const [offer, setOffer] = useState('')
     const [modalVisible, setModalVisible] = useState(false)
+    const [reset, setReset] = useState(true)
+    const [post, setPost] = useState('')
+    const [actionPrice, setActionPrice] = useState('')
 
-    const onSendOffer = () => {
+    const onSendOffer = async () => {
+        await addServiceProviserResponse(postId,
+            uid,
+            'Negotiating',
+            true,
+            'Offer',
+            offer,
+            'false')
+        setReset(!reset);
         navigation.navigate('OfferConfirmation')
     }
     const onDecline = () => {
         setModalVisible(true)
     }
 
-    const onDeclineConfirmed = () => {
+    const onDeclineConfirmed = async () => {
+        await addServiceProviserResponse(
+            postId,
+            uid,
+            'Declined',
+            true,
+            'Declined',
+            actionPrice,
+            'true');
+            setReset(!reset);
         setModalVisible(!modalVisible)
-        console.log("offerdeclined")
     }
-    const onAccept = () => {
-        navigation.navigate('JobConfirmation')
+    const onAccept = async () => {
+        await addServiceProviserResponse(postId,
+            uid,
+            'Accepted',
+            true,
+            'Accepted',
+            actionPrice,
+            'true');
+            setReset(!reset);
+        await updatePostVisibility(postId, actionPrice);
+        navigation.navigate('JobConfirmation', { posts: post, actionPrice: actionPrice })
     }
+
+    useEffect(() => {
+        (async () => {
+            const newResponse = await getResponseByServiseProviderId(uid, postId)
+            setResponse(newResponse[0]);
+
+            setActionPrice(newResponse[0].userResponseSchema.length > 0 && newResponse[0].userResponseSchema[newResponse[0].userResponseSchema.length - 1].userResponsePrice)
+            const newPost = await getOnePost(postId)
+            setPost(newPost)
+        })()
+    }, [reset])
 
     return (
         <>
@@ -75,12 +93,13 @@ export default function StatusDetails({ navigation }) {
                 </View>
             </Modal>
             <OfferInfo
-                ServiceProviderAction={ServiceProviderAction}
+                response={response}
                 setOffer={setOffer}
                 onSendOffer={onSendOffer}
                 offer={offer}
                 onDecline={onDecline}
                 onAccept={onAccept}
+                setActionPrice={setActionPrice}
             />
         </>
     )
