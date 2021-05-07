@@ -32,7 +32,7 @@ export default function PostDetails({ navigation, route }) {
     }
 
     const onOffer = () => {
-        navigation.navigate('OfferDetails')
+        navigation.navigate('OfferDetails', { uid: currentUser.uid, postId:postId })
     }
 
     useEffect(() => {
