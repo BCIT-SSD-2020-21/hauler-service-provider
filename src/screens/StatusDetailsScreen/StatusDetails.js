@@ -12,6 +12,7 @@ export default function StatusDetails({ navigation, route }) {
     const [reset, setReset] = useState(true)
     const [post, setPost] = useState('')
     const [actionPrice, setActionPrice] = useState('')
+    const [error, setError] = useState('')
 
     const onSendOffer = async () => {
         await addServiceProviserResponse(postId,
@@ -20,7 +21,7 @@ export default function StatusDetails({ navigation, route }) {
             true,
             'Offer',
             offer,
-            'false')
+            false)
         setReset(!reset);
         navigation.navigate('OfferConfirmation')
     }
@@ -36,18 +37,20 @@ export default function StatusDetails({ navigation, route }) {
             true,
             'Declined',
             actionPrice,
-            'true');
+            true);
             setReset(!reset);
         setModalVisible(!modalVisible)
     }
     const onAccept = async () => {
-        await addServiceProviserResponse(postId,
+        await addServiceProviserResponse(
+            postId,
             uid,
             'Accepted',
             true,
             'Accepted',
             actionPrice,
-            'true');
+            true
+            );
             setReset(!reset);
         await updatePostVisibility(postId, actionPrice);
         navigation.navigate('JobConfirmation', { posts: post, actionPrice: actionPrice })

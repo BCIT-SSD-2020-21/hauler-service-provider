@@ -1,13 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, TextInput } from 'react-native';
-import { getOnePost } from '../../../network';
+import { addServiceProviserResponse, getOnePost, updatePostVisibility } from '../../../network';
 import PostInfo from '../../components/postInfo/PostInfo';
+import { Context } from '../../context/ContextProvider';
+import { useIsFocused } from "@react-navigation/native";
 
-export default function PostDetails({navigation, route }) {
+export default function PostDetails({ navigation, route }) {
+    const isFocused = useIsFocused();
+
+    const { currentUser } = useContext(Context)
+
     const [posts, setPosts] = useState('')
+    const [error, setError] = useState('')
     const { postId } = route.params;
-    const onAccept = () => {
-        navigation.navigate('JobConfirmation', {posts:posts})
+
+    const onAccept = async () => {
+        setError('')
+        res = await addServiceProviserResponse(
+            postId,
+            currentUser.uid,
+            'Accepted',
+            true,
+            'Accepted',
+            posts.price,
+            true
+            );
+            if (res.data === "Response sent"){
+        await updatePostVisibility(postId, posts.price);
+        navigation.navigate('JobConfirmation', { posts: posts, actionPrice: posts.price })
+            }else(setError(res.data))
     }
 
     const onOffer = () => {
@@ -16,20 +37,22 @@ export default function PostDetails({navigation, route }) {
 
     useEffect(() => {
         (async () => {
+            setError('')
             const post = await getOnePost(postId)
             setPosts(post)
         })()
-    }, [])
+    }, [isFocused])
 
     return (
         <ScrollView>
             <View style={styles.container}>
+            <Text > {error && alert(error)}</Text>
                 <PostInfo
                     posts={posts}
                 />
                 <View style={styles.priceContainer}>
-                <Text style={styles.infoKey}>Quoted Price</Text>
-                <Text style={styles.infoValue}> ${posts.price}</Text>
+                    <Text style={styles.infoKey}>Quoted Price</Text>
+                    <Text style={styles.infoValue}> ${posts.price}</Text>
                 </View>
                 <TouchableOpacity
                     style={[styles.button, styles.acceptButton]}
@@ -37,7 +60,7 @@ export default function PostDetails({navigation, route }) {
                     <Text style={styles.buttonTitle}>ACCEPT</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={[styles.button,styles.offerButton]}
+                    style={[styles.button, styles.offerButton]}
                     onPress={() => onOffer()}>
                     <Text style={styles.buttonTitle}>OFFER</Text>
                 </TouchableOpacity>
@@ -48,7 +71,7 @@ export default function PostDetails({navigation, route }) {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor:'white',
+        backgroundColor: 'white',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -56,9 +79,9 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%'
     },
-    priceContainer:{
+    priceContainer: {
         width: '95%',
-        flexDirection:'row',
+        flexDirection: 'row',
         marginVertical: 10
     },
     infoKey: {
@@ -78,11 +101,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: '95%'
     },
-    acceptButton:{
-        
+    acceptButton: {
+
         backgroundColor: '#A9A9A9',
     },
-    offerButton:{
+    offerButton: {
         backgroundColor: '#0077FC',
     },
     buttonTitle: {
