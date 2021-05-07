@@ -58,6 +58,7 @@ export default function SearchJobs({ navigation }) {
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: 'white',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-start',

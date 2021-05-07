@@ -8,20 +8,29 @@ export default function SearchByLocation({ location, setLocation, searchLocation
         <View style={styles.search}>
             <RNPickerSelect
                 value={location}
-                useNativeAndroidPickerStyle={false}
+                useNativeAndroidPickerStyle={true}
                 style={{
-                    inputAndroid: {
+                    placeholder:{
+                        color: 'black'
+                    },
+                    inputIOS: {
                         fontSize: 14,
                         paddingHorizontal: 10,
                         paddingVertical: 8,
                         color: 'black'
                     },
+                    inputAndroid: {
+                        fontSize: 14,
+                        paddingHorizontal: 10,
+                        paddingVertical: 8,
+                        color: 'black',
+                    },
                 }}
                 onValueChange={(value) => { setLocation(value); searchLocation({ location: value }) }}
-                placeholder={{ label: "Search by location", value: null }}
+                placeholder={{ label: "Search by Location", value: null}}
                 items={[
                     { label: 'Surrey', value: 'Surrey' },
-                    { label: 'Langely', value: 'Langely' },
+                    { label: 'Langely', value: 'Langley' },
                     { label: 'Richmond', value: 'Richmond' },
                     { label: 'Burnaby', value: 'Burnaby' }
                 ]}
@@ -32,10 +41,9 @@ export default function SearchByLocation({ location, setLocation, searchLocation
 
 const styles = StyleSheet.create({
     search: {
-        width: '90%',
-        borderWidth: 1,
-        borderColor: 'black',
-        borderRadius: 8,
+        width: '95%',
+        borderRadius: 10,
+        backgroundColor: '#F5F5F5',
         marginVertical: 5
     }
 })
