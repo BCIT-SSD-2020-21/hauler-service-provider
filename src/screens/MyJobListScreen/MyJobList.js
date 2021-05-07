@@ -5,9 +5,11 @@ import SearchByLocation from '../../components/searchByLocation/SearchByLocation
 import PostsList from '../../components/postList/PostsList';
 import { Context } from '../../context/ContextProvider';
 import { getPostsByServiceProviderId, getPostsByServiceProviderAndService, getPostsByServiceProviderIdAndLocation, getResponseByServiseProviderId } from '../../../network';
+import { useIsFocused } from "@react-navigation/native";
 
 export default function MyJobList({ navigation }) {
     const { currentUser } = useContext(Context)
+    const isFocused = useIsFocused();
 
     const [posts, setPosts] = useState('')
     const [response, setResponse] = useState('')
@@ -44,7 +46,7 @@ export default function MyJobList({ navigation }) {
                 }))
                 setResponse(newResponse)
             })()
-    }, [])
+    }, [isFocused])
 
     return (
         <View style={styles.container}>

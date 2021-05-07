@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Modal, View, Text, TouchableOpacity } from 'react-native';
 import { addServiceProviserResponse, getOnePost, getResponseByServiseProviderId, updatePostVisibility } from '../../../network';
 import OfferInfo from '../../components/offerInfo/OfferInfo';
+import { useIsFocused } from "@react-navigation/native";
 
 export default function StatusDetails({ navigation, route }) {
+    const isFocused = useIsFocused();
     const { uid, postId } = route.params;
 
     const [response, setResponse] = useState('')
@@ -12,6 +14,7 @@ export default function StatusDetails({ navigation, route }) {
     const [reset, setReset] = useState(true)
     const [post, setPost] = useState('')
     const [actionPrice, setActionPrice] = useState('')
+    const [error, setError] = useState('')
 
     const onSendOffer = async () => {
         await addServiceProviserResponse(postId,
@@ -20,7 +23,7 @@ export default function StatusDetails({ navigation, route }) {
             true,
             'Offer',
             offer,
-            'false')
+            false)
         setReset(!reset);
         navigation.navigate('OfferConfirmation')
     }
@@ -36,18 +39,20 @@ export default function StatusDetails({ navigation, route }) {
             true,
             'Declined',
             actionPrice,
-            'true');
+            true);
             setReset(!reset);
         setModalVisible(!modalVisible)
     }
     const onAccept = async () => {
-        await addServiceProviserResponse(postId,
+        await addServiceProviserResponse(
+            postId,
             uid,
             'Accepted',
             true,
             'Accepted',
             actionPrice,
-            'true');
+            true
+            );
             setReset(!reset);
         await updatePostVisibility(postId, actionPrice);
         navigation.navigate('JobConfirmation', { posts: post, actionPrice: actionPrice })
@@ -62,7 +67,7 @@ export default function StatusDetails({ navigation, route }) {
             const newPost = await getOnePost(postId)
             setPost(newPost)
         })()
-    }, [reset])
+    }, [reset, isFocused])
 
     return (
         <>

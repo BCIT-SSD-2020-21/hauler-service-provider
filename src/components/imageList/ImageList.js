@@ -1,19 +1,21 @@
 import React from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, FlatList } from 'react-native';
 
 export default function ImageList({ loadImages }) {
-    list = () => {
-        return loadImages.map((e) => {
-            return (
-                e &&
-                <Image key={e._id} style={styles.image} source={{ uri: e.imageUrl }} />
-            )
-        })
-    }
-
     return (
         <View style={styles.imageContainer}>
-            {list()}
+            <FlatList
+                data={loadImages}
+                keyExtractor={(result) => result._id}
+                renderItem={({ item }) => {
+                    return (
+                        item &&
+                        <Image style={styles.image} source={{ uri: item.imageUrl }} />
+                    )
+                }}
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+            />
         </View>
     )
 }

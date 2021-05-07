@@ -1,42 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
+import { addServiceProviserResponse, getOnePost, getResponseByServiseProviderId } from '../../../network';
 import OfferInfo from '../../components/offerInfo/OfferInfo';
 
-export default function OfferDetails({ navigation }) {
-    const ServiceProviderAction = {
-        _id: 'abc',
-        postId: '1234',
-        serviceProviderId: 'a123',
-        originalPrice: '50',
-        status: 'Negotiating',
-        notification: 'flex',
-        serviceProviderActionButtons: false,
-        serviceProviderResponse: [{
-            _id: 'abc123',
-            serviceProviderResponse: 'Offer',
-            serviceProviderActionPrice: '70',
-        },
-        {
-            _id: 'abc1235',
-            serviceProviderResponse: 'Offer',
-            serviceProviderActionPrice: '65',
-        }],
-        userResponse: [{
-            _id: 'abc1234',
-            userResponse: 'Offer',
-            userResponsePrice: '60'
-        }]
-    }
+export default function OfferDetails({ navigation, route }) {
+
+    const { uid, postId } = route.params;
+    const [reset, setReset] = useState(true)
+    const [response, setResponse] = useState('')
+    const [actionPrice, setActionPrice] = useState('')
+    const [post, setPost] = useState('')
 
     const [offer, setOffer] = useState('')
 
-    const onSendOffer = () => {
+    const onSendOffer = async() => {
+        await addServiceProviserResponse(postId,
+            uid,
+            'Negotiating',
+            true,
+            'Offer',
+            offer,
+            false)
+        setReset(!reset);
         navigation.navigate('OfferConfirmation')
     }
 
+    useEffect(() => {
+        (async () => {
+            const newResponse = await getResponseByServiseProviderId(uid, postId)
+            setResponse(newResponse[0]);
+
+            setActionPrice(newResponse[0] && newResponse[0].userResponseSchema.length > 0 && newResponse[0].userResponseSchema[newResponse[0].userResponseSchema.length - 1].userResponsePrice)
+            const newPost = await getOnePost(postId)
+            setPost(newPost)
+        })()
+    }, [reset])
+
     return (
         <OfferInfo
-            ServiceProviderAction={ServiceProviderAction}
+        response={response}
             setOffer={setOffer}
             onSendOffer={onSendOffer}
             offer={offer}
