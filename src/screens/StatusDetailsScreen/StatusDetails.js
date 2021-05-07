@@ -28,11 +28,19 @@ export default function StatusDetails({ navigation, route }) {
         setModalVisible(true)
     }
 
-    const onDeclineConfirmed = () => {
+    const onDeclineConfirmed = async () => {
+        await addServiceProviserResponse(
+            postId,
+            uid,
+            'Declined',
+            true,
+            'Declined',
+            actionPrice,
+            'true');
+            setReset(!reset);
         setModalVisible(!modalVisible)
-        console.log("offerdeclined")
     }
-    const onAccept = async() => {
+    const onAccept = async () => {
         await addServiceProviserResponse(postId,
             uid,
             'Accepted',
@@ -40,16 +48,17 @@ export default function StatusDetails({ navigation, route }) {
             'Accepted',
             actionPrice,
             'true');
-            await updatePostVisibility(postId, actionPrice);
-        navigation.navigate('JobConfirmation', {posts:post, actionPrice:actionPrice })
+            setReset(!reset);
+        await updatePostVisibility(postId, actionPrice);
+        navigation.navigate('JobConfirmation', { posts: post, actionPrice: actionPrice })
     }
 
     useEffect(() => {
         (async () => {
             const newResponse = await getResponseByServiseProviderId(uid, postId)
             setResponse(newResponse[0]);
-            
-            setActionPrice(newResponse[0].userResponseSchema.length>0 && newResponse[0].userResponseSchema[newResponse[0].userResponseSchema.length - 1].userResponsePrice)
+
+            setActionPrice(newResponse[0].userResponseSchema.length > 0 && newResponse[0].userResponseSchema[newResponse[0].userResponseSchema.length - 1].userResponsePrice)
             const newPost = await getOnePost(postId)
             setPost(newPost)
         })()
