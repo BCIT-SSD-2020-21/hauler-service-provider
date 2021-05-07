@@ -10,7 +10,7 @@ export default function SearchByLocation({ location, setLocation, searchLocation
                 value={location}
                 useNativeAndroidPickerStyle={true}
                 style={{
-                    placeholder:{
+                    placeholder: {
                         color: 'black'
                     },
                     inputIOS: {
@@ -27,7 +27,7 @@ export default function SearchByLocation({ location, setLocation, searchLocation
                     },
                 }}
                 onValueChange={(value) => { setLocation(value); searchLocation({ location: value }) }}
-                placeholder={{ label: "Search by Location", value: null}}
+                placeholder={{ label: "Search by Location", value: null }}
                 items={[
                     { label: 'Surrey', value: 'Surrey' },
                     { label: 'Langely', value: 'Langley' },

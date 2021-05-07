@@ -14,57 +14,56 @@ export default function PostsList({ posts, onViewDetailsPress, response, onStatu
                     return (
                         item &&
                         <View style={styles.cardContainer}>
-                            
-                                <Card containerStyle={{ borderRadius: 10, padding: 10 }}>
-                                    {/* <Card.Title style={styles.cardTitle}>
+                            <Card containerStyle={{ borderRadius: 10, padding: 10 }}>
+                                {/* <Card.Title style={styles.cardTitle}>
                                 {item.service}</Card.Title> */}
-                                    {(response.length > 0) ?
-                                        <Badge
-                                            badgeStyle={{ display: response[index][0].notificationOnServiceProvider }}
-                                            status="success"
-                                            value={response[index][0].serviceProviderResponseSchema[response[index][0].serviceProviderResponseSchema.length - 1].serviceProviderResponse}
-                                            containerStyle={{ position: 'absolute', top: -20, left: -30 }}
-                                        /> :
-                                        <View></View>}
-                                        <TouchableOpacity
-                                onPress={() => onViewDetailsPress({ postId: item._id })}
-                            >
+                                {(response.length > 0) ?
+                                    <Badge
+                                        badgeStyle={{ display: response[index][0].notificationOnServiceProvider }}
+                                        status="success"
+                                        value={response[index][0].serviceProviderResponseSchema[response[index][0].serviceProviderResponseSchema.length - 1].serviceProviderResponse}
+                                        containerStyle={{ position: 'absolute', top: -20, left: -30 }}
+                                    /> :
+                                    <View></View>}
+                                <TouchableOpacity
+                                    onPress={() => onViewDetailsPress({ postId: item._id })}
+                                >
                                     <Image
                                         style={styles.cardImage} source={{ uri: item.loadImages[0].imageUrl }}
                                     /></TouchableOpacity>
-                                    <View style={styles.cardTextContainer}>
-                                        <View style={styles.textContainer}>
-                                            <Text style={styles.cardHeadingText}>
-                                                {item.postHeading}
-                                            </Text>
-                                            <Text style={styles.cardText}>
-                                                {item.pickUpCity}, {item.pickUpProvince}
-                                                {item.dropOffCity &&
-                                                    <Text style={styles.cardText}> to {item.dropOffCity}, {item.dropOffProvince}
-                                                    </Text>}
-                                            </Text>
-                                        </View>
-                                        <View style={styles.cardButton}>
-                                            <Text style={styles.cardButtonContainer}>
+                                <View style={styles.cardTextContainer}>
+                                    <View style={styles.textContainer}>
+                                        <Text style={styles.cardHeadingText}>
+                                            {item.postHeading}
+                                        </Text>
+                                        <Text style={styles.cardText}>
+                                            {item.pickUpCity}, {item.pickUpProvince}
+                                            {item.dropOffCity &&
+                                                <Text style={styles.cardText}> to {item.dropOffCity}, {item.dropOffProvince}
+                                                </Text>}
+                                        </Text>
+                                    </View>
+                                    <View style={styles.cardButton}>
+                                        <Text style={styles.cardButtonContainer}>
                                             {(response.length > 0) ?
-                                            <View style={styles.statusButton}>
-                                                <Button
-                                                    buttonStyle={{ borderRadius: 5, backgroundColor: response[index][0].responseStatus === 'Accepted' ? '#0077FC': '#DE0303', width: 100 }}
-                                                    onPress={() => onStatusDeailsPress({ postId: item._id })}
-                                                    title={`$ ${response[index][0].userResponseSchema.length > 0 ? response[index][0].userResponseSchema[response[index][0].userResponseSchema.length - 1].userResponsePrice : item.price}`}
-                                                />
-                                                <Text style={[styles.cardText, styles.statusText]}>{response[index][0].responseStatus}</Text> 
+                                                <View style={styles.statusButton}>
+                                                    <Button
+                                                        buttonStyle={{ borderRadius: 5, backgroundColor: response[index][0].responseStatus === 'Accepted' ? '#0077FC' : '#DE0303', width: 100 }}
+                                                        onPress={() => onStatusDeailsPress({ postId: item._id })}
+                                                        title={`$ ${response[index][0].userResponseSchema.length > 0 ? response[index][0].userResponseSchema[response[index][0].userResponseSchema.length - 1].userResponsePrice : item.price}`}
+                                                    />
+                                                    <Text style={[styles.cardText, styles.statusText]}>{response[index][0].responseStatus}</Text>
                                                 </View>
                                                 :
                                                 <Button
-                                                    buttonStyle={{ borderRadius: 5, backgroundColor: '#0077FC', width: 100}}
+                                                    buttonStyle={{ borderRadius: 5, backgroundColor: '#0077FC', width: 100 }}
                                                     onPress={() => onViewDetailsPress({ postId: item._id })}
                                                     title='$ 1000'
-                                                    // title={item.price}
+                                                // title={item.price}
                                                 />}</Text>
-                                        </View>
                                     </View>
-                                </Card>
+                                </View>
+                            </Card>
                         </View>
                     )
                 }}
@@ -97,10 +96,10 @@ const styles = StyleSheet.create({
         width: '40%',
         overflow: 'hidden',
     },
-    cardButtonContainer:{
+    cardButtonContainer: {
         alignSelf: 'flex-end',
     },
-    statusButton:{
+    statusButton: {
         width: '100%'
     },
     cardImage: {
@@ -113,7 +112,7 @@ const styles = StyleSheet.create({
         color: '#A9A9A9',
         fontSize: 12,
     },
-    statusText:{
+    statusText: {
         textAlign: 'center'
     }
 })

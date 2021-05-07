@@ -19,9 +19,11 @@ export default function MyJobList({ navigation }) {
     const onViewDetailsPress = (value) => {
         navigation.navigate('PostDetails', { postId: value.postId })
     }
+
     const onStatusDeailsPress = (value) => {
         navigation.navigate('StatusDetails', { uid: currentUser.uid, postId: value.postId })
     }
+    
     const searchService = async (value) => {
         const posts = await getPostsByServiceProviderAndService(currentUser && currentUser.uid, value.service)
         setPosts(posts)
@@ -72,10 +74,10 @@ export default function MyJobList({ navigation }) {
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: 'white',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        paddingTop: '10%',
         width: '100%',
         height: '100%'
     }
