@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { addServiceProviserResponse, getOnePost, updatePostVisibility } from '../../../network';
 import PostInfo from '../../components/postInfo/PostInfo';
 import { Context } from '../../context/ContextProvider';
-import { useIsFocused } from "@react-navigation/native";
 
 export default function PostDetails({ navigation, route }) {
-    const isFocused = useIsFocused();
-
     const { currentUser } = useContext(Context)
 
     const [posts, setPosts] = useState('')
@@ -24,15 +21,17 @@ export default function PostDetails({ navigation, route }) {
             'Accepted',
             posts.price,
             true
-            );
-            if (res.data === "Response sent"){
-        await updatePostVisibility(postId, posts.price);
-        navigation.navigate('JobConfirmation', { posts: posts, actionPrice: posts.price })
-            }else(setError(res.data))
+        );
+        if (res.data === "Response sent") {
+            await updatePostVisibility(postId, posts.price);
+            navigation.navigate('JobConfirmation', { posts: posts, actionPrice: posts.price })
+        } else (
+            setError(res.data)
+        )
     }
 
     const onOffer = () => {
-        navigation.navigate('OfferDetails', { uid: currentUser.uid, postId:postId })
+        navigation.navigate('OfferDetails', { uid: currentUser.uid, postId: postId })
     }
 
     useEffect(() => {
@@ -41,12 +40,12 @@ export default function PostDetails({ navigation, route }) {
             const post = await getOnePost(postId)
             setPosts(post)
         })()
-    }, [isFocused])
+    }, [])
 
     return (
         <ScrollView>
             <View style={styles.container}>
-            <Text > {error && alert(error)}</Text>
+                <Text > {error && alert(error)}</Text>
                 <PostInfo
                     posts={posts}
                 />
