@@ -179,15 +179,27 @@ export async function addServiceProviserResponse(
   userActionButtons
 ) {
   const res = await axios.post(`${url}/api/posts/response/service-provider`, {
-    postId:postId,
+    postId: postId,
     serviceProviderId: serviceProviderId,
-    originalPrice: 60,
     responseStatus: responseStatus,
     serviceProviderActionButtons: serviceProviderActionButtons,
     serviceProviderResponse: serviceProviderResponse,
-    serviceProviderActionPrice : serviceProviderActionPrice,
-    userActionButtons : userActionButtons
+    serviceProviderActionPrice: serviceProviderActionPrice,
+    userActionButtons: userActionButtons
   });
   console.log('response sent');
   return res
+}
+
+//=============================== To change post visibility =====================================================//
+export async function updatePostVisibility(postId, actionPrice) {
+  try {
+    const res = await axios.post(`${url}/api/posts/one/${postId}`,{
+      price: actionPrice
+    });
+    console.log('Hide post');
+    return res
+  } catch (err) {
+    console.log(err);
+  }
 }
