@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
-import { getOnePost, getResponseByServiseProviderId } from '../../../network';
+import { addServiceProviserResponse, getOnePost, getResponseByServiseProviderId } from '../../../network';
 import OfferInfo from '../../components/offerInfo/OfferInfo';
 
 export default function OfferDetails({ navigation, route }) {
@@ -13,7 +13,15 @@ export default function OfferDetails({ navigation, route }) {
 
     const [offer, setOffer] = useState('')
 
-    const onSendOffer = () => {
+    const onSendOffer = async() => {
+        await addServiceProviserResponse(postId,
+            uid,
+            'Negotiating',
+            true,
+            'Offer',
+            offer,
+            false)
+        setReset(!reset);
         navigation.navigate('OfferConfirmation')
     }
 
