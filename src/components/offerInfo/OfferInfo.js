@@ -44,9 +44,9 @@ export default function OfferInfo({ response, setOffer, onSendOffer, offer, onAc
 
                     <TouchableOpacity
                         disabled={response? response.serviceProviderActionButtons: false}
-                        style={styles.button}
+                        style={[styles.button, styles.offerButton]}
                         onPress={() => onSendOffer()}>
-                        <Text style={styles.buttonTitle}>SEND OFFER</Text>
+                        <Text style={[styles.buttonTitle, styles.offerButtonTitle]}>SEND OFFER</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.buttonContainer}>
@@ -54,13 +54,13 @@ export default function OfferInfo({ response, setOffer, onSendOffer, offer, onAc
                         <>
                             <TouchableOpacity
                                 disabled={response.serviceProviderActionButtons}
-                                style={styles.button}
+                                style={[styles.button, styles.acceptButton]}
                                 onPress={() => onAccept()}>
                                 <Text style={styles.buttonTitle}>ACCEPT</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 disabled={response.serviceProviderActionButtons}
-                                style={styles.button}
+                                style={[styles.button, styles.declineButton]}
                                 onPress={() => onDecline()}>
                                 <Text style={styles.buttonTitle}>DECLINE</Text>
                             </TouchableOpacity>
@@ -119,7 +119,6 @@ const styles = StyleSheet.create({
         bottom: 0
     },
     button: {
-        backgroundColor: '#0077FC',
         marginVertical: 10,
         height: 48,
         borderRadius: 10,
@@ -128,10 +127,22 @@ const styles = StyleSheet.create({
         width: '30%',
         marginHorizontal: '2%',
     },
+    offerButton:{
+        backgroundColor: '#E0E0E0',
+    }, 
+    acceptButton:{
+        backgroundColor: '#0077FC',
+    },
+    declineButton:{
+        backgroundColor: '#DE0303',
+    },
     buttonTitle: {
         color: 'white',
         fontSize: 16,
         fontWeight: "bold"
+    },
+    offerButtonTitle:{
+        color: 'black'
     },
     offerContainer: {
         flexDirection: 'row',

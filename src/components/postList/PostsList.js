@@ -56,10 +56,10 @@ export default function PostsList({ posts, onViewDetailsPress, response, onStatu
                                                 </View>
                                                 :
                                                 <Button
-                                                    buttonStyle={{ borderRadius: 5, backgroundColor: '#0077FC', width: 100 }}
+                                                    buttonStyle={{ borderRadius: 10, backgroundColor: '#0077FC', width: 100 }}
                                                     onPress={() => onViewDetailsPress({ postId: item._id })}
                                                     title={item.price}
-                                                />}</Text>
+                                                />}</Text>  
                                     </View>
                                 </View>
                             </Card>
