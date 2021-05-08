@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import { Card, Badge, Button } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 
-export default function PostsList({ posts, onViewDetailsPress, response, onStatusDeailsPress }) {
+export default function PostsList({ posts, onViewDetailsPress, response, onStatusDeailsPress, onAcceptedDetails }) {
 
     return (
         <View style={styles.container}>
@@ -19,14 +19,14 @@ export default function PostsList({ posts, onViewDetailsPress, response, onStatu
                                 {item.service}</Card.Title> */}
                                 {(response.length > 0) ?
                                     <Badge
-                                        badgeStyle={{ display: response[index][0].notificationOnServiceProvider }}
+                                        badgeStyle={{ display: response[index] && response[index].length>0 && response[index][0].notificationOnServiceProvider }}
                                         status="success"
-                                        value={response[index][0].serviceProviderResponseSchema[response[index][0].serviceProviderResponseSchema.length - 1].serviceProviderResponse}
+                                        value={response[index] && response[index].length>0 && response[index][0].serviceProviderResponseSchema[response[index][0].serviceProviderResponseSchema.length - 1].serviceProviderResponse}
                                         containerStyle={{ position: 'absolute', top: -20, left: -30 }}
                                     /> :
                                     <View></View>}
                                 <TouchableOpacity
-                                    onPress={() => onViewDetailsPress({ postId: item._id })}
+                                    onPress={() => {response[index] && response[index].length>0 && (response[index][0].responseStatus === 'Accepted')? onAcceptedDetails({ posts: item }): onViewDetailsPress({ postId: item._id })}}
                                 >
                                     <Image
                                         style={styles.cardImage} source={{ uri: item.loadImages[0].imageUrl }}
@@ -45,7 +45,7 @@ export default function PostsList({ posts, onViewDetailsPress, response, onStatu
                                     </View>
                                     <View style={styles.cardButton}>
                                         <Text style={styles.cardButtonContainer}>
-                                            {(response.length > 0) ?
+                                            {(response[index] && response[index].length>0) ?
                                                 <View style={styles.statusButton}>
                                                     <Button
                                                         buttonStyle={{ borderRadius: 5, backgroundColor: response[index][0].responseStatus === 'Accepted' ? '#0077FC' : (response[index][0].responseStatus === 'Negotiating' ? '#03DE0B' : '#DE0303'), width: 100 }}

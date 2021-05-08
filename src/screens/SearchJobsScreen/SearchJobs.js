@@ -49,6 +49,7 @@ export default function SearchJobs({ navigation }) {
             <PostsList
                 posts={posts}
                 onViewDetailsPress={onViewDetailsPress}
+                onAcceptedDetails = ''
                 response=""
                 onStatusDeailsPress=""
             />

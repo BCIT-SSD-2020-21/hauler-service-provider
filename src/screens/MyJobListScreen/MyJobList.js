@@ -23,7 +23,7 @@ export default function MyJobList({ navigation }) {
     const onStatusDeailsPress = (value) => {
         navigation.navigate('StatusDetails', { uid: currentUser.uid, postId: value.postId })
     }
-    
+
     const searchService = async (value) => {
         const posts = await getPostsByServiceProviderAndService(currentUser && currentUser.uid, value.service)
         setPosts(posts)
@@ -32,6 +32,9 @@ export default function MyJobList({ navigation }) {
     const searchLocation = async (value) => {
         const posts = await getPostsByServiceProviderIdAndLocation(currentUser && currentUser.uid, value.location)
         setPosts(posts)
+    }
+    const onAcceptedDetails = (value) =>{
+        navigation.navigate('JobConfirmation', { posts: value.posts, actionPrice: value.posts.acceptedPrice })
     }
 
     useEffect(() => {
@@ -65,6 +68,7 @@ export default function MyJobList({ navigation }) {
             <PostsList
                 posts={posts}
                 onViewDetailsPress={onViewDetailsPress}
+                onAcceptedDetails={onAcceptedDetails}
                 response={response}
                 onStatusDeailsPress={onStatusDeailsPress}
             />
