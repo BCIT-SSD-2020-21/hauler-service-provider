@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 
 export default function OfferConfirmation({navigation}) {
 
@@ -9,8 +9,10 @@ export default function OfferConfirmation({navigation}) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.message}>CONFIRMATION</Text>
-            <Text style={styles.message}>YOUR OFFER HAS BEEN SENT TO THE CLIENT</Text>
+            <Image source={require('../../../assets/pic1.png')} style={styles.logo} />
+            <Text style={styles.heading1}>Offer sent!</Text>
+            <Text style={styles.heading2}>Thank you!</Text>
+            <Text style={styles.message}>Offer has been sent to the customer</Text>
             <TouchableOpacity
                 style={styles.button}
                 onPress={() => onReturnToHomePressed()}>
@@ -29,14 +31,29 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%'
     },
+    logo: {
+        width: 200,
+        height: 100,
+        alignSelf: 'center',
+    },
+    heading1:{
+        marginTop: 50,
+        fontSize: 30
+    },
+    heading2:{
+        marginVertical: 20,
+        fontSize: 20
+    },
     message:{
-        marginBottom: 50,
+        fontSize: 18,
+        marginBottom: 20,
+        color: '#A9A9A9'
     },
     button: {
-        backgroundColor: '#16B3D5',
-        width: '50%',
+        backgroundColor: '#0077FC',
+        width: '90%',
         height: 48,
-        borderRadius: 5,
+        borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
     },
