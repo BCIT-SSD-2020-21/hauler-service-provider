@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
     },
     infoValue: {
         marginRight: 10,
-        width: '65%'
+        width: '65%',
+        fontWeight: 'bold'
     },
 })

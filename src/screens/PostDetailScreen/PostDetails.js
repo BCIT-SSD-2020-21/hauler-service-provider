@@ -91,7 +91,8 @@ const styles = StyleSheet.create({
     infoValue: {
         overflow: 'hidden',
         marginRight: 10,
-        width: '65%'
+        width: '65%',
+        fontWeight: 'bold'
     },
     button: {
         marginVertical: 10,
@@ -124,4 +125,3 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10
     },
 })
-

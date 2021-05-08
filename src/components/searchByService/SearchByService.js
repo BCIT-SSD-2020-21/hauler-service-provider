@@ -13,6 +13,12 @@ export default function SearchByService({ service, setService, searchService }) 
                     placeholder: {
                         color: 'black'
                     },
+                    inputIOS: {
+                        fontSize: 14,
+                        paddingHorizontal: 10,
+                        paddingVertical: 8,
+                        color: 'black'
+                    },
                     inputAndroid: {
                         fontSize: 14,
                         paddingHorizontal: 10,
