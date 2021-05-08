@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import PostInfo from '../../components/postInfo/PostInfo';
 
-export default function JobConfirmation({navigation, route}) {
+export default function JobConfirmation({ navigation, route }) {
     const { posts, actionPrice } = route.params;
+    const contact = "show"
     const onJobListPressed = () => {
         navigation.navigate('MyJobListNavigator')
     }
@@ -11,22 +12,14 @@ export default function JobConfirmation({navigation, route}) {
     return (
         <ScrollView>
             <View style={styles.container}>
-                <View style={styles.contactInfoContainer}>
-                    <Text style={styles.heading}>Pick Up Contact Information</Text>
-                <Text>{posts.pickUpContactPerson}</Text>
-                <Text>{posts.pickUpContactNumber}</Text>
-                </View>
-                {posts.dropOffContactPerson &&
-                <View style={styles.contactInfoContainer}>
-                    <Text style={styles.heading}>Drop Off Contact Information</Text>
-                <Text>{posts.dropOffContactPerson}</Text>
-                <Text>{posts.dropOffContactNumber}</Text>
-                </View>
-                }
                 <PostInfo
                     posts={posts}
+                    contact={contact}
                 />
-                <Text>Total Earning: ${actionPrice ? actionPrice : posts.price}</Text>
+                <View style={styles.infoContainer}>
+                    <Text style={styles.infoKey}>Total Earning</Text>
+                    <Text style={styles.infoValue}>$ {actionPrice ? actionPrice : posts.price}</Text>
+                </View>
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => onJobListPressed()}>
@@ -42,27 +35,15 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        paddingVertical: '10%',
         width: '100%',
-        height: '100%'
-    },
-    contactInfoContainer:{
-        marginBottom: 10,
-        padding: 10,
-        borderWidth: 1,
-        borderColor: 'black',
-        borderRadius: 8,
-        width: '90%'
-    },
-    heading:{
-        fontSize: 20,
-        fontWeight: 'bold'
+        height: '100%',
+        backgroundColor: 'white'
     },
     button: {
-        backgroundColor: 'black',
+        backgroundColor: '#0077FC',
         marginVertical: 10,
         height: 48,
-        borderRadius: 5,
+        borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
         width: 100
@@ -72,15 +53,17 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "bold"
     },
-    input: {
-        borderColor: 'black',
-        borderWidth: 1,
-        height: 48,
-        borderRadius: 5,
-        overflow: 'hidden',
-        backgroundColor: 'white',
-        marginVertical: '1%',
-        marginHorizontal: '2%',
-        paddingHorizontal: 10
+    infoContainer: {
+        flexDirection: 'row',
+        marginVertical: 10,
+        width: '95%'
+    },
+    infoKey: {
+        color: '#A9A9A9',
+        width: 140,
+    },
+    infoValue: {
+        marginRight: 10,
+        width: '65%'
     },
 })

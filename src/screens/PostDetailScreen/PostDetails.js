@@ -48,6 +48,7 @@ export default function PostDetails({ navigation, route }) {
                 <Text > {error && alert(error)}</Text>
                 <PostInfo
                     posts={posts}
+                    contact= ""
                 />
                 <View style={styles.priceContainer}>
                     <Text style={styles.infoKey}>Quoted Price</Text>
@@ -101,7 +102,6 @@ const styles = StyleSheet.create({
         width: '95%'
     },
     acceptButton: {
-
         backgroundColor: '#A9A9A9',
     },
     offerButton: {
