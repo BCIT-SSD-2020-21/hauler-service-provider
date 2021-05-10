@@ -57,7 +57,7 @@ export default function PostDetails({ navigation, route }) {
                 <TouchableOpacity
                     style={[styles.button, styles.acceptButton]}
                     onPress={() => onAccept()}>
-                    <Text style={styles.buttonTitle}>ACCEPT</Text>
+                    <Text style={[styles.buttonTitle, styles.acceptTitle]}>ACCEPT</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.button, styles.offerButton]}
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingVertical: '2%',
+        paddingBottom: '2%',
         width: '100%',
         height: '100%'
     },
@@ -103,15 +103,17 @@ const styles = StyleSheet.create({
         width: '95%'
     },
     acceptButton: {
-        backgroundColor: '#A9A9A9',
+        backgroundColor: '#E0E0E0',
     },
     offerButton: {
         backgroundColor: '#0077FC',
     },
     buttonTitle: {
         color: 'white',
-        fontSize: 16,
         fontWeight: "bold"
+    },
+    acceptTitle:{
+        color: 'black'
     },
     input: {
         borderColor: 'black',

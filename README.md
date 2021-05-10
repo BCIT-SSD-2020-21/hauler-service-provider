@@ -28,6 +28,9 @@ react-native-safe-area-context @react-native-community/masked-view
 * npm install @react-native-picker/picker
 * expo install @react-native-picker/picker
 * npm install @react-navigation/bottom-tabs
+* expo install react-native-maps
+* npm install react-native-maps --save-exact
+* npm install react-native-maps-directions
 ---
 ### Wireframe for User
 Stored in wireframe folder on the root folder.
