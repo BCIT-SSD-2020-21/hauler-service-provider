@@ -2,10 +2,50 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import ImageList from '../imageList/ImageList';
 import { Feather } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import Map from '../map/map';
 
 export default function PostInfo({ posts, contact }) {
+
+    const [coordinates, setCoordinates] = useState([
+        {
+            latitude: posts.pickUpAddressLat,
+            longitude: posts.pickUpAddressLng,
+        },
+        {
+            latitude: posts.dropOffAddressLat,
+            longitude: posts.dropOffAddressLng,
+        }
+    ])
+
+    onMapsPress = () => {
+        setModalVisible(true)
+    }
+
     return (
         <View style={styles.container}>
+            <Modal
+                animationType='slide'
+                transparent={false}
+                opacity={0.5}
+                visible={modalVisible}
+                backdropOpacity={0.5}
+                onRequestClose={() => {
+                    setModalVisible(!modalVisible);
+                }}
+            >
+                <ScrollView style={styles.modalContainer}>
+                    <Map
+                        coordinates={coordinates}
+                    />
+                    <TouchableOpacity
+                        style={[styles.buttons, styles.logOutButton]}
+                        onPress={() => setModalVisible(!modalVisible)}>
+                        <Text style={styles.buttonTitle}>Close</Text>
+                    </TouchableOpacity>
+
+                </ScrollView>
+            </Modal>
             <View style={styles.infoContainer}>
                 <Text style={styles.infoKey}>Post Heading</Text>
                 <Text style={styles.infoValue}>{posts.postHeading}</Text>
@@ -48,7 +88,7 @@ export default function PostInfo({ posts, contact }) {
                 <Text style={styles.infoKey}>Pick Up Instructions</Text>
                 <Text style={styles.infoValue}>{posts.pickUpSpecialInstruction}</Text>
             </View>
-            {posts.dropOffStreetAddress &&
+            {posts.dropOffAddress &&
                 <View>
                     <View style={styles.infoContainer}>
                         <Text style={styles.infoKey}>Drop Off Address</Text>
@@ -77,8 +117,9 @@ export default function PostInfo({ posts, contact }) {
                         <Text style={styles.infoValue}>{posts.dropOffSpecialInstruction}</Text>
                     </View>
                     <View style={styles.infoContainer}>
-                        <Text style={styles.infoKey}>Distance</Text>
-                        <Text style={styles.infoValue}>{posts.distance} km</Text>
+                        <Text style={styles.infoKey}>Distance </Text>
+                        <Text style={styles.infoValue1}>{posts.distance} km </Text>
+                        <Text style={styles.iconStyle}><MaterialCommunityIcons name='map-marker-multiple-outline' size={24} color='white' /></Text>
                     </View>
                 </View>
             }
@@ -126,7 +167,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         padding: 5,
         overflow: 'hidden'
-    }
+    },
 })
 
 
