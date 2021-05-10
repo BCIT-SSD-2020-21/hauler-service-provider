@@ -1,24 +1,15 @@
-import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Text, Modal, ScrollView, TouchableOpacity } from 'react-native';
 import ImageList from '../imageList/ImageList';
 import { Feather } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import Map from '../map/map';
+import Map from '../map/Map';
 
 export default function PostInfo({ posts, contact }) {
+    const [modalVisible, setModalVisible] = useState(false)
+  
 
-    const [coordinates, setCoordinates] = useState([
-        {
-            latitude: posts.pickUpAddressLat,
-            longitude: posts.pickUpAddressLng,
-        },
-        {
-            latitude: posts.dropOffAddressLat,
-            longitude: posts.dropOffAddressLng,
-        }
-    ])
-
-    onMapsPress = () => {
+    const onMapsPress = () => {
         setModalVisible(true)
     }
 
@@ -35,11 +26,16 @@ export default function PostInfo({ posts, contact }) {
                 }}
             >
                 <ScrollView style={styles.modalContainer}>
+
+                    <Text>
+                        {posts &&
                     <Map
-                        coordinates={coordinates}
+                        posts={posts}
                     />
+                        }
+                    </Text>
                     <TouchableOpacity
-                        style={[styles.buttons, styles.logOutButton]}
+                        style={styles.buttons}
                         onPress={() => setModalVisible(!modalVisible)}>
                         <Text style={styles.buttonTitle}>Close</Text>
                     </TouchableOpacity>
@@ -119,7 +115,7 @@ export default function PostInfo({ posts, contact }) {
                     <View style={styles.infoContainer}>
                         <Text style={styles.infoKey}>Distance </Text>
                         <Text style={styles.infoValue1}>{posts.distance} km </Text>
-                        <Text style={styles.iconStyle}><MaterialCommunityIcons name='map-marker-multiple-outline' size={24} color='white' /></Text>
+                        <TouchableOpacity onPress={() => onMapsPress()}><Text style={styles.iconStyle}><MaterialCommunityIcons name='map-marker-multiple-outline' size={24} color='white' /></Text></TouchableOpacity>
                     </View>
                 </View>
             }
@@ -167,6 +163,25 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         padding: 5,
         overflow: 'hidden'
+    },
+    modalContainer:{
+        width: '100%',
+        marginHorizontal: 16
+    },
+    buttons:{
+        backgroundColor: '#0077FC',
+        marginVertical: 10,
+        height: 48,
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '90%',
+        
+    },
+    buttonTitle: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: "bold"
     },
 })
 

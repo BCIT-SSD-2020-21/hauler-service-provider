@@ -1,14 +1,26 @@
-import React, {useRef } from 'react'
-import { Dimensions, StyleSheet } from 'react-native'
+import React, {useRef, useState} from 'react'
+import { Dimensions, StyleSheet, View } from 'react-native'
 import MapView from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { GOOGLE_MAP_API } from '@env';
 
-export default function Map({ coordinates }) {
+export default function Map({ posts }) {
     const { width, height } = Dimensions.get('window');
     const mapView = useRef();
 
+    const [coordinates, setCoordinates] = useState([
+        {
+            latitude: posts.pickUpAddressLat,
+            longitude: posts.pickUpAddressLng,
+        },
+        {
+            latitude: posts.dropOffAddressLat,
+            longitude: posts.dropOffAddressLng,
+        }
+    ])
+
     return (
+        <View style={styles.mapContainer}>
         <MapView
             style={styles.map}
             ref={mapView}
@@ -26,8 +38,6 @@ export default function Map({ coordinates }) {
                 strokeColor='#DE0303'
                 optimizeWaypoints={true}
                 onReady={result => {
-                    setDistance(result.distance)
-                    setDuration(result.duration)
                     mapView.current.fitToCoordinates(result.coordinates, {
                         edgePadding: {
                             right: (width / 20),
@@ -43,13 +53,19 @@ export default function Map({ coordinates }) {
                 }}
             />
         </MapView>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
     map: {
-        width: Dimensions.get('window').width - 30,
-        height: 300,
-        borderRadius: 20,
+        width: Dimensions.get('window').width-30,
+        height: 500,
+        borderRadius: 20, 
     },
+    mapContainer:{
+        paddingTop: 30,
+    alignItems:'center',
+    justifyContent: 'center',
+    }
 })
