@@ -49,6 +49,7 @@ export default function SearchJobs({ navigation }) {
             <PostsList
                 posts={posts}
                 onViewDetailsPress={onViewDetailsPress}
+                onAcceptedDetails = ''
                 response=""
                 onStatusDeailsPress=""
             />
@@ -58,6 +59,7 @@ export default function SearchJobs({ navigation }) {
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: 'white',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-start',

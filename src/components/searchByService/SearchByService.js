@@ -8,8 +8,17 @@ export default function SearchByService({ service, setService, searchService }) 
         <View style={styles.search}>
             <RNPickerSelect
                 value={service}
-                useNativeAndroidPickerStyle={false}
+                useNativeAndroidPickerStyle={true}
                 style={{
+                    placeholder: {
+                        color: 'black'
+                    },
+                    inputIOS: {
+                        fontSize: 14,
+                        paddingHorizontal: 10,
+                        paddingVertical: 8,
+                        color: 'black'
+                    },
                     inputAndroid: {
                         fontSize: 14,
                         paddingHorizontal: 10,
@@ -17,8 +26,8 @@ export default function SearchByService({ service, setService, searchService }) 
                         color: 'black'
                     },
                 }}
-                onValueChange={(value) => {setService(value); searchService({service: value})}}
-                placeholder={{ label: "Search by service", value: null }}
+                onValueChange={(value) => { setService(value); searchService({ service: value }) }}
+                placeholder={{ label: "Search by Service", value: null }}
                 items={[
                     { label: 'Junk Removal', value: 'Junk' },
                     { label: 'Moving', value: 'Moving' },
@@ -32,9 +41,8 @@ export default function SearchByService({ service, setService, searchService }) 
 const styles = StyleSheet.create({
     search: {
         width: '90%',
-        borderWidth: 1,
-        borderColor: 'black',
-        borderRadius: 8,
+        borderRadius: 10,
+        backgroundColor: '#F5F5F5',
         marginVertical: 5
     }
 })

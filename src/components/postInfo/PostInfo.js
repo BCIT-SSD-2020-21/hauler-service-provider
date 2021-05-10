@@ -1,8 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import ImageList from '../imageList/ImageList';
+import { Feather } from '@expo/vector-icons';
 
-export default function PostInfo({ posts }) {
+export default function PostInfo({ posts, contact }) {
     return (
         <View style={styles.container}>
             <View style={styles.infoContainer}>
@@ -27,6 +28,22 @@ export default function PostInfo({ posts }) {
                     {posts.pickUpStreetAddress}, {posts.pickUpCity}, {posts.pickUpProvince}, {posts.pickUpZipCode}
                 </Text>
             </View>
+            <Text>
+                {contact &&
+                    <View>
+                        <View style={styles.infoContainer}>
+                            <Text style={styles.infoKey}>Pick Up Contact Name</Text>
+                            <Text style={styles.infoValue}>{posts.pickUpContactPerson}</Text>
+                        </View>
+
+                        <View style={styles.infoContainer}>
+                            <Text style={styles.infoKey}>Pick Up Contact Number</Text>
+                            <Text style={styles.infoValue1}>{posts.pickUpContactNumber}  </Text>
+                            <Text style={styles.iconStyle}><Feather name='phone' size={24} color='white' /></Text>
+                        </View>
+                    </View>
+                }
+            </Text>
             <View style={styles.infoContainer}>
                 <Text style={styles.infoKey}>Pick Up Instructions</Text>
                 <Text style={styles.infoValue}>{posts.pickUpSpecialInstruction}</Text>
@@ -39,6 +56,22 @@ export default function PostInfo({ posts }) {
                             {posts.dropOffStreetAddress}, {posts.dropOffCity}, {posts.dropOffProvince}, {posts.dropOffZipCode}
                         </Text>
                     </View>
+                    <Text>
+                        {contact &&
+                            <View>
+                                <View style={styles.infoContainer}>
+                                    <Text style={styles.infoKey}>Drop Off Contact Name</Text>
+                                    <Text style={styles.infoValue}>{posts.dropOffContactPerson}</Text>
+                                </View>
+
+                                <View style={styles.infoContainer}>
+                                    <Text style={styles.infoKey}>Pick Off Contact Number</Text>
+                                    <Text style={styles.infoValue1}>{posts.dropOffContactNumber}  </Text>
+                                    <Text style={styles.iconStyle}><Feather name='phone' size={24} color='white' /></Text>
+                                </View>
+                            </View>
+                        }
+                    </Text>
                     <View style={styles.infoContainer}>
                         <Text style={styles.infoKey}>Drop Off Instructions</Text>
                         <Text style={styles.infoValue}>{posts.dropOffSpecialInstruction}</Text>
@@ -76,7 +109,20 @@ const styles = StyleSheet.create({
     },
     infoValue: {
         marginRight: 10,
-        width: '65%'
+        width: '65%',
+        fontWeight: 'bold',
     },
+    infoValue1: {
+        marginRight: 10,
+        fontWeight: 'bold',
+        paddingTop: 8
+    },
+    iconStyle: {
+        backgroundColor: '#0077FC',
+        borderRadius: 20,
+        padding: 5,
+        overflow: 'hidden'
+    }
 })
+
 
