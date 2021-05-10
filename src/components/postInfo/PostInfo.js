@@ -25,7 +25,7 @@ export default function PostInfo({ posts, contact }) {
             <View style={styles.infoContainer}>
                 <Text style={styles.infoKey}>Pick Up Address</Text>
                 <Text style={styles.infoValue}>
-                    {posts.pickUpStreetAddress}, {posts.pickUpCity}, {posts.pickUpProvince}, {posts.pickUpZipCode}
+                    {posts.pickUpAddress}
                 </Text>
             </View>
             <Text>
@@ -53,7 +53,7 @@ export default function PostInfo({ posts, contact }) {
                     <View style={styles.infoContainer}>
                         <Text style={styles.infoKey}>Drop Off Address</Text>
                         <Text style={styles.infoValue}>
-                            {posts.dropOffStreetAddress}, {posts.dropOffCity}, {posts.dropOffProvince}, {posts.dropOffZipCode}
+                            {posts.dropOffAddress}
                         </Text>
                     </View>
                     <Text>
@@ -65,7 +65,7 @@ export default function PostInfo({ posts, contact }) {
                                 </View>
 
                                 <View style={styles.infoContainer}>
-                                    <Text style={styles.infoKey}>Pick Off Contact Number</Text>
+                                    <Text style={styles.infoKey}>Drop Off Contact Number</Text>
                                     <Text style={styles.infoValue1}>{posts.dropOffContactNumber}  </Text>
                                     <Text style={styles.iconStyle}><Feather name='phone' size={24} color='white' /></Text>
                                 </View>
@@ -75,6 +75,10 @@ export default function PostInfo({ posts, contact }) {
                     <View style={styles.infoContainer}>
                         <Text style={styles.infoKey}>Drop Off Instructions</Text>
                         <Text style={styles.infoValue}>{posts.dropOffSpecialInstruction}</Text>
+                    </View>
+                    <View style={styles.infoContainer}>
+                        <Text style={styles.infoKey}>Distance</Text>
+                        <Text style={styles.infoValue}>{posts.distance} km</Text>
                     </View>
                 </View>
             }

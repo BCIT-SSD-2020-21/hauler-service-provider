@@ -37,10 +37,10 @@ export default function PostsList({ posts, onViewDetailsPress, response, onStatu
                                             {item.postHeading}
                                         </Text>
                                         <Text style={styles.cardText}>
-                                            {item.pickUpCity}, {item.pickUpProvince}
+                                            {item.pickUpCity}
                                             {item.dropOffCity &&
-                                                <Text style={styles.cardText}> to {item.dropOffCity}, {item.dropOffProvince}
-                                                </Text>}
+                                                <Text style={styles.cardText}> to {item.dropOffCity} ({item.distance} km)
+                                                </Text>} 
                                         </Text>
                                     </View>
                                     <View style={styles.cardButton}>
