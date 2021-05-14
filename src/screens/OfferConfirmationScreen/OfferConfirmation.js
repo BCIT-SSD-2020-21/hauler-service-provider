@@ -1,7 +1,21 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 
-export default function OfferConfirmation({navigation}) {
+export default function OfferConfirmation({navigation, route}) {
+    const { confirm } = route.params;
+    
+    const message = () => {
+        if (confirm === 'offer') {
+            return (
+                <Text style={styles.heading1}>Offer Sent Successfully!!!</Text>
+            )
+        }
+        else {
+            return (
+                <Text style={styles.heading1}>Offer Declined!!!</Text>
+            )
+        }
+    }
 
     const onReturnToHomePressed = async () => {
         navigation.navigate('Home')
@@ -10,9 +24,8 @@ export default function OfferConfirmation({navigation}) {
     return (
         <View style={styles.container}>
             <Image source={require('../../../assets/pic1.png')} style={styles.logo} />
-            <Text style={styles.heading1}>Offer sent!</Text>
+            {message()}
             <Text style={styles.heading2}>Thank you!</Text>
-            <Text style={styles.message}>Offer has been sent to the customer</Text>
             <TouchableOpacity
                 style={styles.button}
                 onPress={() => onReturnToHomePressed()}>
