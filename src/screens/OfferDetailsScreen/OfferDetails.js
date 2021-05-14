@@ -22,7 +22,7 @@ export default function OfferDetails({ navigation, route }) {
             offer,
             false)
         setReset(!reset);
-        navigation.navigate('OfferConfirmation')
+        navigation.navigate('OfferConfirmation', { confirm: 'offer' })
     }
 
     useEffect(() => {

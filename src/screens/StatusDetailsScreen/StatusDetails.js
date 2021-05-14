@@ -52,7 +52,7 @@ export default function StatusDetails({ navigation, route }) {
             true
             );
             setReset(!reset);
-        await updatePostVisibility(postId, actionPrice);
+        await updatePostVisibility(postId, actionPrice, uid);
         navigation.navigate('JobConfirmation', { posts: post, actionPrice: actionPrice })
     }
 

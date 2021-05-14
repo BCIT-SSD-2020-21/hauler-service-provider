@@ -6,7 +6,11 @@ export default function JobConfirmation({ navigation, route }) {
     const { posts, actionPrice } = route.params;
     const contact = "show"
     const onJobListPressed = () => {
-        navigation.navigate('MyJobListNavigator')
+        navigation.navigate('MyJobListNavigator', { screen: 'MyJobList' })
+    }
+
+    const onSearchPressed = () =>{
+        navigation.navigate('SearchJobsNavigator', {screen:'SearchJobs'})
     }
 
     return (
@@ -21,9 +25,14 @@ export default function JobConfirmation({ navigation, route }) {
                     <Text style={styles.infoValue}>$ {actionPrice ? actionPrice : posts.price}</Text>
                 </View>
                 <TouchableOpacity
-                    style={styles.button}
+                    style={[styles.button, styles.listButton]}
                     onPress={() => onJobListPressed()}>
-                    <Text style={styles.buttonTitle}>My Job List</Text>
+                    <Text style={[styles.buttonTitle, styles.listTitle]}>My Job List</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => onSearchPressed()}>
+                    <Text style={styles.buttonTitle}>Search More Jobs</Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
@@ -46,7 +55,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
-        width: 100
+        width: '90%'
     },
     buttonTitle: {
         color: 'white',
@@ -67,4 +76,10 @@ const styles = StyleSheet.create({
         width: '65%',
         fontWeight: 'bold'
     },
+    listButton:{
+backgroundColor: '#E0E0E0'
+    },
+    listTitle:{
+        color: 'black'
+    }
 })

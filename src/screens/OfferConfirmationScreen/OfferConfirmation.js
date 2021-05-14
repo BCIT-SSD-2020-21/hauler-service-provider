@@ -21,6 +21,14 @@ export default function OfferConfirmation({navigation, route}) {
         navigation.navigate('Home')
     }
 
+    const onReturnToSearchPressed = () => {
+        navigation.navigate('SearchJobsNavigator', {screen:'SearchJobs'})
+    }
+
+    const onReturnToJobListPressed = () =>{
+        navigation.navigate('MyJobListNavigator', {screen:'MyJobList'})
+    }
+
     return (
         <View style={styles.container}>
             <Image source={require('../../../assets/pic1.png')} style={styles.logo} />
@@ -30,6 +38,16 @@ export default function OfferConfirmation({navigation, route}) {
                 style={styles.button}
                 onPress={() => onReturnToHomePressed()}>
                 <Text style={styles.buttonTitle}>RETURN TO HOME</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => onReturnToSearchPressed()}>
+                <Text style={styles.buttonTitle}>RETURN TO SEARCH</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => onReturnToJobListPressed()}>
+                <Text style={styles.buttonTitle}>RETURN TO MY JOBS</Text>
             </TouchableOpacity>
 
         </View>
@@ -69,6 +87,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
+        marginVertical: 10
     },
     buttonTitle: {
         color: 'white',
