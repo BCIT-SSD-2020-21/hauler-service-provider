@@ -2,9 +2,9 @@ import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import MenuIcon from '../MenuIcon/MenuIcon';
 import HomeNavigator from '../HomeNavigator/HomeNavigator';
-import Profile from '../../../screens/ProfileScreen/Profile';
 import SearchJobsNavigator from'../SearchJobsNavigator/SearchJobsNavigator';
 import MyJobListNavigator from '../MyJobListNavigator/MyJobListNavigator';
+import ProfileNavigator from '../ProfileNavigator/ProfileNavigator';
 
 const Drawer = createDrawerNavigator();
 
@@ -28,7 +28,7 @@ export default function DrawerNavigation() {
       />
       <Drawer.Screen
         name="Profile"
-        component={Profile}
+        component={ProfileNavigator}
         options={{ headerTitle: 'Profile', headerRight: () => <MenuIcon /> }}
       />
     </Drawer.Navigator>
