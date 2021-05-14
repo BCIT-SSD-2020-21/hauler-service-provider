@@ -54,7 +54,7 @@ const MyJobListNavigator = () => {
                             headerRight: () => <MenuIcon />,
                         }
                         : {
-                            headerTitle: '',
+                            headerTitle: 'Confirmation',
                         }
                 }
             />
@@ -93,7 +93,7 @@ const MyJobListNavigator = () => {
                             headerRight: () => <MenuIcon />,
                         }
                         : {
-                            headerTitle: '',
+                            headerTitle: 'Confirmation',
                         }
                 }
             />

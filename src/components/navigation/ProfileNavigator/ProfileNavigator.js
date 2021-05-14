@@ -8,7 +8,7 @@ const ProfileStack = createStackNavigator();
 const ProfileNavigator = () => {
     return (
         <ProfileStack.Navigator
-            initialRouteName='Profile1'
+            initialRouteName='ProfileS'
             screenOptions={{
                 headerShown: true,
                 title: '',
