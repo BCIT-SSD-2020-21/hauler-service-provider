@@ -3,6 +3,7 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, ScrollView,
 import UserInfo from '../../components/userInfo/UserInfo';
 import { Context } from '../../context/ContextProvider';
 import { signUp } from '../../../network';
+import RNPickerSelect from 'react-native-picker-select';
 
 export default function Signup({ navigation }) {
     const { signup, currentUser } = useContext(Context)
@@ -64,28 +65,24 @@ export default function Signup({ navigation }) {
             <View style={styles.container}>
                 <View
                     style={{ flex: 1, width: '100%' }}>
-                    <Image source={require('../../../assets/haulerLogo.png')} style={styles.logo} />
                     <Text style={styles.heading}>Register</Text>
                     <Text > {error && alert(error)}</Text>
+                    <Text style={styles.text1}> Email : </Text>
                     <TextInput
                         style={styles.input}
-                        placeholder='Email'
-                        placeholderTextColor='#C0C0C0'
                         onChangeText={(email) => { setError(""); setEmail(email) }}
                         value={email}
                     />
+                    <Text style={styles.text1}> Password : </Text>
                     <TextInput
                         style={styles.input}
-                        placeholder='Password'
-                        placeholderTextColor='#C0C0C0'
                         secureTextEntry
                         onChangeText={(password) => { setError(""); setPassword(password) }}
                         value={password}
                     />
+                    <Text style={styles.text1}> Confirm Password : </Text>
                     <TextInput
                         style={styles.input}
-                        placeholder='Confirm Password'
-                        placeholderTextColor='#C0C0C0'
                         secureTextEntry
                         onChangeText={(password) => { setError(""); setConfirmPassword(password) }}
                         value={confirmPassword}
@@ -111,55 +108,74 @@ export default function Signup({ navigation }) {
                         setFirstName={setFirstName}
                         setError={setError}
                     />
-                    <Picker
-                        style={styles.input}
-                        selectedValue={vehicleType}
 
+<View style={styles.picker}>
+                    <RNPickerSelect
+                        value={vehicleType}
+                        useNativeAndroidPickerStyle={true}
+                        style={{
+                            placeholder: {
+                                color: 'black'
+                            },
+                            inputIOS: {
+                                fontSize: 14,
+                                paddingHorizontal: 10,
+                                paddingVertical: 8,
+                                color: 'black'
+                            },
+                            inputAndroid: {
+                                fontSize: 14,
+                                paddingHorizontal: 10,
+                                paddingVertical: 8,
+                                color: 'black',
+                            },
+                        }}
                         onValueChange={(type) => { setError(""); setVehicleType(type) }}
-                    >
-                        <Picker.Item label='Select Vehicle type' value='' style={{ color: '#C0C0C0' }} />
-                        <Picker.Item label='SUV' value='SUV' />
-                        <Picker.Item label='VAN' value='VAN' />
-                        <Picker.Item label='PICKUP' value='PICKUP' />
-                    </Picker>
-                    <Picker
-                        style={styles.input}
-                        selectedValue={serviceLocation}
+                        placeholder={{ label: 'Select Vehicle type', value: null }}
+                        items={[
+                            { label: 'SUV', value: 'SUV' },
+                            { label: 'VAN', value: 'VAN' },
+                            { label: 'PICKUP', value: 'PICKUP' },
+                        ]}
+                    />
+                    </View>
+<View style={styles.picker}>
+                    <RNPickerSelect
+                        value={serviceLocation}
+                        useNativeAndroidPickerStyle={true}
+                        style={{
+                            placeholder: {
+                                color: 'black'
+                            },
+                            inputIOS: {
+                                fontSize: 14,
+                                paddingHorizontal: 10,
+                                paddingVertical: 8,
+                                color: 'black'
+                            },
+                            inputAndroid: {
+                                fontSize: 14,
+                                paddingHorizontal: 10,
+                                paddingVertical: 8,
+                                color: 'black',
+                            },
+                        }}
                         onValueChange={(locationOfService) => { setError(""); setLocationOfService(locationOfService) }}
-                    >
-                        <Picker.Item label='Select Location Of Service' value='' style={{ color: '#C0C0C0' }} />
-                        <Picker.Item label='Abbotsford' value='Abbotsford' />
-                        <Picker.Item label='Armstrong' value='Armstrong' />
-                        <Picker.Item label='Burnaby' value='Burnaby' />
-                        <Picker.Item label='Campbell River' value='Campbell River' />
-                        <Picker.Item label='Castlegar' value='Castlegar' />
-                        <Picker.Item label='Chilliwack' value='Chilliwack' />
-                        <Picker.Item label='Colwood' value='Colwood' />
-                        <Picker.Item label='Coquitlam' value='Coquitlam' />
-                        <Picker.Item label='Courtenay' value='Courtenay' />
-                        <Picker.Item label='Cranbrook' value='Cranbrook' />
-                        <Picker.Item label='Dawson Creek' value='Dawson Creek' />
-                        <Picker.Item label='Delta' value='Delta' />
-                        <Picker.Item label='Duncan' value='Duncan' />
-                        <Picker.Item label='Enderby' value='Enderby' />
-                        <Picker.Item label='Fernie' value='Fernie' />
-                        <Picker.Item label='Fort St. John' value='Fort St. John' />
-                        <Picker.Item label='Grand Forks' value='Grand Forks' />
-                        <Picker.Item label='Greenwood' value='Greenwood' />
-                        <Picker.Item label='Hope' value='Hope' />
-                        <Picker.Item label='Kamloops' value='Kamloops' />
-                        <Picker.Item label='Kelowna' value='Kelowna' />
-                        <Picker.Item label='Kimberley' value='Kimberley' />
-                        <Picker.Item label='Langford' value='Langford' />
-                        <Picker.Item label='Langley' value='Langley' />
-                        <Picker.Item label='Maple Ridge' value='Maple Ridge' />
-                        <Picker.Item label='Mission' value='Mission' />
-                        <Picker.Item label='New Westminster' value='New Westminster' />
-                        <Picker.Item label='North Vancouver' value='North Vancouver' />
-                        <Picker.Item label='Richmond' value='Richmond' />
-                        <Picker.Item label='Vancouver' value='Vancouver' />
-                        <Picker.Item label='Whistler' value='Whistler' />
-                    </Picker>
+                        placeholder={{ label: 'Select Location Of Service', value: null }}
+                        items={[
+                            { label: 'Abbotsford', value: 'Abbotsford' },
+                            { label: 'Burnaby', value: 'Burnaby' },
+                            { label: 'Chilliwack', value: 'Chilliwack' },
+                            { label: 'Coquitlam', value: 'Coquitlam' },
+                            { label: 'Delta', value: 'Delta' },
+                            { label: 'Hope', value: 'Hope' },
+                            { label: 'Vancouver', value: 'Vancouver' },
+                            { label: 'Richmond', value: 'Richmond' },
+                            { label: 'New Westminster', value: 'New Westminster' },
+                            { label: 'Surrey', value: 'Surrey' },
+                        ]}
+                    />
+                    </View>
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity
                             style={styles.buttons}>
@@ -174,10 +190,9 @@ export default function Signup({ navigation }) {
                             <Text style={styles.buttonTitle}>Driver Abstract</Text>
                         </TouchableOpacity>
                     </View>
+                    <Text style={styles.text1}> Driver Licence Expiry : </Text>
                     <TextInput
                         style={styles.input}
-                        placeholder='Driver Licence Expiry'
-                        placeholderTextColor='#C0C0C0'
                         onChangeText={(date) => { setError(""); setExpiryDate(date) }}
                         value={driverLicenseExpiry}
                     />
@@ -185,7 +200,7 @@ export default function Signup({ navigation }) {
                         style={styles.button}
                         disabled={loading}
                         onPress={() => onSignUpClicked()}>
-                        <Text style={styles.buttonTitle}>Create account</Text>
+                        <Text style={styles.buttonTitle1}>Create account</Text>
                     </TouchableOpacity>
 
                     <View style={styles.option}>
@@ -195,9 +210,6 @@ export default function Signup({ navigation }) {
                                 onPress={() => navigation.navigate('Signin')}>
                                 Log in
                                 </Text>
-                        </Text>
-                        <Text style={styles.email}>
-                            Current user : {currentUser && currentUser.email}
                         </Text>
                     </View>
                 </View>
@@ -210,7 +222,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        marginVertical: '2%'
+        marginVertical: '2%',
+        backgroundColor: 'white'
     },
     logo: {
         width: 200,
@@ -221,50 +234,54 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 45,
         marginVertical: '1%',
-        color: "#2EBCAC",
-        fontWeight: "bold",
+        color: "black",
     },
     input: {
-        borderColor: 'black',
-        borderWidth: 1,
-        height: 48,
-        borderRadius: 5,
+        borderBottomColor: '#BFBFBF',
+        borderBottomWidth: 1,
+        height: 40,
         overflow: 'hidden',
         backgroundColor: 'white',
-        marginVertical: '1%',
-        marginHorizontal: '2%',
-        paddingLeft: 16
+        marginHorizontal: '5%',
+        marginBottom: 20
     },
     email: {
         color: '#73AB84',
         textAlign: 'center'
     },
     buttonContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
         marginHorizontal: '2%',
         marginVertical: '1%',
     },
     button: {
-        backgroundColor: '#F68347',
+        backgroundColor: '#0077FC',
         marginLeft: '2%',
         marginRight: '2%',
-        marginTop: 20,
+        marginTop: 50,
         height: 48,
-        borderRadius: 5,
-        alignItems: "center",
-        justifyContent: 'center'
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '90%',
+        alignSelf: 'center'
     },
     buttons: {
-        backgroundColor: '#5C5C5C',
-        width: '30%',
+        backgroundColor: '#E0E0E0',
+        width: '90%',
         height: 48,
-        borderRadius: 5,
-        alignItems: "center",
-        justifyContent: 'center'
+        borderRadius: 10,
+        alignSelf: "center",
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginVertical: 10
+    },
+    buttonTitle1: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: "bold"
     },
     buttonTitle: {
-        color: 'white',
+        color: 'black',
         fontSize: 16,
         fontWeight: "bold"
     },
@@ -281,6 +298,14 @@ const styles = StyleSheet.create({
         color: "#A9A9A9",
         fontWeight: "bold",
         fontSize: 16
+    },
+    text1: {
+        color: '#BFBFBF',
+        marginLeft: '5%'
+    },
+    picker:{
+        width: '90%',
+        alignSelf: 'center'
     }
 })
 
