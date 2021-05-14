@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
-        height: '100%'
+        height: '100%',
+        backgroundColor: 'white'
     },
     button: {
         backgroundColor: '#0077FC',

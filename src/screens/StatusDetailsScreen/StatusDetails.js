@@ -22,7 +22,7 @@ export default function StatusDetails({ navigation, route }) {
             offer,
             false)
         setReset(!reset);
-        navigation.navigate('OfferConfirmation')
+        navigation.navigate('OfferConfirmation', { confirm: 'offer' })
     }
     const onDecline = () => {
         setModalVisible(true)
@@ -39,6 +39,7 @@ export default function StatusDetails({ navigation, route }) {
             true);
             setReset(!reset);
         setModalVisible(!modalVisible)
+        navigation.navigate('OfferConfirmation', { confirm: 'decline' })
     }
     const onAccept = async () => {
         await addServiceProviserResponse(
