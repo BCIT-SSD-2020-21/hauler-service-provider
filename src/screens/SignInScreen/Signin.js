@@ -27,19 +27,20 @@ export default function Signin({ navigation }) {
             <View style={styles.container}>
                 <View
                     style={{ flex: 1, width: '100%' }}>
+                        <View style={styles.logoContainer}>
                     <Image source={require('../../../assets/haulerLogo.png')} style={styles.logo} />
-                    <Text style={styles.heading}>Login</Text>
+                    </View>
                     <Text > {error && alert(error)}</Text>
+                    <Text style={styles.text1}> Email : </Text>
                     <TextInput
                         style={styles.input}
-                        placeholder='Email'
                         placeholderTextColor='#C0C0C0'
                         onChangeText={(email) => { setError(""); setEmail(email) }}
                         value={email}
                     />
+                    <Text style={styles.text1}> Password : </Text>
                     <TextInput
                         style={styles.input}
-                        placeholder='Password'
                         placeholderTextColor='#C0C0C0'
                         secureTextEntry
                         onChangeText={(password) => { setError(""); setPassword(password) }}
@@ -74,10 +75,14 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        marginVertical: '2%'
+        paddingVertical: '2%',
+        backgroundColor: 'white',
+        minHeight: 600,
+        justifyContent: 'center',
+        paddingBottom: 180,
     },
     logo: {
-        width: 200,
+        width: 100,
         height: 100,
         alignSelf: 'center',
     },
@@ -89,29 +94,29 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     input: {
-        borderColor: 'black',
-        borderWidth: 1,
-        height: 48,
-        borderRadius: 5,
+        borderBottomColor: '#BFBFBF',
+        borderBottomWidth: 1,
+        height: 40,
         overflow: 'hidden',
         backgroundColor: 'white',
-        marginVertical: '1%',
-        marginHorizontal: '2%',
-        paddingLeft: 16
+        marginHorizontal: '5%',
+        marginBottom: 20
     },
     email: {
         color: '#73AB84',
         textAlign: 'center'
     },
     button: {
-        backgroundColor: '#F68347',
+        backgroundColor: '#0077FC',
         marginLeft: '2%',
         marginRight: '2%',
-        marginTop: 20,
+        marginTop: 50,
         height: 48,
-        borderRadius: 5,
+        borderRadius: 10,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        width: '90%',
+        alignSelf: 'center'
     },
     buttonTitle: {
         color: 'white',
@@ -131,6 +136,14 @@ const styles = StyleSheet.create({
         color: '#A9A9A9',
         fontWeight: 'bold',
         fontSize: 16
-    }
+    },
+    logoContainer: {
+        marginTop: '10%',
+        marginBottom: '10%'
+    },
+    text1: {
+        color: '#BFBFBF',
+        marginLeft: '5%'
+    },
 })
 

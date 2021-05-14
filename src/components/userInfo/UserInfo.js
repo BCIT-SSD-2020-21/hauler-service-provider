@@ -1,71 +1,62 @@
 import React from 'react';
-import { TextInput, View, Picker } from 'react-native';
+import { TextInput, View, Text } from 'react-native';
 import { StyleSheet } from 'react-native';
 
 export default function UserInfo({ firstName, lastName, province, city, streetAddress,
     unitNumber, setCity, setStreetAddress, setUnitNumber, profilePicUrl, dateOfBirth, setDob, contactNumber, setContactNumber, setProvince, setFirstName, setLastName, setProfilePicUrl, setError }) {
     return (
         <View>
+             <Text style={styles.text1}> profilePicUrl : </Text>
             <TextInput
                 style={styles.input}
-                placeholder='profilePicUrl'
-                placeholderTextColor='#C0C0C0'
                 onChangeText={(profilePic) => { setError(""); setProfilePicUrl(profilePic) }}
                 value={profilePicUrl}
             />
+             <Text style={styles.text1}> First Name : </Text>
             <TextInput
                 style={styles.input}
-                placeholder='First Name'
-                placeholderTextColor='#C0C0C0'
                 onChangeText={(fname) => { setError(""); setFirstName(fname) }}
                 value={firstName}
             />
+             <Text style={styles.text1}> Last Name : </Text>
             <TextInput
                 style={styles.input}
-                placeholder='Last Name'
-                placeholderTextColor='#C0C0C0'
                 onChangeText={(lname) => { setError(""); setLastName(lname) }}
                 value={lastName}
             />
+             <Text style={styles.text1}> Date of Birth : </Text>
             <TextInput
                 style={styles.input}
-                placeholder='Date of Birth'
-                placeholderTextColor='#C0C0C0'
                 onChangeText={(date) => { setError(""); setDob(date) }}
                 value={dateOfBirth}
             />
+             <Text style={styles.text1}> Province : </Text>
             <TextInput
                 style={styles.input}
-                placeholder='Province'
-                placeholderTextColor='#C0C0C0'
                 onChangeText={(province) => { setError(""); setProvince(province) }}
                 value={province}
             />
+             <Text style={styles.text1}> City : </Text>
             <TextInput
                 style={styles.input}
-                placeholder='City'
-                placeholderTextColor='#C0C0C0'
                 onChangeText={(city) => { setError(""); setCity(city) }}
                 value={city}
             />
+             <Text style={styles.text1}> StreetAddress : </Text>
             <TextInput
                 style={styles.input}
-                placeholder='StreetAddress'
-                placeholderTextColor='#C0C0C0'
                 onChangeText={(streetAddress) => { setError(""); setStreetAddress(streetAddress) }}
                 value={streetAddress}
             />
+             <Text style={styles.text1}> Unit Number : </Text>
             <TextInput
                 style={styles.input}
-                placeholder='Unit Number'
-                placeholderTextColor='#C0C0C0'
                 onChangeText={(unitNumber) => { setError(""); setUnitNumber(unitNumber) }}
                 value={unitNumber}
             />
+             <Text style={styles.text1}> Contact Number : </Text>
             <TextInput
                 style={styles.input}
-                placeholder='Contact Number'
-                placeholderTextColor='#C0C0C0'
                 onChangeText={(number) => { setError(""); setContactNumber(number) }}
                 value={contactNumber}
             />
@@ -75,15 +66,17 @@ export default function UserInfo({ firstName, lastName, province, city, streetAd
 
 const styles = StyleSheet.create({
     input: {
-        borderColor: 'black',
-        borderWidth: 1,
-        height: 48,
-        borderRadius: 5,
+        borderBottomColor: '#BFBFBF',
+        borderBottomWidth: 1,
+        height: 40,
         overflow: 'hidden',
         backgroundColor: 'white',
-        marginVertical: '1%',
-        marginHorizontal: '2%',
-        paddingLeft: 16
-    }
+        marginHorizontal: '5%',
+        marginBottom: 20
+    },
+    text1: {
+        color: '#BFBFBF',
+        marginLeft: '5%'
+    },
 })
 

@@ -192,10 +192,12 @@ export async function addServiceProviserResponse(
 }
 
 //=============================== To change post visibility =====================================================//
-export async function updatePostVisibility(postId, actionPrice) {
+
+export async function updatePostVisibility(postId, actionPrice,serviceProviderId) {
   try {
     const res = await axios.post(`${url}/api/posts/one/${postId}`,{
-      price: actionPrice
+      price: actionPrice,
+      serviceProviderId:  serviceProviderId
     });
     console.log('Hide post');
     return res

@@ -95,11 +95,11 @@ export default function Profile({ navigation }) {
                             {serviceProvider.firstName}
                         </Text>
                         <View style={styles.headerContainer} >
-                            <FontAwesome name='star' size={20} color='#2EBCAC' />
-                            <FontAwesome name='star' size={20} color='#2EBCAC' />
-                            <FontAwesome name='star' size={20} color='#2EBCAC' />
-                            <FontAwesome name='star' size={20} color='#2EBCAC' />
-                            <FontAwesome name='star' size={20} color='#2EBCAC' />
+                            <FontAwesome name='star' size={20} color='#FCC742' />
+                            <FontAwesome name='star' size={20} color='#FCC742' />
+                            <FontAwesome name='star' size={20} color='#FCC742' />
+                            <FontAwesome name='star' size={20} color='#FCC742' />
+                            <FontAwesome name='star' size={20} color='#FCC742' />
                         </View>
                         <View style={styles.infoContainer}>
                             <FontAwesome style={styles.infoIcon} name='user' size={24} color='black' />
@@ -182,9 +182,9 @@ export default function Profile({ navigation }) {
                                 />
                                 <View style={styles.buttonContainer}>
                                     <TouchableOpacity
-                                        style={[styles.buttons, styles.logOutButton]}
+                                        style={[styles.buttons, styles.editButton]}
                                         onPress={() => onEditSubmitted()}>
-                                        <Text style={styles.buttonTitle}>Submit</Text>
+                                        <Text style={[styles.buttonTitle, styles.editTitle]}>Submit</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity
                                         style={[styles.buttons, styles.logOutButton]}
@@ -195,12 +195,11 @@ export default function Profile({ navigation }) {
                             </ScrollView>
                         </Modal>
                     </View>
-                    <View style={styles.buttonContainer}>
                         <TouchableOpacity
                             style={[styles.buttons, styles.editButton]}
                             disabled={loading}
                             onPress={() => onEditClicked()}>
-                            <Text style={styles.buttonTitle}>Edit</Text>
+                            <Text style={[styles.buttonTitle, styles.editTitle]}>Edit</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={[styles.buttons, styles.logOutButton]}
@@ -208,7 +207,6 @@ export default function Profile({ navigation }) {
                             onPress={() => onSignOutClicked()}>
                             <Text style={styles.buttonTitle}>Log Out</Text>
                         </TouchableOpacity>
-                    </View>
 
                 </View>
                 : <View></View>}
@@ -220,12 +218,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        marginVertical: 20,
-        width: '100%'
-    },
-    buttonContainer: {
-        flexDirection: 'row',
-        marginVertical: 10,
+        paddingVertical: 20,
+        width: '100%',
+        backgroundColor: 'white'
     },
     profileContainer: {
         flex: 1,
@@ -260,23 +255,22 @@ const styles = StyleSheet.create({
     modalContainer: {
         margin: 20
     },
-    buttonContainer: {
-        flexDirection: 'row',
-        marginVertical: 10,
-    },
     buttons: {
-
-        width: '50%',
+        width: '90%',
         height: 48,
-        borderRadius: 5,
+        borderRadius: 10,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginVertical: 10
     },
     editButton: {
-        backgroundColor: '#16B3D5',
+        backgroundColor: '#E0E0E0',
+    },
+    editTitle:{
+color: 'black'
     },
     logOutButton: {
-        backgroundColor: '#F68347',
+        backgroundColor: '#0077FC',
     },
     buttonTitle: {
         color: 'white',

@@ -23,7 +23,7 @@ export default function PostDetails({ navigation, route }) {
             true
         );
         if (res.data === "Response sent") {
-            await updatePostVisibility(postId, posts.price);
+            await updatePostVisibility(postId, posts.price, currentUser.uid);
             navigation.navigate('JobConfirmation', { posts: posts, actionPrice: posts.price })
         } else (
             setError(res.data)
